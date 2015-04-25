@@ -4,14 +4,29 @@ public class User {
 
 	private String myUsername;
 	private String myPassword;
+	private Achivement myAchivements;
+	private Highscores myHighscore;
 	
-	User(String username, String password){
-		
+	
+
+
+	public User(String username, String password, Achivement achivement, Highscores highscore){
+		myAchivements = achivement;
 		myUsername = username;
 		myPassword = password;
+		myHighscore = highscore;
+		
 		
 	}
 
+	public Highscores getMyHighscore() {
+		return myHighscore;
+	}
+
+
+	public void setMyHighscore(Highscores myHighscore) {
+		this.myHighscore = myHighscore;
+	}
 	public String getMyUsername() {
 		return myUsername;
 	}
@@ -31,5 +46,15 @@ public class User {
 	public String getMyPassword() {
 		return myPassword;
 	}
+
+	public Achivement getMyAchivements() {
+		return myAchivements;
+	}
+
+	public void setMyAchivements(Achivement myAchivements) {
+		this.myAchivements = myAchivements;
+	}
+	
+	
 	
 }
