@@ -91,7 +91,7 @@ public class LoginWindow {
 		frame.getContentPane().add(txtpnWelcomeTo);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Mathew\\gitZork\\Zork\\input\\pictures\\TTTIcon.png"));
+		lblNewLabel.setIcon(new ImageIcon("input/pictures/TTTIcon.png"));
 		lblNewLabel.setBounds(63, 69, 258, 265);
 		frame.getContentPane().add(lblNewLabel);
 		
@@ -119,10 +119,14 @@ public class LoginWindow {
 		button.setActionCommand("Login");
 		button.setBounds(575, 281, 85, 50);
 		frame.getContentPane().add(button);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon("input/pictures/train.jpg"));
+		label.setBounds(-30, 0, 820, 611);
+		frame.getContentPane().add(label);
 	}
 	
 	public int login(){
 		return login[0];
 	}
-	
 }
