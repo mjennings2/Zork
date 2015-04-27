@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Panel;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
@@ -31,7 +32,7 @@ public class Display {
 	private JTextField textField;
 	private JTextArea textArea;
 	public String textSent = "";
-	
+	public JLabel lblNewLabel;
 	
 	/**
 	 * Launch the application.
@@ -88,6 +89,7 @@ public class Display {
 //		textField.setBounds(15, (int)(923.0/1025.0 * 1025), (int)(1774.0 / 1920.0 * 1920), (int)(30.0/1025.0 * 1025));
 
 		textField.setBounds(15, (int)(923.0/1025.0 * height-45), 1774, 23);
+		textField.setFont(new Font("OCR A Extended", Font.PLAIN, 18));
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
@@ -99,6 +101,7 @@ public class Display {
 		frame.getContentPane().add(scrollPane);
 		
 		textArea = new JTextArea();
+		textArea.setFont(new Font("OCR A Extended", Font.PLAIN, 18));
 		scrollPane.setViewportView(textArea);
 		button.setBounds((int)(1795.0/1920.0 * width), (int)(923.0/1025.0 * (height-55)),(int)(90.0/1920.0 * width), (int)(30.0/1025.0*(height-55)));
 		button.addActionListener(new ActionListener() {
@@ -112,7 +115,7 @@ public class Display {
 		
 		frame.getContentPane().add(button);
 		
-		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(image));
 		//lblNewLabel.setBounds(15, 15, 1920-(int)(0.02604166666666666666666666666667 * 1920), (int) (1025 * 0.7024390243902439024390243902439));
 		lblNewLabel.setBounds(15, 15, width-(int)(0.02604166666666666666666666666667 * width), (int) ((height-55) * 0.7024390243902439024390243902439));
@@ -125,7 +128,11 @@ public class Display {
 		
 	}
 	
-	
+	public void displayln(String output){
+		
+		textArea.append(output + "\n");
+		
+	}
 	
 	
 }

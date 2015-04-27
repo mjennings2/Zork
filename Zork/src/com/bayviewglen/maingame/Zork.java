@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner; 
 
+import javax.swing.ImageIcon;
+
 import com.bayviewglen.maingame.Display;
 
 public class Zork {
@@ -20,31 +22,37 @@ public static boolean loginAllowed = false;
 		LoginWindow login = new LoginWindow(users);
 		login.frame.setVisible(true);
 		while(login.login() < 10){
-			 try {                                                                                                                                                                                                          
-	                Thread.sleep(1000); //3000 milliseconds is three seconds.                                                                                                                                                   
-	            } catch (InterruptedException ex) {                                                                                                                                                                            
-	                Thread.currentThread().interrupt();                                                                                                                                                                        
-	            }   
+			 sleep(1000);
 		}
 		
 		Display x = new Display("input/pictures/test.jpg");
 		x.frame.setVisible(true);
-		x.display("Hello and welcome to Trouble in Nuke on a Train Town!\n");
-		try {                                                                                                                                                                                                          
-            Thread.sleep(1000); //3000 milliseconds is three seconds.                                                                                                                                                   
-        } catch (InterruptedException ex) {                                                                                                                                                                            
-            Thread.currentThread().interrupt();                                                                                                                                                                        
-        }
+		displayTextMilitaryStyle(x,"Hello and welcome to Trouble in Nuke on a Train Town!\nYou are in Commander DesLauriers Office. He is giving you special Instructions.\nCommander:\nBla Bla Bla Bla Bla Bla Bla\nBla Bla Bla Bla Bla Bla Bla\nBla Bla Bla Bla Bla Bla Bla\nI love scrolling text.\nIs Best\n");
+		sleep(1000);
+		x.lblNewLabel.setIcon(new ImageIcon("input/pictures/test1.jpg"));
 		waitForProperInput(x, "How do i use the thing method");
 		
-		x.frame.setVisible(false);
-		x = new Display("input/pictures/test1.jpg");
-		x.frame.setVisible(true);
 		saveUsers(users);
 		
 	}
 
 	
+
+	private static void displayTextMilitaryStyle(Display x, String str) {
+		// TODO Auto-generated method stub
+		
+		for(int i = 0; i < str.length(); i++){
+			if(str.substring(i, i+1).equals("\n")){
+				x.display(str.substring(i, i+1));
+				sleep(500);
+			}else{
+				x.display(str.substring(i, i+1));
+				sleep(50);
+			}
+		}
+	}
+
+
 
 	private static void waitForProperInput(Display x, String string) {
 		// TODO Auto-generated method stub
@@ -57,10 +65,16 @@ public static boolean loginAllowed = false;
 	                Thread.currentThread().interrupt();                                                                                                                                                                        
 	            }   
 		}
-		loop = checkIfValid(x, "hello hi tie");
+		String[] commandWords = x.textSent.split(" ");
+		Command typed = new Command(commandWords[0], commandWords[1]);
+		// TODO Check if command is valid
+			{
+			loop = true;
+			}
 		}
 		System.out.println("HELLO");
 		loop = true;
+		// TODO Outcome if valid
 	}
 
 
@@ -124,4 +138,12 @@ public static boolean loginAllowed = false;
 		
 	}
 
+	public static void sleep(int time){
+		 try {                                                                                                                                                                                                          
+             Thread.sleep(time); //3000 milliseconds is three seconds.                                                                                                                                                   
+         } catch (InterruptedException ex) {                                                                                                                                                                            
+             Thread.currentThread().interrupt();                                                                                                                                                                        
+         }   
+	}
+	
 }
