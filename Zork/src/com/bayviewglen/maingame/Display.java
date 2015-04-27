@@ -19,6 +19,8 @@ import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Label;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Display {
 	
@@ -28,6 +30,8 @@ public class Display {
 	public JFrame frame;
 	private JTextField textField;
 	private JTextArea textArea;
+	public String textSent = "";
+	
 	
 	/**
 	 * Launch the application.
@@ -69,10 +73,21 @@ public class Display {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		
 		textField = new JTextField();
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if(e.getExtendedKeyCode() == KeyEvent.VK_ENTER){
+					textSent = textField.getText();
+				}
+				
+			}
+		});
 //		textField.setBounds(15, (int)(923.0/1025.0 * 1025), (int)(1774.0 / 1920.0 * 1920), (int)(30.0/1025.0 * 1025));
 
-		textField.setBounds(15, (int)(923.0/1025.0 * height-55), (int)(1774.0 / 1920.0 * width), (int)(30.0/1025.0 * height-55));
+		textField.setBounds(15, (int)(923.0/1025.0 * height-45), 1774, 23);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
@@ -87,9 +102,10 @@ public class Display {
 		scrollPane.setViewportView(textArea);
 		button.setBounds((int)(1795.0/1920.0 * width), (int)(923.0/1025.0 * (height-55)),(int)(90.0/1920.0 * width), (int)(30.0/1025.0*(height-55)));
 		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				textArea.append("\n" + textField.getText());
-				textField.setText("");
+			public void actionPerformed(ActionEvent e) {
+				
+					textSent = textField.getText();
+				
 			}
 		});
 		
@@ -97,7 +113,7 @@ public class Display {
 		frame.getContentPane().add(button);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("input/pictures/test.jpg"));
+		lblNewLabel.setIcon(new ImageIcon(image));
 		//lblNewLabel.setBounds(15, 15, 1920-(int)(0.02604166666666666666666666666667 * 1920), (int) (1025 * 0.7024390243902439024390243902439));
 		lblNewLabel.setBounds(15, 15, width-(int)(0.02604166666666666666666666666667 * width), (int) ((height-55) * 0.7024390243902439024390243902439));
 		frame.getContentPane().add(lblNewLabel);
@@ -108,6 +124,8 @@ public class Display {
 		textArea.append(output);
 		
 	}
+	
+	
 	
 	
 }
