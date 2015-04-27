@@ -27,15 +27,57 @@ public static boolean loginAllowed = false;
 	            }   
 		}
 		
-		String image = "input/pictures/Infantry Car.JPG";
-		Display x = new Display(image);
+		Display x = new Display("input/pictures/test.jpg");
 		x.frame.setVisible(true);
 		x.display("Hello and welcome to Trouble in Nuke on a Train Town!\n");
+		try {                                                                                                                                                                                                          
+            Thread.sleep(1000); //3000 milliseconds is three seconds.                                                                                                                                                   
+        } catch (InterruptedException ex) {                                                                                                                                                                            
+            Thread.currentThread().interrupt();                                                                                                                                                                        
+        }
+		waitForProperInput(x, "How do i use the thing method");
+		
+		x.frame.setVisible(false);
+		x = new Display("input/pictures/test1.jpg");
+		x.frame.setVisible(true);
 		saveUsers(users);
 		
 	}
 
 	
+
+	private static void waitForProperInput(Display x, String string) {
+		// TODO Auto-generated method stub
+		boolean loop = false;
+		while(!loop){
+		while(x.textSent.equals("")){
+			 try {                                                                                                                                                                                                          
+	                Thread.sleep(1000); //3000 milliseconds is three seconds.                                                                                                                                                   
+	            } catch (InterruptedException ex) {                                                                                                                                                                            
+	                Thread.currentThread().interrupt();                                                                                                                                                                        
+	            }   
+		}
+		loop = checkIfValid(x, "hello hi tie");
+		}
+		System.out.println("HELLO");
+		loop = true;
+	}
+
+
+
+	private static boolean checkIfValid(Display x, String string) {
+		// TODO Auto-generated method stub
+		String[] conditions = string.split("|");
+		String[] inputs = x.textSent.split(" ");
+		for(int i = 0; i < conditions.length; i++){ 
+			if(!(conditions[i].equals(inputs[i])));
+			x.textSent = "";
+			return false;
+		}
+		return true;
+	}
+
+
 
 	private static void saveUsers(ArrayList<User> users) throws IOException {
 		// TODO Auto-generated method stub
