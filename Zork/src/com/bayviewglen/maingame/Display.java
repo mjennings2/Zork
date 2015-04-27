@@ -93,7 +93,7 @@ public class Display {
 		frame.getContentPane().add(button);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("input/pictures/Untitled-1.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("input/pictures/test.jpg"));
 		//lblNewLabel.setBounds(15, 15, 1920-(int)(0.02604166666666666666666666666667 * 1920), (int) (1025 * 0.7024390243902439024390243902439));
 		lblNewLabel.setBounds(15, 15, 1920-(int)(0.02604166666666666666666666666667 * 1920), (int) (1025 * 0.7024390243902439024390243902439));
 		frame.getContentPane().add(lblNewLabel);

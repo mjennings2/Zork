@@ -21,6 +21,8 @@ import javax.swing.ImageIcon;
 import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class LoginWindow {
@@ -77,6 +79,29 @@ public class LoginWindow {
 		password = new JPasswordField();
 		password.setColumns(10);
 		password.setBounds(523, 200, 200, 50);
+		password.addKeyListener(new KeyAdapter() {
+			   @SuppressWarnings("deprecation")
+			@Override
+			   public void keyPressed(KeyEvent e) {
+			    if(e.getExtendedKeyCode() == KeyEvent.VK_ENTER){
+			     for(int i = 0; i < users.size(); i++){
+			      if(users.get(i).getMyUsername().equals(username.getText())){
+			       if(users.get(i).validatePassword(password.getText())){
+			        login[0] = 100;
+			       }else{
+			        Notice window = new Notice("That password is not recodnized for the username \"" + username.getText());
+			        window.frame.setVisible(true);
+			       }
+			       i += users.size();
+			      }else if(i == users.size()-1){
+			       UsernameMissing window = new UsernameMissing(users, username.getText(), password.getText(), login);
+			       window.frame.setVisible(true);
+			      }
+			     }
+			    }
+			    
+			   }
+			  });
 		frame.getContentPane().add(password);
 		
 		JLabel lblPassword = new JLabel("Password:");
@@ -102,12 +127,14 @@ public class LoginWindow {
 				System.out.println("Hi");
 				for(int i = 0; i < users.size(); i++){
 					if(users.get(i).getMyUsername().equals(username.getText())){
+						
 						if(users.get(i).validatePassword(password.getText())){
 							login[0] = 100;
 						}else{
 							Notice window = new Notice("That password is not recodnized for the username \"" + username.getText());
 							window.frame.setVisible(true);
 						}
+						i += users.size();
 					}else if(i == users.size()-1){
 						UsernameMissing window = new UsernameMissing(users, username.getText(), password.getText(), login);
 						window.frame.setVisible(true);
