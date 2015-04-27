@@ -25,12 +25,13 @@ public static boolean loginAllowed = false;
 			 sleep(1000);
 		}
 		
-		Display x = new Display("input/pictures/test.jpg");
+		Display x = new Display("input/pictures/Title.jpg");
 		x.frame.setVisible(true);
-		displayTextMilitaryStyle(x,"Hello and welcome to Trouble in Nuke on a Train Town!\nYou are in Commander DesLauriers Office. He is giving you special Instructions.\nCommander:\nBla Bla Bla Bla Bla Bla Bla\nBla Bla Bla Bla Bla Bla Bla\nBla Bla Bla Bla Bla Bla Bla\nI love scrolling text.\nIs Best\n");
+		displayTextMilitaryStyle(x,"Hello and welcome to Trouble in Nuke on a Train with a Terrorest Town!\nType 'Start' to start\n");
 		sleep(1000);
-		x.lblNewLabel.setIcon(new ImageIcon("input/pictures/test1.jpg"));
-		waitForProperInput(x, "How do i use the thing method");
+		waitForProperInput(x, "Start");
+		x.lblNewLabel.setIcon(new ImageIcon("input/pictures/test.jpg"));
+		displayTextMilitaryStyle(x,"You are in Commander DesLauriers Office. He is giving you special Instructions.\nCommander:\nBla Bla Bla Bla Bla Bla Bla\nBla Bla Bla Bla Bla Bla Bla\nBla Bla Bla Bla Bla Bla Bla\nI love scrolling text.\nIs Best\n");
 		
 		saveUsers(users);
 		
@@ -66,19 +67,19 @@ public static boolean loginAllowed = false;
 	            }   
 		}
 		String[] commandWords = x.textSent.split(" ");
-		Command typed = new Command(commandWords[0], commandWords[1]);
+	//	Command typed = new Command(commandWords[0], commandWords[1]);
 		// TODO Check if command is valid
-			{
-			loop = true;
+			if(commandWords[0].equals("Start")){
+				loop = true;
 			}
 		}
-		System.out.println("HELLO");
-		loop = true;
 		// TODO Outcome if valid
+		displayTextMilitaryStyle(x, "Ok Soilder\n");
 	}
 
 
 
+	@SuppressWarnings("unused")
 	private static boolean checkIfValid(Display x, String string) {
 		// TODO Auto-generated method stub
 		String[] conditions = string.split("|");
@@ -120,6 +121,7 @@ public static boolean loginAllowed = false;
 	}
 
 	private static void importUsers(ArrayList<User> users) throws FileNotFoundException {
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(new File("input/users.dat"));  
 		while(scanner.hasNext()){
 			String[] temp = scanner.nextLine().split(" ");

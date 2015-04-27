@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.text.DefaultCaret;
 
 import java.awt.Button;
 import java.awt.event.ActionListener;
@@ -82,6 +83,7 @@ public class Display {
 				
 				if(e.getExtendedKeyCode() == KeyEvent.VK_ENTER){
 					textSent = textField.getText();
+					textField.setText("");
 				}
 				
 			}
@@ -102,13 +104,15 @@ public class Display {
 		
 		textArea = new JTextArea();
 		textArea.setFont(new Font("OCR A Extended", Font.PLAIN, 18));
+		DefaultCaret caret = (DefaultCaret)textArea.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		scrollPane.setViewportView(textArea);
 		button.setBounds((int)(1795.0/1920.0 * width), (int)(923.0/1025.0 * (height-55)),(int)(90.0/1920.0 * width), (int)(30.0/1025.0*(height-55)));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 					textSent = textField.getText();
-				
+					textField.setText("");
 			}
 		});
 		
