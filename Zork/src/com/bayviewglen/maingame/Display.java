@@ -65,7 +65,7 @@ public class Display {
 	    int height = (int) screenSize.getHeight();
 
 		frame = new JFrame();
-		frame.setBounds(0, 0, 1920, 1080-55);
+		frame.setBounds(0, 0, width, height-55);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
