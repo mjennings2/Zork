@@ -24,14 +24,14 @@ public static boolean loginAllowed = false;
 		while(login.login() < 10){
 			 sleep(1000);
 		}
-		
+		login.frame.setVisible(false);
 		Display x = new Display("input/pictures/Title.jpg");
 		x.frame.setVisible(true);
 		displayTextMilitaryStyle(x,"Hello and welcome to Trouble in Nuke on a Train with a Terrorest Town!\nType 'Start' to start\n");
 		sleep(1000);
 		waitForProperInput(x, "Start");
-		x.lblNewLabel.setIcon(new ImageIcon("input/pictures/test.jpg"));
-		displayTextMilitaryStyle(x,"You are in Commander DesLauriers Office. He is giving you special Instructions.\nCommander:\nBla Bla Bla Bla Bla Bla Bla\nBla Bla Bla Bla Bla Bla Bla\nBla Bla Bla Bla Bla Bla Bla\nI love scrolling text.\nIs Best\n");
+		x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk.jpg"));
+		displayTextMilitaryStyle(x,"Location: Military train bound for Sanfransico. \nOperation Nuke: The train is carrying a nucular weapon on a flat bed.\nTime to arrival: 30 min.\nYou are in General DesLauriers Office. He is giving you special Instructions.\nDesLauriers:\nBla Bla Bla Bla Bla Bla Bla\nBla Bla Bla Bla Bla Bla Bla\nWHY ARE YOU CRYING?\nBla Bla Bla Bla Bla Bla Bla\nI love scrolling text.\nIs Best.\n");
 		
 		saveUsers(users);
 		
@@ -69,12 +69,12 @@ public static boolean loginAllowed = false;
 		String[] commandWords = x.textSent.split(" ");
 	//	Command typed = new Command(commandWords[0], commandWords[1]);
 		// TODO Check if command is valid
-			if(commandWords[0].equals("Start")){
+			if(commandWords[0].equalsIgnoreCase("start")){
 				loop = true;
 			}
 		}
 		// TODO Outcome if valid
-		displayTextMilitaryStyle(x, "Ok Soilder\n");
+		displayTextMilitaryStyle(x, "Ok Soldier\n");
 	}
 
 

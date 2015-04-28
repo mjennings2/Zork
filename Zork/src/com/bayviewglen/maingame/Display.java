@@ -104,6 +104,7 @@ public class Display {
 		
 		textArea = new JTextArea();
 		textArea.setFont(new Font("OCR A Extended", Font.PLAIN, 18));
+		textArea.setEditable(false);
 		DefaultCaret caret = (DefaultCaret)textArea.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		scrollPane.setViewportView(textArea);
