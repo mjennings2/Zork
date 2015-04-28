@@ -39,7 +39,7 @@ public class LoginWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginWindow window = new LoginWindow(null);
+					LoginWindow window = new LoginWindow(null, null);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,16 +50,18 @@ public class LoginWindow {
 
 	/**
 	 * Create the application.
+	 * @param currentUser 
 	 */
-	public LoginWindow(ArrayList<User> users) {
-		initialize(users);
+	public LoginWindow(ArrayList<User> users, int[] currentUser) {
+		initialize(users, currentUser);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @param users 
+	 * @param currentUser 
 	 */
-	private void initialize(ArrayList<User> users) {
+	private void initialize(ArrayList<User> users, int[] currentUser) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 812, 639);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,6 +90,7 @@ public class LoginWindow {
 			      if(users.get(i).getMyUsername().equals(username.getText())){
 			       if(users.get(i).validatePassword(password.getText())){
 			        login[0] = 100;
+			        currentUser[0] = i;
 			       }else{
 			        Notice window = new Notice("That password is not recodnized for the username \"" + username.getText());
 			        window.frame.setVisible(true);

@@ -1,11 +1,14 @@
 package com.bayviewglen.maingame;
 
+import java.util.ArrayList;
+
 public class User {
 
 	private String myUsername;
 	private String myPassword;
 	private Achivement myAchivements;
 	private Highscores myHighscore;
+	private ArrayList<Item> inventory = new ArrayList<Item>();
 	
 	
 
@@ -55,6 +58,39 @@ public class User {
 		this.myAchivements = myAchivements;
 	}
 	
+	public void addToInventory(Item x){
+		inventory.add(x);
+	}
+
+	public ArrayList<Item> getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(ArrayList<Item> inventory) {
+		this.inventory = inventory;
+	}
+	
+	public void displayAllItems(Display x){
+		for(Item j : inventory){
+		for(int i = 0; i < j.getItemName().length(); i++){
+			if(j.getItemName().substring(i, i+1).equals("\n")){
+				x.display(j.getItemName().substring(i, i+1));
+				sleep(500);
+			}else{
+				x.display(j.getItemName().substring(i, i+1));
+				sleep(50);
+			}
+		}
+		}
+	}
+	
+	private static void sleep(int time){
+		 try {                                                                                                                                                                                                          
+            Thread.sleep(time); //3000 milliseconds is three seconds.                                                                                                                                                   
+        } catch (InterruptedException ex) {                                                                                                                                                                            
+            Thread.currentThread().interrupt();                                                                                                                                                                        
+        }   
+	}
 	
 	
 }
