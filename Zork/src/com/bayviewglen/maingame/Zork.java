@@ -15,15 +15,19 @@ import com.bayviewglen.maingame.Display;
 
 
 public class Zork {
-	private static String[] commands = {"go", "quit", "help", "eat", "use", "pickup"};
+	private static String[] commands = {"go", "quit", "help", "eat", "use", "pickup", "exit", "shoot"};
 public static boolean loginAllowed = false;
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
+		int location = 0;
 		// TODO Auto-generated method stub
 		
 		ArrayList<User> users = new ArrayList<User>();
-		int[] currentUser = new int[1];
+		//int[] currentUser = new int[1];
+		int[] currentUser = {0};
 		importUsers(users);
-		LoginWindow login = new LoginWindow(users, currentUser);
+		boolean playGame = true;
+		
+		/*LoginWindow login = new LoginWindow(users, currentUser);
 		
 		login.frame.setVisible(true);
 		while(login.login() < 10){
@@ -31,17 +35,70 @@ public static boolean loginAllowed = false;
 		}
 		
 		login.frame.setVisible(false);
+		*/
+		
+		
+		
 		Display x = new Display("input/pictures/Title.jpg");
 		x.frame.setVisible(true);
-		displayTextMilitaryStyle(x,"Hello and welcome to Trouble in Nuke on a Train with a Terrorest Town!\nType 'Start' to start\n");
+		displayTextMilitaryStyle(x,"Hello and welcome to Trouble in Nuke on a Train with a Terrorest Town!\nType commands in the text bar below. Finding out the commands is part of the puzzle!\nLeaving a room is exit, you can go north or south.\nType 'Start' to start\n");
 		sleep(1000);
 		waitForProperInput(x, "Start");
-		Item[] items = {new Item("Extinguisher"), new Item("Page"), new Item("Sheet"), new Item("Report"), new Item("Pice of paper"), new Item("fire extiguisher")};
-		Room commandersOffice = new Room("Commanders Office", items);
 		x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk.jpg"));
-		displayTextMilitaryStyle(x,"Location: Military train bound for Sanfransico. \nOperation Nuke: The train is carrying a nucular weapon on a flat bed.\nTime to arrival: 30 min.\nYou are in General DesLauriers Office. He is giving you special Instructions.\nDesLauriers:\nBla Bla Bla Bla Bla Bla Bla\nBla Bla Bla Bla Bla Bla Bla\nWHY ARE YOU CRYING?\nBla Bla Bla Bla Bla Bla Bla\nI love scrolling text.\nIs Best.\n");
-		waitForProperInput(x, commandersOffice, currentUser, users);
-		users.get(currentUser[0]).displayAllItems(x);
+		displayTextMilitaryStyle(x,"Location: Military train bound for Sanfransico. \nOperation Nuke: The train is carrying a nucular weapon on a flat bed.\nTime to arrival: 30 min.\nYou are in General DesLauriers Office at the south most part of the train.\nHe is giving you special Instructions.\nDesLauriers:\n\"Alright Maggot! We've got a Problem!\nThe train is crying!\nWe are carrying a nuclear payload and have caught wind of a traitor in our ranks!\nYour mission: find this traitor and bring him to Java justice!\nHere, take this fire extinguisher just in case, and this pistol for any traitor-hunting duties you may have to fulfill.\nGet to work, soldier!\n");
+		
+		
+		// Declare all Rooms
+		Room[] rooms = new Room[3];
+		Room[] randomizedRooms = new Room[3];
+		Item[] items = {new Item("Piece of paper"), new Item("fire extinguisher")};
+		rooms[0] = new Room("Commanders Office", items);
+		Item[] items1 = {new Item("KeyCard")};
+		rooms[1] = new Room("Commanders Office", items);
+		Item[] items2 = {new Item("Gun"), new Item("Combat Knife")};
+		rooms[2] = new Room("Armory", items);
+		
+		// Set rooms locations
+		int[] usedRooms = new int[3];
+		
+		for(int i = 0; i < rooms.length; i++){
+			int random = (int)(Math.random()*rooms.length);
+			if(i == 0){
+				rooms[0].setExit('N', rooms[random]);
+				usedRooms[0] = 0;
+			}else if(i == rooms.length-1){
+				rooms[usedRooms[i]].setExit('S', rooms[usedRooms[i-1]]);
+				randomizedRooms[i-1] = rooms[usedRooms[i-1]];
+				randomizedRooms[i] = rooms[usedRooms[i]];
+			}else{
+			
+				rooms[usedRooms[i]].setExit('N', rooms[random]);
+				rooms[usedRooms[i]].setExit('S', rooms[usedRooms[i-1]]);
+				randomizedRooms[i-1] = rooms[usedRooms[i-1]];
+			}
+			usedRooms[i+1] = random;
+		}
+		
+		
+		
+		
+		while(playGame){
+			
+			// Commanders office
+			if(location == 0){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				
+			
+			// Receptionist's Hall
+			}else if(location == 1){  
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/test.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(location == 2){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/test1.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}
+		}
 		saveUsers(users);
 		
 		
@@ -49,7 +106,7 @@ public static boolean loginAllowed = false;
 
 	
 
-	private static void waitForProperInput(Display x, Room room, int[] currentUser, ArrayList<User> users) {
+	private static int waitForProperInput(Display x, Room room, int[] currentUser, ArrayList<User> users, int location, Room[] randomizedRooms) {
 		// TODO Auto-generated method stub
 		boolean loop = false;
 		while(!loop){
@@ -60,15 +117,16 @@ public static boolean loginAllowed = false;
 	                Thread.currentThread().interrupt();                                                                                                                                                                        
 	            }   
 		}
-		String[] commandWords = x.textSent.split(" ");
+		String[] commandWords = {x.textSent.substring(0,x.textSent.indexOf(" ")), x.textSent.substring(x.textSent.indexOf(" ")+1)};
 	//	Command typed = new Command(commandWords[0], commandWords[1]);
 		// TODO Check if command is valid
 			boolean commandWord = true, goOnToSecond = false;
 			while(commandWord){
 				for(int i = 0; i < commands.length; i++){
-					if(commandWords[0].equalsIgnoreCase(commandWords[0])){
+					if(commandWords[0].equalsIgnoreCase(commands[i])){
 						commandWord = false;
 						goOnToSecond = true;
+						i += commands.length;
 					}else if (i == commands.length-1){
 						loop = false;
 						displayTextMilitaryStyle(x, "That command is not recodnized.\n");
@@ -82,8 +140,36 @@ public static boolean loginAllowed = false;
 						if(commandWords[1].equalsIgnoreCase(room.getItems()[i].getName())){
 							displayTextMilitaryStyle(x, "You picked up the " + commandWords[1] + ".\n");
 							users.get(currentUser[0]).addToInventory(room.getItems()[i]);
-							loop = true;
 							i += room.getItems().length;
+						}
+					}
+				}else if(commandWords[0].equalsIgnoreCase("shoot")){
+					if(commandWords[1].equalsIgnoreCase("DesLauriers") || commandWords[1].equalsIgnoreCase("The General") || commandWords[1].equalsIgnoreCase("General DesLaurier")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk_Dead.jpg"));
+						displayTextMilitaryStyle(x, "You shot the General! You were the traitor all along!\nYou walk behind the desk, and flip a switch\n");
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
+						displayTextMilitaryStyle(x, "Allahu Akbar");
+						loop = true;
+						commandWord = false;
+						goOnToSecond = false;
+					}
+				}else if(commandWords[0].equalsIgnoreCase("exit")){
+					if(commandWords[1].equalsIgnoreCase("North") || commandWords[1].equalsIgnoreCase("South")){
+						if(location == 0 && commandWords[1].equalsIgnoreCase("South")){
+							displayTextMilitaryStyle(x, "That is invalid.");
+						}else if(location == randomizedRooms.length && commandWords[1].equalsIgnoreCase("North")){
+							displayTextMilitaryStyle(x, "That is invalid.");
+						}else{
+							loop = true;
+							commandWord = false;
+							goOnToSecond = false;
+							if(commandWords[1].equalsIgnoreCase("North")){
+								displayTextMilitaryStyle(x, "You are now in " + randomizedRooms[location + 1].getRoomName() + ".");
+								return location + 1;
+							}else{
+								displayTextMilitaryStyle(x, "You are now in " + randomizedRooms[location - 1].getRoomName() + ".");
+								return location - 1;
+							}
 						}
 					}
 				}
@@ -93,9 +179,9 @@ public static boolean loginAllowed = false;
 		// TODO Outcome if valid
 		//displayTextMilitaryStyle(x, "Ok Soldier\n");
 	}
+		x.textSent = "";
+		return location;
 	}
-
-
 
 	private static void displayTextMilitaryStyle(Display x, String str) {
 		// TODO Auto-generated method stub
@@ -103,10 +189,10 @@ public static boolean loginAllowed = false;
 		for(int i = 0; i < str.length(); i++){
 			if(str.substring(i, i+1).equals("\n")){
 				x.display(str.substring(i, i+1));
-				sleep(500);
+				sleep(300);
 			}else{
 				x.display(str.substring(i, i+1));
-				sleep(50);
+				sleep(25);
 			}
 		}
 	}
@@ -133,9 +219,10 @@ public static boolean loginAllowed = false;
 		}
 		// TODO Outcome if valid
 		displayTextMilitaryStyle(x, "Ok Soldier\n");
+		x.textSent = ("");
 	}
 
-
+	
 
 	@SuppressWarnings("unused")
 	private static boolean checkIfValid(Display x, String string) {

@@ -139,5 +139,12 @@ public class Display {
 		
 	}
 	
+	public void setBold(){
+		textArea.setFont(new Font("OCR A Extended", Font.BOLD, 18));
+	}
+	
+	public void setRegular(){
+		textArea.setFont(new Font("OCR A Extended", Font.PLAIN, 18));
+	}
 	
 }
