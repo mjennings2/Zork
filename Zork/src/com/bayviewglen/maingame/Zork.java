@@ -79,7 +79,7 @@ public static boolean loginAllowed = false;
 			if(goOnToSecond){
 				if(commandWords[0].equalsIgnoreCase("pickup")){
 					for(int i = 0; i < room.getItems().length; i++){
-						if(commandWords[1].equalsIgnoreCase(room.getItems()[i].getItemName())){
+						if(commandWords[1].equalsIgnoreCase(room.getItems()[i].getName())){
 							displayTextMilitaryStyle(x, "You picked up the " + commandWords[1] + ".\n");
 							users.get(currentUser[0]).addToInventory(room.getItems()[i]);
 							loop = true;
