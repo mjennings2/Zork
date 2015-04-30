@@ -45,7 +45,7 @@ public static boolean loginAllowed = false;
 		sleep(1000);
 		waitForProperInput(x, "Start");
 		x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk.jpg"));
-		displayTextMilitaryStyle(x,"Location: Military train bound for Sanfransico. \nOperation Nuke: The train is carrying a nucular weapon on a flat bed.\nTime to arrival: 30 min.\nYou are in General DesLauriers Office at the south most part of the train.\nHe is giving you special Instructions.\nDesLauriers:\n\"Alright Maggot! We've got a Problem!\nThe train is crying!\nWe are carrying a nuclear payload and have caught wind of a traitor in our ranks!\nYour mission: find this traitor and bring him to Java justice!\nHere, take this fire extinguisher just in case, and this pistol for any traitor-hunting duties you may have to fulfill.\nGet to work, soldier!\n");
+	//	displayTextMilitaryStyle(x,"Location: Military train bound for Sanfransico. \nOperation Nuke: The train is carrying a nucular weapon on a flat bed.\nTime to arrival: 30 min.\nYou are in General DesLauriers Office at the south most part of the train.\nHe is giving you special Instructions.\nDesLauriers:\n\"Alright Maggot! We've got a Problem!\nThe train is crying!\nWe are carrying a nuclear payload and have caught wind of a traitor in our ranks!\nYour mission: find this traitor and bring him to Java justice!\nHere, take this fire extinguisher just in case, and this pistol for any traitor-hunting duties you may have to fulfill.\nGet to work, soldier!\n");
 		
 		
 		// Declare all Rooms
@@ -54,18 +54,32 @@ public static boolean loginAllowed = false;
 		Item[] items = {new Item("Piece of paper"), new Item("fire extinguisher")};
 		rooms[0] = new Room("Commanders Office", items);
 		Item[] items1 = {new Item("KeyCard")};
-		rooms[1] = new Room("Commanders Office", items);
+		rooms[1] = new Room("Reception hall", items);
 		Item[] items2 = {new Item("Gun"), new Item("Combat Knife")};
 		rooms[2] = new Room("Armory", items);
 		
 		// Set rooms locations
 		int[] usedRooms = new int[3];
-		
+		int random = 0;
 		for(int i = 0; i < rooms.length; i++){
-			int random = (int)(Math.random()*rooms.length);
+			boolean randomUnused = true;
+			while(randomUnused){
+				random = (int)(Math.random()*rooms.length);
+				for(int j = 0; j < usedRooms.length; j++){
+					if(usedRooms[j] != random){
+						randomUnused = false;
+					}else{
+						randomUnused = true;
+					}
+				}
+			}
+			
+			
+			
 			if(i == 0){
 				rooms[0].setExit('N', rooms[random]);
 				usedRooms[0] = 0;
+				usedRooms[i+1] = random;
 			}else if(i == rooms.length-1){
 				rooms[usedRooms[i]].setExit('S', rooms[usedRooms[i-1]]);
 				randomizedRooms[i-1] = rooms[usedRooms[i-1]];
@@ -75,8 +89,9 @@ public static boolean loginAllowed = false;
 				rooms[usedRooms[i]].setExit('N', rooms[random]);
 				rooms[usedRooms[i]].setExit('S', rooms[usedRooms[i-1]]);
 				randomizedRooms[i-1] = rooms[usedRooms[i-1]];
+				usedRooms[i+1] = random;
 			}
-			usedRooms[i+1] = random;
+			
 		}
 		
 		
@@ -85,17 +100,19 @@ public static boolean loginAllowed = false;
 		while(playGame){
 			
 			// Commanders office
-			if(location == 0){
+			if(randomizedRooms[location].getRoomName().equals("Commanders Office")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk.jpg"));
 				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
 				
 			
 			// Receptionist's Hall
-			}else if(location == 1){  
-				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/test.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
-			}else if(location == 2){
+			}else if(randomizedRooms[location].getRoomName().equals("Reception hall")){  
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/test1.jpg"));
+				System.out.println("One");
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Armory")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Armory.jpg"));
+				System.out.println("Two");
 				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
 			}
 		}
@@ -141,6 +158,8 @@ public static boolean loginAllowed = false;
 							displayTextMilitaryStyle(x, "You picked up the " + commandWords[1] + ".\n");
 							users.get(currentUser[0]).addToInventory(room.getItems()[i]);
 							i += room.getItems().length;
+							loop = false;
+							commandWord = true;
 						}
 					}
 				}else if(commandWords[0].equalsIgnoreCase("shoot")){
@@ -149,9 +168,8 @@ public static boolean loginAllowed = false;
 						displayTextMilitaryStyle(x, "You shot the General! You were the traitor all along!\nYou walk behind the desk, and flip a switch\n");
 						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
 						displayTextMilitaryStyle(x, "Allahu Akbar");
-						loop = true;
-						commandWord = false;
 						goOnToSecond = false;
+						loop = false;
 					}
 				}else if(commandWords[0].equalsIgnoreCase("exit")){
 					if(commandWords[1].equalsIgnoreCase("North") || commandWords[1].equalsIgnoreCase("South")){
@@ -165,9 +183,11 @@ public static boolean loginAllowed = false;
 							goOnToSecond = false;
 							if(commandWords[1].equalsIgnoreCase("North")){
 								displayTextMilitaryStyle(x, "You are now in " + randomizedRooms[location + 1].getRoomName() + ".");
+								x.textSent = ("");
 								return location + 1;
 							}else{
 								displayTextMilitaryStyle(x, "You are now in " + randomizedRooms[location - 1].getRoomName() + ".");
+								x.textSent = ("");
 								return location - 1;
 							}
 						}

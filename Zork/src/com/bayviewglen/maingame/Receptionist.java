@@ -12,7 +12,7 @@ public class Receptionist extends NPC {
             false, false, false
         };
         boolean loop = true;
-        displayTextMilitaryStyle(x, "Receptionist:\n\"Hello!\"\nWhat do you say?\n");
+        displayTextMilitaryStyle(x, "Receptionist:tu say?\n");
         if (isTerrorist) {
             while (loop) {
                 if (!questions[0]) {
