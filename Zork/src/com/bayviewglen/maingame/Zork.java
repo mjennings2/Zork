@@ -2,6 +2,7 @@ package com.bayviewglen.maingame;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,23 +20,23 @@ public class Zork {
 public static boolean loginAllowed = false;
 	public static void main(String[] args) throws Exception {
 		int location = 0;
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stubx
 		
 		ArrayList<User> users = new ArrayList<User>();
-		//int[] currentUser = new int[1];
-		int[] currentUser = {0};
+		int[] currentUser = new int[1];
+		//int[] currentUser= {0};
 		importUsers(users);
 		boolean playGame = true;
 		
-		/*LoginWindow login = new LoginWindow(users, currentUser);
+		LoginWindow login = new LoginWindow(users, currentUser);
 		
 		login.frame.setVisible(true);
 		while(login.login() < 10){
 			 sleep(1000);
-		}
+			}
 		
 		login.frame.setVisible(false);
-		*/
+		
 		
 		
 		
@@ -46,9 +47,9 @@ public static boolean loginAllowed = false;
 		waitForProperInput(x, "Start");
 		x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk.jpg"));
 
-		//displayTextMilitaryStyle(x,"Location: Military train bound for San Fransisco. \nOperation Nuke: The train is carrying a nuclear weapon on a flat bed.\nTime to arrival: 30 min.\nYou are in General DesLauriers Office at the south most part of the train.\nHe is giving you special instructions.\nDesLauriers:\n\"Alright Maggot! We've got a Problem!\nThe train is crying!\nWe are carrying a nuclear payload and have caught wind of a traitor in our ranks!\nYour mission: find this traitor and bring him to Java justice!\nHere, take this fire extinguisher just in case, and this pistol for any traitor-hunting duties you may have to fulfill.\nGet to work, soldier!\n");
+		displayTextMilitaryStyle(x,"Location: Military train bound for San Fransisco. \nOperation Nuke: The train is carrying a nuclear weapon on a flat bed.\nTime to arrival: 30 min.\nYou are in General DesLauriers Office at the south most part of the train.\nHe is giving you special instructions.\nDesLauriers:\n\"Alright Maggot! We've got a Problem!\nThe train is crying!\nWe are carrying a nuclear payload and have caught wind of a traitor in our ranks!\nYour mission: find this traitor and bring him to Java justice!\nHere, take this fire extinguisher just in case, and this pistol for any traitor-hunting duties you may have to fulfill.\nGet to work, soldier!\n");
 
-		
+		                                                                                                                                                                                                                                                                                                               
 		
 		// Declare all Rooms
 		Room[] rooms = new Room[3];
@@ -67,12 +68,17 @@ public static boolean loginAllowed = false;
 			boolean randomUnused = true;
 			while(randomUnused){
 				random = (int)(Math.random()*rooms.length);
+				if(i != rooms.length-1){
 				for(int j = 0; j < usedRooms.length; j++){
 					if(usedRooms[j] != random){
 						randomUnused = false;
 					}else{
 						randomUnused = true;
+						j += usedRooms.length;
 					}
+				}
+				}else{
+					randomUnused = false;
 				}
 			}
 			
@@ -129,6 +135,7 @@ public static boolean loginAllowed = false;
 		// TODO Auto-generated method stub
 		boolean loop = false;
 		while(!loop){
+			System.out.println("Hello");
 		while(x.textSent.equals("")){
 			 try {                                                                                                                                                                                                          
 	                Thread.sleep(1000); //3000 milliseconds is three seconds.                                                                                                                                                   
@@ -136,8 +143,12 @@ public static boolean loginAllowed = false;
 	                Thread.currentThread().interrupt();                                                                                                                                                                        
 	            }   
 		}
-		String[] commandWords = {x.textSent.substring(0,x.textSent.indexOf(" ")), x.textSent.substring(x.textSent.indexOf(" ")+1)};
-	//	Command typed = new Command(commandWords[0], commandWords[1]);
+		String[] commandWords = null;
+		if(x.textSent.indexOf(" ") != -1){
+		String[] commandWordsTemp = {x.textSent.substring(0,x.textSent.indexOf(" ")), x.textSent.substring(x.textSent.indexOf(" ")+1)};
+		commandWords = commandWordsTemp;
+		
+		//	Command typed = new Command(commandWords[0], commandWords[1]);
 		// TODO Check if command is valid
 			boolean commandWord = true, goOnToSecond = false;
 			while(commandWord){
@@ -155,7 +166,7 @@ public static boolean loginAllowed = false;
 			commandWord = true;
 			if(goOnToSecond){
 				if(commandWords[0].equalsIgnoreCase("pickup")){
-					for(int i = 0; i < room.getItems().length; i++){
+					for(int i = 0; i < room.getItems().length; i++){	
 						if(commandWords[1].equalsIgnoreCase(room.getItems()[i].getName())){
 							displayTextMilitaryStyle(x, "You picked up the " + commandWords[1] + ".\n");
 							users.get(currentUser[0]).addToInventory(room.getItems()[i]);
@@ -165,20 +176,15 @@ public static boolean loginAllowed = false;
 						}
 					}
 				}else if(commandWords[0].equalsIgnoreCase("shoot")){
-					if(commandWords[1].equalsIgnoreCase("DesLauriers") || commandWords[1].equalsIgnoreCase("The General") || commandWords[1].equalsIgnoreCase("General DesLaurier")){
-						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk_Dead.jpg"));
-						displayTextMilitaryStyle(x, "You shot the General! You were the traitor all along!\nYou walk behind the desk, and flip a switch\n");
-						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
-						displayTextMilitaryStyle(x, "Allahu Akbar");
-						goOnToSecond = false;
-						loop = false;
-					}
-				}else if(commandWords[0].equalsIgnoreCase("exit")){
+					
+				}else if(commandWords[0].equalsIgnoreCase("exit") || commandWords[0].equalsIgnoreCase("go")){
 					if(commandWords[1].equalsIgnoreCase("North") || commandWords[1].equalsIgnoreCase("South")){
 						if(location == 0 && commandWords[1].equalsIgnoreCase("South")){
 							displayTextMilitaryStyle(x, "That is invalid.");
-						}else if(location == randomizedRooms.length && commandWords[1].equalsIgnoreCase("North")){
+							x.textSent = "";
+						}else if(location == randomizedRooms.length-1 && commandWords[1].equalsIgnoreCase("North")){
 							displayTextMilitaryStyle(x, "That is invalid.");
+							x.textSent = "";
 						}else{
 							loop = true;
 							commandWord = false;
@@ -196,8 +202,9 @@ public static boolean loginAllowed = false;
 					}
 				}
 			}
+		}
 			
-		
+		x.textSent = "";
 		// TODO Outcome if valid
 		//displayTextMilitaryStyle(x, "Ok Soldier\n");
 	}
