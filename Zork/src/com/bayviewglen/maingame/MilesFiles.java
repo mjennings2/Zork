@@ -69,7 +69,7 @@ public class MilesFiles extends NPC {
 								"\"Sorry captain, can't do that. DesLauriers has said no files can be viewed at this time. Everything you need is in your mission detail.\"\n");
 						questions[1] = true;
 					} else if (input == 3) {
-						displayTextMilitaryStyle(x, "\"They are good.\"\n");
+						displayTextMilitaryStyle(x, "\"*gasps* NOOOOO! OUT DAMNED SPOT! *furiously cleans spot*\"\n");
 						questions[2] = true;
 					} else {
 						loop = false;
