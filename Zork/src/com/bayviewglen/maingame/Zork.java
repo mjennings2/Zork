@@ -1,15 +1,21 @@
 package com.bayviewglen.maingame;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner; 
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import java.io.*;
+import sun.audio.*;
 
 import com.bayviewglen.maingame.Display;
 
@@ -17,11 +23,13 @@ import com.bayviewglen.maingame.Display;
 
 public class Zork {
 	private static String[] commands = {"go", "quit", "help", "eat", "use", "pickup", "exit", "shoot"};
-public static boolean loginAllowed = false;
+	public static boolean loginAllowed = false;
 	public static void main(String[] args) throws Exception {
 		int location = 0;
 		// TODO Auto-generated method stubx
-		
+		// open the sound file as a Java input stream
+	   
+	  
 		ArrayList<User> users = new ArrayList<User>();
 		int[] currentUser = new int[1];
 		//int[] currentUser= {0};
@@ -52,17 +60,34 @@ public static boolean loginAllowed = false;
 		                                                                                                                                                                                                                                                                                                               
 		
 		// Declare all Rooms
-		Room[] rooms = new Room[3];
-		Room[] randomizedRooms = new Room[3];
-		Item[] items = {new Item("Piece of paper"), new Item("fire extinguisher")};
+		Room[] rooms = new Room[10];
+		Room[] randomizedRooms = new Room[10];
+		String[] lables = {"fire extinguisher" , "extinguisher", "fire-extinguishing system", "fire-extinguishing thing", "fire extinguishing system", "fire extinguishing thing"};
+		String [] lables1 = {"paper", "sheet", "piece of paper", "piece paper", "piece", "report", "assignment", "profile sheet"};
+		ArrayList<Item> items = new ArrayList<Item>();
+		items.add(new Item("Piece of paper", lables1));
+		items.add(new Item("fire extinguisher", lables));
 		rooms[0] = new Room("Commanders Office", items);
-		Item[] items1 = {new Item("KeyCard")};
-		rooms[1] = new Room("Reception hall", items);
-		Item[] items2 = {new Item("Gun"), new Item("Combat Knife")};
-		rooms[2] = new Room("Armory", items);
+		String[] lables2 = {"card", "keycard", "key", "Acsesscard", "idcard"};
+		ArrayList<Item> items1 = new ArrayList<Item>();
+		items1.add(new Item("KeyCard",lables2));
+		rooms[1] = new Room("Reception hall", items1);
+		String[] none = {"none"};
+		ArrayList<Item> items2 = new ArrayList<Item>();
+		items2.add(new Item("none", none));
+		rooms[2] = new Room("Armory", items2);
+		rooms[3] = new Room("TVRoom", items2);
+		//TODO
+		rooms[4] = new Room("Music Car", items2);
+		rooms[5] = new Room("Workout Car", items2);
+		rooms[6] = new Room("Reporting Car", items2);
+		rooms[7] = new Room("Filing Car", items2);
+		rooms[8] = new Room("Biking Car", items2);
+		rooms[9] = new Room("Propaganda Car", items2);
+		
 		
 		// Set rooms locations
-		int[] usedRooms = new int[3];
+		int[] usedRooms = new int[10];
 		int random = 0;
 		for(int i = 0; i < rooms.length; i++){
 			boolean randomUnused = true;
@@ -116,13 +141,44 @@ public static boolean loginAllowed = false;
 			// Receptionist's Hall
 			}else if(randomizedRooms[location].getRoomName().equals("Reception hall")){  
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/test1.jpg"));
-				System.out.println("One");
 				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
 			}else if(randomizedRooms[location].getRoomName().equals("Armory")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Armory.jpg"));
-				System.out.println("Two");
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("TVRoom")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Cad.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Workout Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Buff.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Reporting Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Bill Nye the News Guy.png"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Filing Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Files2.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Biking Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Road biker.png"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Propaganda Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Propaganda.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Music Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
 				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
 			}
+			
+			
+			
+			
+			/*
+			 * rooms[6] = new Room("Reporting Car", items2);
+			 * rooms[7] = new Room("Filing Car", items2);
+			 * rooms[8] = new Room("Biking Car", items2);
+			 * rooms[9] = new Room("Propaganda Car", items2);
+			 */
+			
+			
 		}
 		saveUsers(users);
 		
@@ -130,7 +186,6 @@ public static boolean loginAllowed = false;
 	}
 
 	
-
 	private static int waitForProperInput(Display x, Room room, int[] currentUser, ArrayList<User> users, int location, Room[] randomizedRooms) {
 		// TODO Auto-generated method stub
 		boolean loop = false;
@@ -166,14 +221,25 @@ public static boolean loginAllowed = false;
 			commandWord = true;
 			if(goOnToSecond){
 				if(commandWords[0].equalsIgnoreCase("pickup")){
-					for(int i = 0; i < room.getItems().length; i++){	
-						if(commandWords[1].equalsIgnoreCase(room.getItems()[i].getName())){
+					boolean validItem = false;
+					for(int i = 0; i < room.getItems().size(); i++){	
+						for(int j = 0; j < room.getItems().get(i).getLables().length; j++){
+						if(commandWords[1].equalsIgnoreCase(room.getItems().get(i).getLables()[j])){
+							
 							displayTextMilitaryStyle(x, "You picked up the " + commandWords[1] + ".\n");
-							users.get(currentUser[0]).addToInventory(room.getItems()[i]);
-							i += room.getItems().length;
+							users.get(currentUser[0]).addToInventory(room.getItems().get(i));
+							room.getItems().remove(i);
+							x.textSent = "";
+							i += room.getItems().size();
 							loop = false;
 							commandWord = true;
+							j += room.getItems().get(i).getLables().length;
+							validItem = true;
 						}
+						}
+					}
+					if(!validItem){
+						displayTextMilitaryStyle(x,"That is not a valid Item!");
 					}
 				}else if(commandWords[0].equalsIgnoreCase("shoot")){
 					
@@ -186,15 +252,15 @@ public static boolean loginAllowed = false;
 							displayTextMilitaryStyle(x, "That is invalid.");
 							x.textSent = "";
 						}else{
-							loop = true;
+							loop = true; 
 							commandWord = false;
 							goOnToSecond = false;
 							if(commandWords[1].equalsIgnoreCase("North")){
-								displayTextMilitaryStyle(x, "You are now in " + randomizedRooms[location + 1].getRoomName() + ".");
+								displayTextMilitaryStyle(x, "You are now in " + randomizedRooms[location + 1].getRoomName() + ".\n");
 								x.textSent = ("");
 								return location + 1;
 							}else{
-								displayTextMilitaryStyle(x, "You are now in " + randomizedRooms[location - 1].getRoomName() + ".");
+								displayTextMilitaryStyle(x, "You are now in " + randomizedRooms[location - 1].getRoomName() + ".\n");
 								x.textSent = ("");
 								return location - 1;
 							}
@@ -211,7 +277,16 @@ public static boolean loginAllowed = false;
 		x.textSent = "";
 		return location;
 	}
-
+	//The method for the test program, you could just copy paste this into your program and put the string for the url in the parameters.
+	
+	
+	public static synchronized void playSound(final String url) {
+		
+		    
+		
+	}
+	
+	
 	private static void displayTextMilitaryStyle(Display x, String str) {
 		// TODO Auto-generated method stub
 		

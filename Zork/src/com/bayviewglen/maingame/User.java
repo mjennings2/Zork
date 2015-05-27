@@ -70,7 +70,7 @@ public class User {
 		this.inventory = inventory;
 	}
 	
-	public void displayAllItems(Display x){
+	/*public void displayAllItems(Display x){
 		for(Item j : inventory){
 		for(int i = 0; i < j.getItemName().length(); i++){
 			if(j.getItemName().substring(i, i+1).equals("\n")){
@@ -83,7 +83,7 @@ public class User {
 		}
 		}
 	}
-	
+	*/
 	private static void sleep(int time){
 		 try {                                                                                                                                                                                                          
             Thread.sleep(time); //3000 milliseconds is three seconds.                                                                                                                                                   
