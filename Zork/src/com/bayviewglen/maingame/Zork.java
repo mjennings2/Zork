@@ -25,7 +25,9 @@ public class Zork {
 	private static String[] commands = {"go", "quit", "help", "eat", "use", "pickup", "exit", "shoot"};
 	public static boolean loginAllowed = false;
 	public static void main(String[] args) throws Exception {
+
 		int location = 0;
+		double time = 31;
 		// TODO Auto-generated method stubx
 		// open the sound file as a Java input stream
 	   
@@ -60,7 +62,7 @@ public class Zork {
 		                                                                                                                                                                                                                                                                                                               
 		
 		// Declare all Rooms
-		Room[] rooms = new Room[10];
+		Room[] rooms = new Room[27];
 		Room[] randomizedRooms = new Room[10];
 		String[] lables = {"fire extinguisher" , "extinguisher", "fire-extinguishing system", "fire-extinguishing thing", "fire extinguishing system", "fire extinguishing thing"};
 		String [] lables1 = {"paper", "sheet", "piece of paper", "piece paper", "piece", "report", "assignment", "profile sheet"};
@@ -86,10 +88,29 @@ public class Zork {
 		rooms[9] = new Room("Propaganda Car", items2);
 		
 		
+		rooms[10] = new Room("Security", items2);
+		rooms[11] = new Room("Pokemon", items2);
+		rooms[12] = new Room("Pirate Car", items2);
+		rooms[13] = new Room("Tea Car", items2);
+		rooms[14] = new Room("Doot Doot Car", items2);
+		rooms[15] = new Room("Surfer Car", items2);
+		rooms[16] = new Room("Barracks Car", items2);
+		rooms[17] = new Room("Shower Car", items2);
+		rooms[18] = new Room("Toilets Car", items2);
+		rooms[19] = new Room("Theatre Car", items2);
+		rooms[20] = new Room("Billiards Car", items2);
+		rooms[21] = new Room("Baseball Car", items2);
+		rooms[22] = new Room("Hockey Car", items2);
+		rooms[23] = new Room("Maple Syrup Car", items2);
+		rooms[24] = new Room("Kebab Car", items2);
+		rooms[25] = new Room("Coding Car", items2);
+		rooms[26] = new Room("Sushi Car", items2);
+		
+		
 		// Set rooms locations
-		int[] usedRooms = new int[10];
+		int[] usedRooms = new int[12];
 		int random = 0;
-		for(int i = 0; i < rooms.length; i++){
+		for(int i = 0; i <= randomizedRooms.length; i++){
 			boolean randomUnused = true;
 			while(randomUnused){
 				random = (int)(Math.random()*rooms.length);
@@ -132,8 +153,37 @@ public class Zork {
 		
 		while(playGame){
 			
+			time--;
+			if(time <=0){
+				
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
+				displayTextMilitaryStyle(x, "BOOOOOOOOOOOOOOOOOOOOOOOOOOOM! You took to long and the terrorist exploded the bomb. You lose, plaese play again!");
+				
+			}else if(time == 20){
+				
+				displayTextMilitaryStyle(x, "20 Min Remaining");
+				
+			}else if(time == 10){
+				
+				displayTextMilitaryStyle(x, "10 Min Remaining");
+				
+			}else if(time == 5){
+				
+				displayTextMilitaryStyle(x, "5 Min Remaining");
+				
+			}else if(time == 2){
+				
+				displayTextMilitaryStyle(x, "2 Min Remaining");
+				
+			}else if(time == 1){
+				
+				displayTextMilitaryStyle(x, "1 Min Remaining");
+				
+			}
+			
+			if(time <=0){
 			// Commanders office
-			if(randomizedRooms[location].getRoomName().equals("Commanders Office")){
+			}else if(randomizedRooms[location].getRoomName().equals("Commanders Office")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk.jpg"));
 				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
 				
@@ -166,16 +216,80 @@ public class Zork {
 			}else if(randomizedRooms[location].getRoomName().equals("Music Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
 				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Security")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/SecurityRoom.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Pokemon")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Pokemon.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Pirate Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Pirate.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Tea Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Tea.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Doot Doot Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Doot.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Surfer Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/surfing.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Barracks Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Barraks.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Shower Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Shower.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Toilets Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/bathroom.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Theatre Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Billiards Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Baseball Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Hockey Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Maple Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Kebab Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Coding Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+			}else if(randomizedRooms[location].getRoomName().equals("Sushi Car")){
+				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
 			}
 			
 			
 			
 			
 			/*
-			 * rooms[6] = new Room("Reporting Car", items2);
-			 * rooms[7] = new Room("Filing Car", items2);
-			 * rooms[8] = new Room("Biking Car", items2);
-			 * rooms[9] = new Room("Propaganda Car", items2);
+			rooms[10] = new Room("Security", items2);
+			rooms[11] = new Room("Pokemon", items2);
+			rooms[12] = new Room("Pirate Car", items2);
+			rooms[13] = new Room("Tea Car", items2);
+			rooms[14] = new Room("Doot Doot Car", items2);
+			rooms[15] = new Room("Surfer Car", items2);
+			rooms[16] = new Room("Barracks Car", items2);
+			rooms[17] = new Room("Shower Car", items2);
+			rooms[18] = new Room("Toilets Car", items2);
+			rooms[19] = new Room("Theatre Car", items2);
+			rooms[20] = new Room("Billiards Car", items2);
+			rooms[21] = new Room("Baseball Car", items2);
+			rooms[22] = new Room("Hockey Car", items2);
+			rooms[23] = new Room("Maple Syrup Car", items2);
+			rooms[24] = new Room("Kebab Car", items2);
+			rooms[25] = new Room("Coding Car", items2);
+			rooms[26] = new Room("Sushi Car", items2);
 			 */
 			
 			
@@ -214,7 +328,8 @@ public class Zork {
 						i += commands.length;
 					}else if (i == commands.length-1){
 						loop = false;
-						displayTextMilitaryStyle(x, "That command is not recodnized.\n");
+						commandWord = false;
+						displayTextMilitaryStyle(x, "That command is not recognized.\n");
 					}
 				}
 			}
@@ -317,7 +432,7 @@ public class Zork {
 		String[] commandWords = x.textSent.split(" ");
 	//	Command typed = new Command(commandWords[0], commandWords[1]);
 		// TODO Check if command is valid
-			if(commandWords[0].equalsIgnoreCase("start")){
+			if(commandWords[0].equalsIgnoreCase(string)){
 				loop = true;
 			}
 		}
