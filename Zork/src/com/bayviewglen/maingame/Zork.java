@@ -37,6 +37,8 @@ public class Zork {
 		//int[] currentUser= {0};
 		importUsers(users);
 		boolean playGame = true;
+		NPC[] npcs = new NPC[27];
+		
 		
 		LoginWindow login = new LoginWindow(users, currentUser);
 		
@@ -59,7 +61,9 @@ public class Zork {
 
 		displayTextMilitaryStyle(x,"Location: Military train bound for San Fransisco. \nOperation Nuke: The train is carrying a nuclear weapon on a flat bed.\nTime to arrival: 30 min.\nYou are in General DesLauriers Office at the south most part of the train.\nHe is giving you special instructions.\nDesLauriers:\n\"Alright Maggot! We've got a Problem!\nThe train is crying!\nWe are carrying a nuclear payload and have caught wind of a traitor in our ranks!\nYour mission: find this traitor and bring him to Java justice!\nHere, take this fire extinguisher just in case, and this pistol for any traitor-hunting duties you may have to fulfill.\nGet to work, soldier!\n");
 
-		                                                                                                                                                                                                                                                                                                               
+		//npcs[0] = new Receptionist(x, true);
+		
+		
 		
 		// Declare all Rooms
 		Room[] rooms = new Room[27];
@@ -191,6 +195,7 @@ public class Zork {
 			// Receptionist's Hall
 			}else if(randomizedRooms[location].getRoomName().equals("Reception hall")){  
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/test1.jpg"));
+				
 				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
 			}else if(randomizedRooms[location].getRoomName().equals("Armory")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Armory.jpg"));
