@@ -1,8 +1,8 @@
 package com.bayviewglen.maingame;
 
-public class BigBrother extends NPC {
+public class SurferDude extends NPC {
 
-	public BigBrother(String name) {
+	public SurferDude(String name) {
 		super(name);
 
 	}
@@ -11,33 +11,35 @@ public class BigBrother extends NPC {
 		boolean[] questions = { false, false, false };
 		boolean loop = true;
 		displayTextMilitaryStyle(x,
-				"*Big Brother looms on a large screen in the car*\n");
+				"*Surfer Dude is tearing up the surfing simulator*\n");
 		if (isTerrorist) {
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x,
-							"1 Have you seen any suspicious activity around here?\n");
+							"1 Surfer Dude! Have you seen anything suspicious around here?\n");
 				}
 				if (!questions[1]) {
 					displayTextMilitaryStyle(x,
-							"2 Have you checked the cameras on the train recently?\n");
+							"2 When the hell did we get a wave simulator installed?!\n");
 				}
 				if (!questions[2]) {
 					displayTextMilitaryStyle(x,
-							"3 How many question have you done?\n");
+							"3 Since when is surfing an appropriate military past-time?\n");
 				}
 				displayTextMilitaryStyle(x, "4 Goodbye\n");
 				int input = waitForProperInput(x, "1 2 3 4");
 				if (input == 1) {
-					displayTextMilitaryStyle(x, "\"No.\"\n");
-					questions[0] = true;
-				} else if (input == 2) {
 					displayTextMilitaryStyle(
 							x,
-							"\"I talked to Mike in Security about it, but he said there wasn’t anything. Whoever's doing this is obviously very sneaky.\"\n");
+							"\"Saw some cat checkin' out the payload a little while ago, but nothing else bro.\"\n");
+					questions[0] = true;
+				} else if (input == 2) {
+					displayTextMilitaryStyle(x,
+							"\"It looks expensive, but it's pretty awesome.\"\n");
 					questions[1] = true;
 				} else if (input == 3) {
-					displayTextMilitaryStyle(x, "\"Uh…you feeling ok, sir?\"\n");
+					displayTextMilitaryStyle(x,
+							"\"It doesn’t really matter what you enjoy when you're off duty.\"\n");
 					questions[2] = true;
 				} else {
 					loop = false;
@@ -48,27 +50,28 @@ public class BigBrother extends NPC {
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x,
-							"1 Have you seen any suspicious activity around here?\n");
+							"1 Surfer Dude! Have you seen anything suspicious around here?\n");
 					if (!questions[1]) {
 						displayTextMilitaryStyle(x,
-								"2 Have you checked the cameras on the train recently?\n");
+								"2 When the hell did we get a wave simulator installed?!\n");
 					}
 					if (questions[2]) {
 						displayTextMilitaryStyle(x,
-								"3 How many question have you done?\n");
+								"3 Since when is surfing an appropriate military past-time?\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
 					int input = waitForProperInput(x, "1 2 3 4");
 					if (input == 1) {
-						displayTextMilitaryStyle(x, "\"I SEE ALL. SUBMIT.\"\n");
+						displayTextMilitaryStyle(x,
+								"\"Nah maaaaaan, I was just riding the waves!\"\n");
 						questions[0] = true;
 					} else if (input == 2) {
 						displayTextMilitaryStyle(x,
-								"\"I HAVE NO NEED TO CHECK CAMERAS. I AM THE CAMERAS.\"\n");
+								"\"I dunno maaaaaaan, but it's siiiiiiiick!\"\n");
 						questions[1] = true;
 					} else if (input == 3) {
 						displayTextMilitaryStyle(x,
-								"\"I HAVE NO NEED FOR QUESTIONS. I ALREADY KNOW THE ANSWER.\"\n");
+								"\"Don't be such a bummer, maaaaaaan!\"\n");
 						questions[2] = true;
 					} else {
 						loop = false;
