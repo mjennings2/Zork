@@ -14,33 +14,66 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+
 import java.io.*;
+
 import sun.audio.*;
 
 import com.bayviewglen.maingame.Display;
 
 
 
-public class Zork {
+public class Zork implements Serializable{
 	private static String[] commands = {"go", "quit", "help", "eat", "use", "pickup", "exit", "shoot"};
 	public static boolean loginAllowed = false;
 	public static void main(String[] args) throws Exception {
 
 		int location = 0;
-		double time = 31;
-		// TODO Auto-generated method stubx
+		double time[] = {31};
+		Room[] randomizedRooms = null;
+		Room[] rooms = null;
+		boolean[] newUser = {false};
+		// TODO Auto-generated method stub
 		// open the sound file as a Java input stream
 	   
 	  
-		ArrayList<User> users = new ArrayList<User>();
+		ArrayList<User> users =  importUsersTest();
+		//ArrayList<User> users =  new ArrayList<User>();
 		int[] currentUser = new int[1];
 		//int[] currentUser= {0};
-		importUsers(users);
+		//importUsers(users);
 		boolean playGame = true;
 		NPC[] npcs = new NPC[27];
-		
-		
-		LoginWindow login = new LoginWindow(users, currentUser);
+		/*
+		npcs[1] = new Receptionist();
+		npcs[2] = new Receptionist();
+		npcs[3] = new Receptionist();
+		npcs[4] = new Receptionist();
+		npcs[5] = new Receptionist();
+		npcs[6] = new Receptionist();
+		npcs[7] = new Receptionist();
+		npcs[8] = new Receptionist();
+		npcs[9] = new Receptionist();
+		npcs[10] = new Receptionist();
+		npcs[11] = new Receptionist();
+		npcs[12] = new Receptionist();
+		npcs[13] = new Receptionist();
+		npcs[14] = new Receptionist();
+		npcs[15] = new Receptionist();
+		npcs[16] = new Receptionist();
+		npcs[17] = new Receptionist();
+		npcs[18] = new Receptionist();
+		npcs[19] = new Receptionist();
+		npcs[20] = new Receptionist();
+		npcs[21] = new Receptionist();
+		npcs[22] = new Receptionist();
+		npcs[23] = new Receptionist();
+		npcs[24] = new Receptionist();
+		npcs[25] = new Receptionist();
+		npcs[26] = new Receptionist();
+		npcs[27] = new Receptionist();
+		*/
+		LoginWindow login = new LoginWindow(users, currentUser, newUser);
 		
 		login.frame.setVisible(true);
 		while(login.login() < 10){
@@ -54,20 +87,21 @@ public class Zork {
 		
 		Display x = new Display("input/pictures/Title.jpg");
 		x.frame.setVisible(true);
-		displayTextMilitaryStyle(x,"Hello and welcome to Trouble in Nuke on a Train with a Terrorist Town!\nType commands in the text bar below. Finding out the commands is part of the puzzle!\nLeaving a room is exit, you can go north or south.\nType 'Start' to start\n");
+		displayTextMilitaryStyle(x,"Hello and welcome to Trouble in Nuke on a Train with a Terrorist Town!\nType commands in the text bar below. Finding out the commands is part of the puzzle!\nLeaving a room is exit, you can go north or south.\nType 'Start' to start, or 'Load' if you would like to continue your previous game.\n");
 		sleep(1000);
-		waitForProperInput(x, "Start");
+		location = waitForStartOrLoad(x, time,currentUser,users, newUser);
+		if(time[0] == 31){
 		x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk.jpg"));
 
 		displayTextMilitaryStyle(x,"Location: Military train bound for San Fransisco. \nOperation Nuke: The train is carrying a nuclear weapon on a flat bed.\nTime to arrival: 30 min.\nYou are in General DesLauriers Office at the south most part of the train.\nHe is giving you special instructions.\nDesLauriers:\n\"Alright Maggot! We've got a Problem!\nThe train is crying!\nWe are carrying a nuclear payload and have caught wind of a traitor in our ranks!\nYour mission: find this traitor and bring him to Java justice!\nHere, take this fire extinguisher just in case, and this pistol for any traitor-hunting duties you may have to fulfill.\nGet to work, soldier!\n");
-
+		
 		//npcs[0] = new Receptionist(x, true);
 		
 		
 		
 		// Declare all Rooms
-		Room[] rooms = new Room[27];
-		Room[] randomizedRooms = new Room[10];
+		rooms = new Room[27];
+		randomizedRooms = new Room[10];
 		String[] lables = {"fire extinguisher" , "extinguisher", "fire-extinguishing system", "fire-extinguishing thing", "fire extinguishing system", "fire extinguishing thing"};
 		String [] lables1 = {"paper", "sheet", "piece of paper", "piece paper", "piece", "report", "assignment", "profile sheet"};
 		ArrayList<Item> items = new ArrayList<Item>();
@@ -152,40 +186,47 @@ public class Zork {
 			
 		}
 		
+		users.get(currentUser[0]).setMap(randomizedRooms);
+		users.get(currentUser[0]).setAllRooms(rooms);
 		
-		
-		
-		while(playGame){
+		}else{
 			
-			time--;
-			if(time <=0){
+			randomizedRooms = users.get(currentUser[0]).getMap();
+			rooms = users.get(currentUser[0]).getAllRooms();
+			
+		}
+		while(playGame){
+			time[0]--;
+			saveUsersTest(users,location,time,currentUser);
+			
+			if(time[0] <=0){
 				
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
 				displayTextMilitaryStyle(x, "BOOOOOOOOOOOOOOOOOOOOOOOOOOOM! You took to long and the terrorist exploded the bomb. You lose, plaese play again!");
 				
-			}else if(time == 20){
+			}else if(time[0] == 20){
 				
 				displayTextMilitaryStyle(x, "20 Min Remaining");
 				
-			}else if(time == 10){
+			}else if(time[0] == 10){
 				
 				displayTextMilitaryStyle(x, "10 Min Remaining");
 				
-			}else if(time == 5){
+			}else if(time[0] == 5){
 				
 				displayTextMilitaryStyle(x, "5 Min Remaining");
 				
-			}else if(time == 2){
+			}else if(time[0] == 2){
 				
 				displayTextMilitaryStyle(x, "2 Min Remaining");
 				
-			}else if(time == 1){
+			}else if(time[0] == 1){
 				
 				displayTextMilitaryStyle(x, "1 Min Remaining");
 				
 			}
 			
-			if(time <=0){
+			if(time[0] <=0){
 			// Commanders office
 			}else if(randomizedRooms[location].getRoomName().equals("Commanders Office")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk.jpg"));
@@ -277,25 +318,7 @@ public class Zork {
 			
 			
 			
-			/*
-			rooms[10] = new Room("Security", items2);
-			rooms[11] = new Room("Pokemon", items2);
-			rooms[12] = new Room("Pirate Car", items2);
-			rooms[13] = new Room("Tea Car", items2);
-			rooms[14] = new Room("Doot Doot Car", items2);
-			rooms[15] = new Room("Surfer Car", items2);
-			rooms[16] = new Room("Barracks Car", items2);
-			rooms[17] = new Room("Shower Car", items2);
-			rooms[18] = new Room("Toilets Car", items2);
-			rooms[19] = new Room("Theatre Car", items2);
-			rooms[20] = new Room("Billiards Car", items2);
-			rooms[21] = new Room("Baseball Car", items2);
-			rooms[22] = new Room("Hockey Car", items2);
-			rooms[23] = new Room("Maple Syrup Car", items2);
-			rooms[24] = new Room("Kebab Car", items2);
-			rooms[25] = new Room("Coding Car", items2);
-			rooms[26] = new Room("Sushi Car", items2);
-			 */
+			
 			
 			
 		}
@@ -409,7 +432,6 @@ public class Zork {
 	
 	private static void displayTextMilitaryStyle(Display x, String str) {
 		// TODO Auto-generated method stub
-		
 		for(int i = 0; i < str.length(); i++){
 			if(str.substring(i, i+1).equals("\n")){
 				x.display(str.substring(i, i+1));
@@ -423,7 +445,7 @@ public class Zork {
 
 
 
-	private static void waitForProperInput(Display x, String string) {
+	private static int waitForStartOrLoad(Display x, double[] time, int[] currentUser, ArrayList<User> users, boolean[] newUser) {
 		// TODO Auto-generated method stub
 		boolean loop = false;
 		while(!loop){
@@ -437,13 +459,28 @@ public class Zork {
 		String[] commandWords = x.textSent.split(" ");
 	//	Command typed = new Command(commandWords[0], commandWords[1]);
 		// TODO Check if command is valid
-			if(commandWords[0].equalsIgnoreCase(string)){
+			if(commandWords[0].equalsIgnoreCase("Start")){
+				displayTextMilitaryStyle(x, "Welcome Soilder!\n");
+				x.textSent = ("");
 				loop = true;
+				return 0;
+			}else if(commandWords[0].equalsIgnoreCase("Load") && !newUser[0] ){
+				displayTextMilitaryStyle(x, "Welcome back Soilder!\n");
+				x.textSent = ("");
+				loop = true;
+				time[0] = users.get(currentUser[0]).getTime();
+				return users.get(currentUser[0]).getLocation();
+			}else{
+				displayTextMilitaryStyle(x, "That is Invalid.\n");
+				x.textSent = ("");
 			}
 		}
 		// TODO Outcome if valid
+		
+		
 		displayTextMilitaryStyle(x, "Ok Soldier\n");
 		x.textSent = ("");
+		return 0;
 	}
 
 	
@@ -461,7 +498,23 @@ public class Zork {
 		return true;
 	}
 
-
+	private static void saveUsersTest(ArrayList<User> users, int location, double[] time, int[] currentUser){
+		
+		// Serialization code
+        try {
+            FileOutputStream fileOut = new FileOutputStream("input/userDetails.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            users.get(currentUser[0]).setLocation(location);
+            users.get(currentUser[0]).setTime(time[0]);
+            out.writeObject(users);
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+		
+		
+	}
 
 	private static void saveUsers(ArrayList<User> users) throws IOException {
 		// TODO Auto-generated method stub
@@ -489,6 +542,26 @@ public class Zork {
           
 	}
 
+	@SuppressWarnings("unchecked")
+	private static ArrayList<User> importUsersTest() throws FileNotFoundException {
+		ArrayList<User> deserializedUsers = null;
+		try {
+            FileInputStream fileIn = new FileInputStream("input/userDetails.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            deserializedUsers = (ArrayList<User>) in.readObject();
+            in.close();
+            fileIn.close();
+            return deserializedUsers;
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (ClassNotFoundException cnfe) {
+            cnfe.printStackTrace();
+        }
+		return deserializedUsers;
+		
+	}
+	
+	
 	private static void importUsers(ArrayList<User> users) throws FileNotFoundException {
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(new File("input/users.dat"));  
@@ -499,7 +572,8 @@ public class Zork {
 				achivements[i-6] = temp[i].equals("true");
 			}
 			Highscores highscore = new Highscores(Integer.parseInt(temp[2]), temp[0], Integer.parseInt(temp[3]), Integer.parseInt(temp[4]), Integer.parseInt(temp[5]));
-			users.add(new User(temp[0], temp[1], new Achivement(achivements), highscore));
+			
+			users.add(new User(temp[0], temp[1], new Achivement(achivements), highscore, 0, 0, null, null));
 		}
 	}
 	

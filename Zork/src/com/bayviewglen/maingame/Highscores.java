@@ -1,9 +1,10 @@
 package com.bayviewglen.maingame;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Highscores {
+public class Highscores implements Serializable{
 
 	private int highscore;
 	private Calendar date;

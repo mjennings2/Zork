@@ -1,19 +1,22 @@
 package com.bayviewglen.maingame;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User {
+public class User implements Serializable{
 
 	private String myUsername;
 	private String myPassword;
 	private Achivement myAchivements;
 	private Highscores myHighscore;
 	private ArrayList<Item> inventory = new ArrayList<Item>();
-	
-	
+	private int location;
+	private double time;
+	private Room[] map;
+	private Room[] allRooms;
 
 
-	public User(String username, String password, Achivement achivement, Highscores highscore){
+	public User(String username, String password, Achivement achivement, Highscores highscore, int location, int time, Room[] map, Room[] allRooms){
 		myAchivements = achivement;
 		myUsername = username;
 		myPassword = password;
@@ -70,6 +73,38 @@ public class User {
 		this.inventory = inventory;
 	}
 	
+	public int getLocation() {
+		return location;
+	}
+
+	public void setLocation(int location) {
+		this.location = location;
+	}
+
+	public double getTime() {
+		return time;
+	}
+
+	public void setTime(double time2) {
+		this.time = time2;
+	}
+
+	public Room[] getMap() {
+		return map;
+	}
+
+	public void setMap(Room[] map) {
+		this.map = map;
+	}
+
+	public Room[] getAllRooms() {
+		return allRooms;
+	}
+
+	public void setAllRooms(Room[] allRooms) {
+		this.allRooms = allRooms;
+	}
+
 	/*public void displayAllItems(Display x){
 		for(Item j : inventory){
 		for(int i = 0; i < j.getItemName().length(); i++){

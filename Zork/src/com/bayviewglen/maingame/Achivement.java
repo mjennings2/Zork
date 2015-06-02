@@ -1,6 +1,8 @@
 package com.bayviewglen.maingame;
 
-public class Achivement {
+import java.io.Serializable;
+
+public class Achivement implements Serializable{
 
 	private boolean[] myAchivements;
 	

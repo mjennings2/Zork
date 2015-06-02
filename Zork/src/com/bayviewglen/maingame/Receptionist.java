@@ -2,6 +2,13 @@ package com.bayviewglen.maingame;
 
 public class Receptionist extends NPC {
 
+	
+	 public Receptionist() {
+	        
+	        // TODO Auto-generated constructor stub
+	    }
+
+	
     public Receptionist(String name) {
         super(name);
         // TODO Auto-generated constructor stub

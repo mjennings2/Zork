@@ -21,7 +21,7 @@ public class UsernameMissing {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UsernameMissing window = new UsernameMissing(null, null, null, null);
+					UsernameMissing window = new UsernameMissing(null, null, null, null, null);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,11 +33,12 @@ public class UsernameMissing {
 	/**
 	 * Create the application.
 	 * @param users 
+	 * @param newUser 
 	 * @param string2 
 	 * @param string 
 	 */
-	public UsernameMissing(ArrayList<User> users, String username, String password, int[] login) {
-		initialize(users, username, password, login);
+	public UsernameMissing(ArrayList<User> users, String username, String password, int[] login, boolean[] newUser) {
+		initialize(users, username, password, login, newUser);
 	}
 
 	/**
@@ -46,8 +47,9 @@ public class UsernameMissing {
 	 * @param password 
 	 * @param username 
 	 * @param login 
+	 * @param newUser 
 	 */
-	private void initialize(ArrayList<User> users, String username, String password, int[] login) {
+	private void initialize(ArrayList<User> users, String username, String password, int[] login, boolean[] newUser) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 503, 301);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,7 +67,8 @@ public class UsernameMissing {
 		btnYes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean[] newAchivement = {false, false, false, false, false};
-				users.add(new User(username,password, new Achivement(newAchivement), new Highscores(0, username, 0, 0, 0)));
+				users.add(new User(username,password, new Achivement(newAchivement), new Highscores(0, username, 0, 0, 0),0,0, null, null));
+				newUser[0] = true;
 				frame.setVisible(false);
 				login[0] = 100;
 			}

@@ -39,7 +39,7 @@ public class LoginWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginWindow window = new LoginWindow(null, null);
+					LoginWindow window = new LoginWindow(null, null, null);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,17 +51,19 @@ public class LoginWindow {
 	/**
 	 * Create the application.
 	 * @param currentUser 
+	 * @param newUser 
 	 */
-	public LoginWindow(ArrayList<User> users, int[] currentUser) {
-		initialize(users, currentUser);
+	public LoginWindow(ArrayList<User> users, int[] currentUser, boolean[] newUser) {
+		initialize(users, currentUser, newUser);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @param users 
 	 * @param currentUser 
+	 * @param newUser 
 	 */
-	private void initialize(ArrayList<User> users, int[] currentUser) {
+	private void initialize(ArrayList<User> users, int[] currentUser, boolean[] newUser) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 812, 639);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,7 +99,7 @@ public class LoginWindow {
 			       }
 			       i += users.size();
 			      }else if(i == users.size()-1){
-			       UsernameMissing window = new UsernameMissing(users, username.getText(), password.getText(), login);
+			       UsernameMissing window = new UsernameMissing(users, username.getText(), password.getText(), login, newUser);
 			       window.frame.setVisible(true);
 			      }
 			     }
@@ -139,7 +141,7 @@ public class LoginWindow {
 						}
 						i += users.size();
 					}else if(i == users.size()-1){
-						UsernameMissing window = new UsernameMissing(users, username.getText(), password.getText(), login);
+						UsernameMissing window = new UsernameMissing(users, username.getText(), password.getText(), login, newUser);
 						window.frame.setVisible(true);
 					}
 				}
