@@ -2,7 +2,7 @@ package com.bayviewglen.maingame;
 
 public class NPC {
 
-	private String name;
+	public String name;
 	
 	public NPC() {
 		
@@ -20,7 +20,7 @@ public class NPC {
 		boolean loop = false;
 		while(!loop){
 		while(x.textSent.equals("")){
-			 try {                                                                                                                                                                                                          
+			 try {                                                                                                                                                                                                             
 	                Thread.sleep(1000); //3000 milliseconds is three seconds.                                                                                                                                                   
 	            } catch (InterruptedException ex) {                                                                                                                                                                            
 	                Thread.currentThread().interrupt();                                                                                                                                                                        
@@ -42,6 +42,11 @@ public class NPC {
 		}
 		x.textSent = ("");
 		return 0;
+	}
+	
+	protected static void TalkTo(Display x, boolean isTerrorist){
+		
+		
 	}
 	
 	protected static void displayTextMilitaryStyle(Display x, String str) {

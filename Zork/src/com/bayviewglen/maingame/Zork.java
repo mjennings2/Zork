@@ -24,10 +24,10 @@ import com.bayviewglen.maingame.Display;
 
 
 public class Zork implements Serializable{
-	private static String[] commands = {"go", "quit", "help", "eat", "use", "pickup", "exit", "shoot"};
+	private static String[] commands = {"talk","go", "quit", "help", "eat", "use", "pickup", "exit", "shoot"};
 	public static boolean loginAllowed = false;
 	public static void main(String[] args) throws Exception {
-
+		int traitor = (int) (Math.random() * 27) + 1;
 		int location = 0;
 		double time[] = {31};
 		Room[] randomizedRooms = null;
@@ -44,24 +44,24 @@ public class Zork implements Serializable{
 		//importUsers(users);
 		boolean playGame = true;
 		NPC[] npcs = new NPC[27];
-		/*
-		npcs[1] = new Receptionist();
-		npcs[2] = new Receptionist();
-		npcs[3] = new Receptionist();
-		npcs[4] = new Receptionist();
-		npcs[5] = new Receptionist();
-		npcs[6] = new Receptionist();
-		npcs[7] = new Receptionist();
-		npcs[8] = new Receptionist();
-		npcs[9] = new Receptionist();
-		npcs[10] = new Receptionist();
-		npcs[11] = new Receptionist();
-		npcs[12] = new Receptionist();
-		npcs[13] = new Receptionist();
-		npcs[14] = new Receptionist();
-		npcs[15] = new Receptionist();
-		npcs[16] = new Receptionist();
-		npcs[17] = new Receptionist();
+		
+		npcs[1] = new Receptionist("Receptionist");
+		/*npcs[2] = new ArmoryGuard("Armory Gaurd");
+		npcs[3] = new BigBrother("Big Brother");
+		npcs[4] = new BoratBuff("Borat Buff");
+		npcs[5] = new CaptainCheesecrumbs("Captain Cheesecrumbs");
+		npcs[6] = new CorporalCad("Corporal Cad");
+		npcs[7] = new DanceHarmstring("Dance Harmstring");
+		npcs[8] = new DankSiesta("Dank Siesta");
+		npcs[9] = new DashKetchup("Dash Ketchup");
+		npcs[10] = new JonCitrus("Jon Citrus");
+		npcs[11] = new MikeSchmidt("Mike Schmidt");
+		npcs[12] = new MilesFiles("Miles Files");
+		npcs[13] = new MrSkeltal("Mr. Skeltal");
+		npcs[14] = new SirPoshingtonIII("Sir Poshington III");
+		npcs[15] = new SurferDude("Surfer Dude");
+		npcs[16] = new SergeantJohnson("Sergeant");
+		npcs[17] = new SergeantMajorSmith("Seargent Major Smith");
 		npcs[18] = new Receptionist();
 		npcs[19] = new Receptionist();
 		npcs[20] = new Receptionist();
@@ -73,6 +73,7 @@ public class Zork implements Serializable{
 		npcs[26] = new Receptionist();
 		npcs[27] = new Receptionist();
 		*/
+		
 		LoginWindow login = new LoginWindow(users, currentUser, newUser);
 		
 		login.frame.setVisible(true);
@@ -98,8 +99,7 @@ public class Zork implements Serializable{
 		//npcs[0] = new Receptionist(x, true);
 		
 		
-		
-		// Declare all Rooms
+				// Declare all Rooms
 		rooms = new Room[27];
 		randomizedRooms = new Room[10];
 		String[] lables = {"fire extinguisher" , "extinguisher", "fire-extinguishing system", "fire-extinguishing thing", "fire extinguishing system", "fire extinguishing thing"};
@@ -107,42 +107,42 @@ public class Zork implements Serializable{
 		ArrayList<Item> items = new ArrayList<Item>();
 		items.add(new Item("Piece of paper", lables1));
 		items.add(new Item("fire extinguisher", lables));
-		rooms[0] = new Room("Commanders Office", items);
+		rooms[0] = new Room("Commanders Office", items, 0);
 		String[] lables2 = {"card", "keycard", "key", "Acsesscard", "idcard"};
 		ArrayList<Item> items1 = new ArrayList<Item>();
 		items1.add(new Item("KeyCard",lables2));
-		rooms[1] = new Room("Reception hall", items1);
+		rooms[1] = new Room("Reception hall", items1, 1);
 		String[] none = {"none"};
 		ArrayList<Item> items2 = new ArrayList<Item>();
 		items2.add(new Item("none", none));
-		rooms[2] = new Room("Armory", items2);
-		rooms[3] = new Room("TVRoom", items2);
+		rooms[2] = new Room("Armory", items2, 2);
+		rooms[3] = new Room("TVRoom", items2, 3);
 		//TODO
-		rooms[4] = new Room("Music Car", items2);
-		rooms[5] = new Room("Workout Car", items2);
-		rooms[6] = new Room("Reporting Car", items2);
-		rooms[7] = new Room("Filing Car", items2);
-		rooms[8] = new Room("Biking Car", items2);
-		rooms[9] = new Room("Propaganda Car", items2);
+		rooms[4] = new Room("Music Car", items2, 4);
+		rooms[5] = new Room("Workout Car", items2, 5);
+		rooms[6] = new Room("Reporting Car", items2, 6);
+		rooms[7] = new Room("Filing Car", items2, 7);
+		rooms[8] = new Room("Biking Car", items2, 8);
+		rooms[9] = new Room("Propaganda Car", items2, 9);
 		
 		
-		rooms[10] = new Room("Security", items2);
-		rooms[11] = new Room("Pokemon", items2);
-		rooms[12] = new Room("Pirate Car", items2);
-		rooms[13] = new Room("Tea Car", items2);
-		rooms[14] = new Room("Doot Doot Car", items2);
-		rooms[15] = new Room("Surfer Car", items2);
-		rooms[16] = new Room("Barracks Car", items2);
-		rooms[17] = new Room("Shower Car", items2);
-		rooms[18] = new Room("Toilets Car", items2);
-		rooms[19] = new Room("Theatre Car", items2);
-		rooms[20] = new Room("Billiards Car", items2);
-		rooms[21] = new Room("Baseball Car", items2);
-		rooms[22] = new Room("Hockey Car", items2);
-		rooms[23] = new Room("Maple Syrup Car", items2);
-		rooms[24] = new Room("Kebab Car", items2);
-		rooms[25] = new Room("Coding Car", items2);
-		rooms[26] = new Room("Sushi Car", items2);
+		rooms[10] = new Room("Security", items2, 10);
+		rooms[11] = new Room("Pokemon", items2, 11);
+		rooms[12] = new Room("Pirate Car", items2, 12);
+		rooms[13] = new Room("Tea Car", items2, 13);
+		rooms[14] = new Room("Doot Doot Car", items2, 14);
+		rooms[15] = new Room("Surfer Car", items2, 15);
+		rooms[16] = new Room("Barracks Car", items2, 16);
+		rooms[17] = new Room("Shower Car", items2, 17);
+		rooms[18] = new Room("Toilets Car", items2, 18);
+		rooms[19] = new Room("Theatre Car", items2, 19);
+		rooms[20] = new Room("Billiards Car", items2, 20);
+		rooms[21] = new Room("Baseball Car", items2, 21);
+		rooms[22] = new Room("Hockey Car", items2, 22);
+		rooms[23] = new Room("Maple Syrup Car", items2, 23);
+		rooms[24] = new Room("Kebab Car", items2, 24);
+		rooms[25] = new Room("Coding Car", items2, 25);
+		rooms[26] = new Room("Sushi Car", items2, 26);
 		
 		
 		// Set rooms locations
@@ -230,89 +230,89 @@ public class Zork implements Serializable{
 			// Commanders office
 			}else if(randomizedRooms[location].getRoomName().equals("Commanders Office")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 				
 			
 			// Receptionist's Hall
 			}else if(randomizedRooms[location].getRoomName().equals("Reception hall")){  
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/test1.jpg"));
 				
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Armory")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Armory.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("TVRoom")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Cad.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Workout Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Buff.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Reporting Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Bill Nye the News Guy.png"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Filing Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Files2.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Biking Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Road biker.png"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Propaganda Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Propaganda.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Music Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Security")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/SecurityRoom.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Pokemon")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Pokemon.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Pirate Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Pirate.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Tea Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Tea.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Doot Doot Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Doot.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Surfer Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/surfing.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Barracks Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Barraks.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Shower Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Shower.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Toilets Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/bathroom.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Theatre Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Billiards Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Baseball Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Hockey Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Maple Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Kebab Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Coding Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}else if(randomizedRooms[location].getRoomName().equals("Sushi Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
 			}
 			
 			
@@ -328,7 +328,8 @@ public class Zork implements Serializable{
 	}
 
 	
-	private static int waitForProperInput(Display x, Room room, int[] currentUser, ArrayList<User> users, int location, Room[] randomizedRooms) {
+	@SuppressWarnings("static-access")
+	private static int waitForProperInput(Display x, Room room, int[] currentUser, ArrayList<User> users, int location, Room[] randomizedRooms, NPC[] npcs, int traitor) {
 		// TODO Auto-generated method stub
 		boolean loop = false;
 		while(!loop){
@@ -342,7 +343,7 @@ public class Zork implements Serializable{
 		}
 		String[] commandWords = null;
 		if(x.textSent.indexOf(" ") != -1){
-		String[] commandWordsTemp = {x.textSent.substring(0,x.textSent.indexOf(" ")), x.textSent.substring(x.textSent.indexOf(" ")+1)};
+		String[] commandWordsTemp = x.textSent.split(" ");
 		commandWords = commandWordsTemp;
 		
 		//	Command typed = new Command(commandWords[0], commandWords[1]);
@@ -368,7 +369,7 @@ public class Zork implements Serializable{
 					for(int i = 0; i < room.getItems().size(); i++){	
 						for(int j = 0; j < room.getItems().get(i).getLables().length; j++){
 						if(commandWords[1].equalsIgnoreCase(room.getItems().get(i).getLables()[j])){
-							
+							    
 							displayTextMilitaryStyle(x, "You picked up the " + commandWords[1] + ".\n");
 							users.get(currentUser[0]).addToInventory(room.getItems().get(i));
 							room.getItems().remove(i);
@@ -386,6 +387,16 @@ public class Zork implements Serializable{
 					}
 				}else if(commandWords[0].equalsIgnoreCase("shoot")){
 					
+				}else if(commandWords[0].equalsIgnoreCase("talk")){
+					if(commandWords[1].equalsIgnoreCase("to") || commandWords[1].equalsIgnoreCase("with") || commandWords[1].equalsIgnoreCase(npcs[location].name)){
+						if((commandWords[2]!=null && commandWords[1].equalsIgnoreCase(npcs[location].name))){
+							x.textSent="";
+							npcs[randomizedRooms[location].i].TalkTo(x,traitor==location);
+						}else if((commandWords[2].equalsIgnoreCase(npcs[randomizedRooms[location].i].name))){
+							x.textSent="";
+							npcs[location].TalkTo(x,traitor==location);
+						}
+					}
 				}else if(commandWords[0].equalsIgnoreCase("exit") || commandWords[0].equalsIgnoreCase("go")){
 					if(commandWords[1].equalsIgnoreCase("North") || commandWords[1].equalsIgnoreCase("South")){
 						if(location == 0 && commandWords[1].equalsIgnoreCase("South")){
