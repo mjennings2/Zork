@@ -43,11 +43,12 @@ public class SerbiaSteve extends NPC {
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x, "1 Seen anything suspicious around here?\n");
-					if (!questions[1]) {
+				}
+				if (!questions[1]) {
 						displayTextMilitaryStyle(x,
 								"2 Are these Kebabs ready?\n");
 					}
-					if (questions[2]) {
+					if (!questions[2]) {
 						displayTextMilitaryStyle(x, "3 Is that shipment of kebabs ready for supply drop?\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
@@ -66,7 +67,7 @@ public class SerbiaSteve extends NPC {
 					} else {
 						loop = false;
 					}
-				}
+				
 			}
 		}
 

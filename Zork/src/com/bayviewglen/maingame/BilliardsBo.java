@@ -41,10 +41,11 @@ public class BilliardsBo extends NPC {
 	            while (loop) {
 	                if (!questions[0]) {
 	                    displayTextMilitaryStyle(x, "1 What. Why are you playing by yourself?\n");
-	                    if (!questions[1]) {
+	                }
+	                if (!questions[1]) {
 	                        displayTextMilitaryStyle(x, "2 What is the goal here?\n");
 	                    }
-	                    if (questions[2]) {
+	                    if (!questions[2]) {
 	                        displayTextMilitaryStyle(x, "3 Well, Good luck with your game!\n");
 	                    }
 	                    displayTextMilitaryStyle(x, "4 Goodbye\n");
@@ -63,8 +64,7 @@ public class BilliardsBo extends NPC {
 	                    }
 	                }
 	            }
-	        }
-
+	        
 
 	    }
 }

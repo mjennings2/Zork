@@ -50,11 +50,12 @@ public class MikeSchmidt extends NPC {
 					displayTextMilitaryStyle(
 							x,
 							"1 Mike, you're my number one choice for security here, even though it's just a summer job. So, I need to you to tell my if you've seen anything suspicious as of late.\n");
-					if (!questions[1]) {
+				}
+				if (!questions[1]) {
 						displayTextMilitaryStyle(x,
 								"2 Anything else to report?\n");
 					}
-					if (questions[2]) {
+					if (!questions[2]) {
 						displayTextMilitaryStyle(x,
 								"3 How long have you been in here?\n");
 					}
@@ -73,5 +74,5 @@ public class MikeSchmidt extends NPC {
 						questions[2] = true;
 					} else {
 						loop = false;
-					}
+				
 				}}}}}	

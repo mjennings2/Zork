@@ -50,11 +50,12 @@ public class JonCitrus extends NPC {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x,
 							"1 Have you seen anything suspicious lately?\n");
-					if (!questions[1]) {
+				}
+				if (!questions[1]) {
 						displayTextMilitaryStyle(x,
 								"2 Anything on the news that's noteworthy?\n");
 					}
-					if (questions[2]) {
+					if (!questions[2]) {
 						displayTextMilitaryStyle(x,
 								"3 How's the weather looking in San Francisco?\n");
 					}
@@ -73,7 +74,7 @@ public class JonCitrus extends NPC {
 						questions[2] = true;
 					} else {
 						loop = false;
-					}
+				
 				}
 			}
 		}

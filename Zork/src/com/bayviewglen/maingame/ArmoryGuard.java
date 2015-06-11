@@ -44,10 +44,11 @@ public class ArmoryGuard extends NPC{
             while (loop) {
                 if (!questions[0]) {
                     displayTextMilitaryStyle(x, "1 Anything to report?\n");
-                    if (!questions[1]) {
+                }
+                if (!questions[1]) {
                         displayTextMilitaryStyle(x, "2 Your shoes are untied, soldier!\n");
                     }
-                    if (questions[2]) {
+                    if (!questions[2]) {
                         displayTextMilitaryStyle(x, "3 Do you have any extra weapons for me?\n");
                     }
                     displayTextMilitaryStyle(x, "4 Goodbye\n");
@@ -66,6 +67,5 @@ public class ArmoryGuard extends NPC{
 					}
 				}
 			}
-		}
-	}
-}
+		
+	}}

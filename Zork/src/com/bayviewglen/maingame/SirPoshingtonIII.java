@@ -45,11 +45,12 @@ public class SirPoshingtonIII extends NPC {
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x, "1 Mr. Poshington! How lovely to see you again, friend.\n");
-					if (!questions[1]) {
+				}
+				if (!questions[1]) {
 						displayTextMilitaryStyle(x,
 								"2 Is it time for tea already?\n");
 					}
-					if (questions[2]) {
+					if (!questions[2]) {
 						displayTextMilitaryStyle(x, "3 How are the tea rations doing?\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
@@ -68,7 +69,7 @@ public class SirPoshingtonIII extends NPC {
 					} else {
 						loop = false;
 					}
-				}
+				
 			}
 		}
 	}

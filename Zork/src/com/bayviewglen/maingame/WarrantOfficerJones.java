@@ -41,10 +41,11 @@ public class WarrantOfficerJones extends NPC {
 	            while (loop) {
 	                if (!questions[0]) {
 	                    displayTextMilitaryStyle(x, "1 What movie is playing?\n");
-	                    if (!questions[1]) {
+	                }
+	                if (!questions[1]) {
 	                        displayTextMilitaryStyle(x, "2 What is your next shift?\n");
 	                    }
-	                    if (questions[2]) {
+	                    if (!questions[2]) {
 	                        displayTextMilitaryStyle(x, "3 How are the kids?\n");
 	                    }
 	                    displayTextMilitaryStyle(x, "4 Goodbye\n");
@@ -61,7 +62,7 @@ public class WarrantOfficerJones extends NPC {
 	                    } else {
 	                        loop = false;
 	                    }
-	                }
+	                
 	            }
 	        }
 

@@ -45,11 +45,12 @@ public class DankSiesta extends NPC {
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x, "1 Hey! Dank! Have you seen anything weird around here lately\n");
-					if (!questions[1]) {
+				}
+				if (!questions[1]) {
 						displayTextMilitaryStyle(x,
 								"2 Dank! Can you hear me?!\n");
 					}
-					if (questions[2]) {
+					if (!questions[2]) {
 						displayTextMilitaryStyle(x, "3 DANK! HOW LONG HAVE YOU BEEN HERE!?\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
@@ -68,7 +69,7 @@ public class DankSiesta extends NPC {
 					} else {
 						loop = false;
 					}
-				}
+				
 			}
 		}
 	}

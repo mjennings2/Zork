@@ -50,7 +50,8 @@ public class MilesFiles extends NPC {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x,
 							"1 Seen anything suspicious going on around here?\n");
-					if (!questions[1]) {
+				}
+				if (!questions[1]) {
 						displayTextMilitaryStyle(x,
 								"2 Can you access some personal files? I'm on a mission and-\n");
 					}
@@ -73,7 +74,7 @@ public class MilesFiles extends NPC {
 						questions[2] = true;
 					} else {
 						loop = false;
-					}
+				
 				}
 			}
 		}

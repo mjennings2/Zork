@@ -49,11 +49,12 @@ public class BigBrother extends NPC {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x,
 							"1 Have you seen any suspicious activity around here?\n");
-					if (!questions[1]) {
+				}
+				if (!questions[1]) {
 						displayTextMilitaryStyle(x,
 								"2 Have you checked the cameras on the train recently?\n");
 					}
-					if (questions[2]) {
+					if (!questions[2]) {
 						displayTextMilitaryStyle(x,
 								"3 How many question have you done?\n");
 					}
@@ -72,7 +73,7 @@ public class BigBrother extends NPC {
 						questions[2] = true;
 					} else {
 						loop = false;
-					}
+				
 				}
 			}
 		}

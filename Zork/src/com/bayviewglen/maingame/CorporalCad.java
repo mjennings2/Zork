@@ -47,11 +47,12 @@ public class CorporalCad extends NPC {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x,
 							"1 You! Corporal! Have you seen anything suspicious lately?\n");
-					if (!questions[1]) {
+				}
+				if (!questions[1]) {
 						displayTextMilitaryStyle(x,
 								"2 Whatcha watchin' there, Corporal?\n");
 					}
-					if (questions[2]) {
+					if (!questions[2]) {
 						displayTextMilitaryStyle(x,
 								"3 That TV is too loud, soldier! People are sleeping on this train!\n");
 					}
@@ -73,7 +74,7 @@ public class CorporalCad extends NPC {
 					} else {
 						loop = false;
 					}
-				}
+				
 			}
 		}
 	}

@@ -47,11 +47,12 @@ public class SergeantJohnson extends NPC {
    while (loop) {
     if (!questions[0]) {
      displayTextMilitaryStyle(x, "1 Who's in there?\n");
-     if (!questions[1]) {
+    }
+    if (!questions[1]) {
       displayTextMilitaryStyle(x,
         "2 You'd better get out, we are almost to San Fran!\n");
      }
-     if (questions[2]) {
+     if (!questions[2]) {
       displayTextMilitaryStyle(x,
         "3 Why is there a trail of blood leading to the shower?\n");
      }
@@ -70,7 +71,7 @@ public class SergeantJohnson extends NPC {
       questions[2] = true;
      } else {
       loop = false;
-     }
+    
     }
    }
   }

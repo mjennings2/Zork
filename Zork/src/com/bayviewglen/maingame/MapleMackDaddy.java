@@ -43,11 +43,13 @@ public class MapleMackDaddy extends NPC {
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x, "1 Seen anything suspicious around here?\n");
-					if (!questions[1]) {
+				}
+				if (!questions[1]) {
 						displayTextMilitaryStyle(x,
 								"2 Why is there no Maple Toffee here?\n");
 					}
-					if (questions[2]) {
+			}
+			if (!questions[2]) {
 						displayTextMilitaryStyle(x, "3 Pop Quiz: Where do we store the maple syrup?\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
@@ -66,10 +68,9 @@ public class MapleMackDaddy extends NPC {
 					} else {
 						loop = false;
 					}
-				}
+				
 			}
 		}
 
-	}
-
+	
 }

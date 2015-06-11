@@ -41,10 +41,11 @@ public class HockeyHank extends NPC {
 	            while (loop) {
 	                if (!questions[0]) {
 	                    displayTextMilitaryStyle(x, "1 Hey, How are you?\n");
-	                    if (!questions[1]) {
+	                }
+	                if (!questions[1]) {
 	                        displayTextMilitaryStyle(x, "2 Seen anyone suspicious on the ice?\n");
 	                    }
-	                    if (questions[2]) {
+	                    if (!questions[2]) {
 	                        displayTextMilitaryStyle(x, "3 How ‘bout dem Leafs?\n");
 	                    }
 	                    displayTextMilitaryStyle(x, "4 Goodbye\n");
@@ -63,8 +64,7 @@ public class HockeyHank extends NPC {
 	                    }
 	                }
 	            }
-	        }
-
+	        
 
 	    }
 }

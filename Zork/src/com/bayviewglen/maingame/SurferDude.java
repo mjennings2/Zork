@@ -47,7 +47,8 @@ public class SurferDude extends NPC {
 			}
 		} else {
 			while (loop) {
-				if (!questions[0]) {
+			}
+			if (!questions[0]) {
 					displayTextMilitaryStyle(x,
 							"1 Surfer Dude! Have you seen anything suspicious around here?\n");
 					if (!questions[1]) {
@@ -70,13 +71,13 @@ public class SurferDude extends NPC {
 						questions[1] = true;
 					} else if (input == 3) {
 						displayTextMilitaryStyle(x,
-								"\"Don't be such a bummer, maaaaaaan!\"\n");
+							"\"Don't be such a bummer, maaaaaaan!\"\n");
 						questions[2] = true;
 					} else {
 						loop = false;
 					}
 				}
 			}
-		}
+		
 	}
 }

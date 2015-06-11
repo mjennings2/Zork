@@ -45,10 +45,11 @@ public class SergeantMajorSmith extends NPC {
    while (loop) {
     if (!questions[0]) {
      displayTextMilitaryStyle(x, "1 When is your next shift?\n");
-     if (!questions[1]) {
+    }
+    if (!questions[1]) {
       displayTextMilitaryStyle(x, "2 Is anyone missing?\n");
      }
-     if (questions[2]) {
+     if (!questions[2]) {
       displayTextMilitaryStyle(x,
         "3 Seen anything suspicious?\n");
      }
@@ -68,7 +69,7 @@ public class SergeantMajorSmith extends NPC {
      } else {
       loop = false;
      }
-    }
+    
    }
   }
  }

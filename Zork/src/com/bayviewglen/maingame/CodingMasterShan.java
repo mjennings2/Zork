@@ -41,10 +41,11 @@ public class CodingMasterShan extends NPC {
 	            while (loop) {
 	                if (!questions[0]) {
 	                    displayTextMilitaryStyle(x, "1 een anyone who can't code?\n");
-	                    if (!questions[1]) {
+	                }
+	                if (!questions[1]) {
 	                        displayTextMilitaryStyle(x, "2 What program are you coding right now?\n");
 	                    }
-	                    if (questions[2]) {
+	                    if (!questions[2]) {
 	                        displayTextMilitaryStyle(x, "3 Are you ready for the Coding Competition?\n");
 	                    }
 	                    displayTextMilitaryStyle(x, "4 Goodbye\n");
@@ -63,8 +64,7 @@ public class CodingMasterShan extends NPC {
 	                    }
 	                }
 	            }
-	        }
-
+	        
 
 	    }
 }

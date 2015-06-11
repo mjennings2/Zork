@@ -45,11 +45,12 @@ public class BoratBuff extends NPC {
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x, "1 Buff! Have you seen anything suspicious lately?\n");
-					if (!questions[1]) {
+				}
+				if (!questions[1]) {
 						displayTextMilitaryStyle(x,
 								"2 I forgot, what's your favorite country again?\n");
 					}
-					if (questions[2]) {
+					if (!questions[2]) {
 						displayTextMilitaryStyle(x, "3 Seen any good movies lately?\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
@@ -68,7 +69,7 @@ public class BoratBuff extends NPC {
 					} else {
 						loop = false;
 					}
-				}
+				
 			}
 		}
 	}

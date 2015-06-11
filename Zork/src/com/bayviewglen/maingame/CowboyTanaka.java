@@ -42,10 +42,11 @@ public class CowboyTanaka extends NPC {
 	            while (loop) {
 	                if (!questions[0]) {
 	                    displayTextMilitaryStyle(x, "1 Since when do we have a sushi car?\n");
-	                    if (!questions[1]) {
+	                }
+	                if (!questions[1]) {
 	                        displayTextMilitaryStyle(x, "2 Have you seen anything suspicious around here?\n");
 	                    }
-	                    if (questions[2]) {
+	                    if (!questions[2]) {
 	                        displayTextMilitaryStyle(x, "3 Need any extra sushi supplies?\n");
 	                    }
 	                    displayTextMilitaryStyle(x, "4 Goodbye\n");
@@ -66,6 +67,5 @@ public class CowboyTanaka extends NPC {
 	            }
 	        }
 
-
-	    }
+	    
 }

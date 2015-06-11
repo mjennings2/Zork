@@ -43,11 +43,12 @@ public class SergeantWilliams extends NPC {
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x, "1 Who's in there?\n");
-					if (!questions[1]) {
+				}
+				if (!questions[1]) {
 						displayTextMilitaryStyle(x,
 								"2 How long have you been in there?\n");
 					}
-					if (questions[2]) {
+					if (!questions[2]) {
 						displayTextMilitaryStyle(x, "3 Get out soon Sergeant!!!\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
@@ -66,7 +67,7 @@ public class SergeantWilliams extends NPC {
 					} else {
 						loop = false;
 					}
-				}
+				
 			}
 		}
 

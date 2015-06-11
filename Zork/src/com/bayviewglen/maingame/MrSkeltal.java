@@ -45,7 +45,8 @@ public class MrSkeltal extends NPC {
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x, "1 Mr. Skeltal, have you seen anything suspicious around here?\n");
-					if (!questions[1]) {
+				}
+				if (!questions[1]) {
 						displayTextMilitaryStyle(x,
 								"2 Mr. Skeltal, can you help me on my traitor-finding journey?\n");
 					}
@@ -68,7 +69,7 @@ public class MrSkeltal extends NPC {
 					} else {
 						loop = false;
 					}
-				}
+				
 			}
 		}
 	}

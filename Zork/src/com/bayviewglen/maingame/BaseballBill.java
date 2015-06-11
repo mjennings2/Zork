@@ -41,10 +41,11 @@ public class BaseballBill extends NPC {
 	            while (loop) {
 	                if (!questions[0]) {
 	                    displayTextMilitaryStyle(x, "1 What’s that bat for?\n");
-	                    if (!questions[1]) {
+	                }
+	                if (!questions[1]) {
 	                        displayTextMilitaryStyle(x, "2 Seen anyone suspicions in the cage?\n");
 	                    }
-	                    if (questions[2]) {
+	                    if (!questions[2]) {
 	                        displayTextMilitaryStyle(x, "3 How ‘bout dem Blue Jays?\n");
 	                    }
 	                    displayTextMilitaryStyle(x, "4 Goodbye\n");
@@ -63,8 +64,7 @@ public class BaseballBill extends NPC {
 	                    }
 	                }
 	            }
-	        }
-
+	        
 
 	    }
 }

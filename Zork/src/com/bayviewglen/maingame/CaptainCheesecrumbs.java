@@ -45,11 +45,12 @@ public class CaptainCheesecrumbs extends NPC {
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x, "1 Good day Cheesecrumbs, have you seen anything suspicious going on around here lately?\n");
-					if (!questions[1]) {
+				}
+				if (!questions[1]) {
 						displayTextMilitaryStyle(x,
 								"2 How's your, uh, eye doing there?\n");
 					}
-					if (questions[2]) {
+					if (!questions[2]) {
 						displayTextMilitaryStyle(x, "3 A parrot? I didn't think DesLauriers would allow pets on this train...\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
@@ -68,7 +69,7 @@ public class CaptainCheesecrumbs extends NPC {
 					} else {
 						loop = false;
 					}
-				}
+				
 			}
 		}
 	}

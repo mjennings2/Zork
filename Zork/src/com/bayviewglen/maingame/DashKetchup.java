@@ -45,11 +45,12 @@ public class DashKetchup extends NPC {
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x, "1 Have you seen anything suspicious around here recently?\n");
-					if (!questions[1]) {
+				}
+				if (!questions[1]) {
 						displayTextMilitaryStyle(x,
 								"2 Where's your weapon soldier? You're only carrying those little red and white balls!\n");
 					}
-					if (questions[2]) {
+					if (!questions[2]) {
 						displayTextMilitaryStyle(x, "3 What do you do for fun?\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
@@ -68,7 +69,7 @@ public class DashKetchup extends NPC {
 					} else {
 						loop = false;
 					}
-				}
+				
 			}
 		}
 	}

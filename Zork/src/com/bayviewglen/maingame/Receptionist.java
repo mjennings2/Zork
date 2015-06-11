@@ -51,10 +51,11 @@ public class Receptionist extends NPC {
             while (loop) {
                 if (!questions[0]) {
                     displayTextMilitaryStyle(x, "1 Hey, How are you?\n");
-                    if (!questions[1]) {
+                }
+                if (!questions[1]) {
                         displayTextMilitaryStyle(x, "2 What are you planning to do in San Fransisco?\n");
                     }
-                    if (questions[2]) {
+                    if (!questions[2]) {
                         displayTextMilitaryStyle(x, "3 How are the kids?\n");
                     }
                     displayTextMilitaryStyle(x, "4 Goodbye\n");
@@ -73,8 +74,7 @@ public class Receptionist extends NPC {
                     }
                 }
             }
-        }
-
+        
 
     }
 
