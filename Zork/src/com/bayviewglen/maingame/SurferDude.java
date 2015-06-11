@@ -1,7 +1,7 @@
 package com.bayviewglen.maingame;
 
 public class SurferDude extends NPC {
-
+	
 	public SurferDude(String name) {
 		super(name);
 
@@ -10,8 +10,7 @@ public class SurferDude extends NPC {
 	public void TalkTo(Display x, Boolean isTerrorist) {
 		boolean[] questions = { false, false, false };
 		boolean loop = true;
-		displayTextMilitaryStyle(x,
-				"*Surfer Dude is tearing up the surfing simulator*\n");
+		displayTextMilitaryStyle(x,	"*Surfer Dude is tearing up the surfing simulator*\n");
 		if (isTerrorist) {
 			while (loop) {
 				if (!questions[0]) {
@@ -55,7 +54,7 @@ public class SurferDude extends NPC {
 						displayTextMilitaryStyle(x,
 								"2 When the hell did we get a wave simulator installed?!\n");
 					}
-					if (questions[2]) {
+					if (!questions[2]) {
 						displayTextMilitaryStyle(x,
 								"3 Since when is surfing an appropriate military past-time?\n");
 					}

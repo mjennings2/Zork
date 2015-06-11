@@ -49,8 +49,8 @@ public class MrSkeltal extends NPC {
 						displayTextMilitaryStyle(x,
 								"2 Mr. Skeltal, can you help me on my traitor-finding journey?\n");
 					}
-					if (questions[2]) {
-						displayTextMilitaryStyle(x, "Have you had your spooks today?\n");
+					if (!questions[2]) {
+						displayTextMilitaryStyle(x, "3 Have you had your spooks today?\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
 					int input = waitForProperInput(x, "1 2 3 4");

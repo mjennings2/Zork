@@ -44,10 +44,6 @@ public class NPC {
 		return 0;
 	}
 	
-	protected static void TalkTo(Display x, boolean isTerrorist){
-		
-		
-	}
 	
 	protected static void displayTextMilitaryStyle(Display x, String str) {
 		// TODO Auto-generated method stub

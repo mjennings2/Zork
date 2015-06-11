@@ -26,7 +26,7 @@ import com.bayviewglen.maingame.Display;
 public class Zork implements Serializable{
 	private static String[] commands = {"talk","go", "quit", "help", "eat", "use", "pickup", "exit", "shoot"};
 	public static boolean loginAllowed = false;
-	public static void main(String[] ar gs) throws Exception {
+	public static void main(String[] args) throws Exception {
 		int traitor = (int) (Math.random() * 27) + 1;
 		int location = 0;
 		double time[] = {31};
@@ -43,10 +43,10 @@ public class Zork implements Serializable{
 		//int[] currentUser= {0};
 		//importUsers(users);
 		boolean playGame = true;
-		NPC[] npcs = new NPC[27];
+		NPC[] npcs = new NPC[28];
 		
 		npcs[1] = new Receptionist("Receptionist");
-		/*npcs[2] = new ArmoryGuard("Armory Gaurd");
+		npcs[2] = new ArmoryGuard("Armory Gaurd");
 		npcs[3] = new BigBrother("Big Brother");
 		npcs[4] = new BoratBuff("Borat Buff");
 		npcs[5] = new CaptainCheesecrumbs("Captain Cheesecrumbs");
@@ -62,17 +62,17 @@ public class Zork implements Serializable{
 		npcs[15] = new SurferDude("Surfer Dude");
 		npcs[16] = new SergeantJohnson("Sergeant");
 		npcs[17] = new SergeantMajorSmith("Seargent Major Smith");
-		npcs[18] = new Receptionist();
-		npcs[19] = new Receptionist();
-		npcs[20] = new Receptionist();
-		npcs[21] = new Receptionist();
-		npcs[22] = new Receptionist();
-		npcs[23] = new Receptionist();
-		npcs[24] = new Receptionist();
-		npcs[25] = new Receptionist();
-		npcs[26] = new Receptionist();
-		npcs[27] = new Receptionist();
-		*/
+		npcs[18] = new BilliardsBo("BilliardsBo");
+		npcs[19] = new CodingMasterShan("CodingMasterShan");
+		npcs[20] = new HockeyHank("HockeyHank");
+		npcs[21] = new MapleMackDaddy("MapleMackDaddy");
+		npcs[22] = new SerbiaSteve("SerbiaSteve");
+		npcs[23] = new SergeantWilliams("SergeantWilliams");
+		npcs[24] = new WarrantOfficerJones("WarrantOfficerJones");
+		npcs[25] = new BaseballBill("BaseballBill");
+		npcs[26] = new CowboyTanaka("CowboyTanaka");
+		npcs[27] = new CurlingCarl("CurlingCarl");
+		
 		
 		LoginWindow login = new LoginWindow(users, currentUser, newUser);
 		
@@ -100,7 +100,7 @@ public class Zork implements Serializable{
 		
 		
 				// Declare all Rooms
-		rooms = new Room[27];
+		rooms = new Room[28];
 		randomizedRooms = new Room[10];
 		String[] lables = {"fire extinguisher" , "extinguisher", "fire-extinguishing system", "fire-extinguishing thing", "fire extinguishing system", "fire extinguishing thing"};
 		String [] lables1 = {"paper", "sheet", "piece of paper", "piece paper", "piece", "report", "assignment", "profile sheet"};
@@ -116,33 +116,34 @@ public class Zork implements Serializable{
 		ArrayList<Item> items2 = new ArrayList<Item>();
 		items2.add(new Item("none", none));
 		rooms[2] = new Room("Armory", items2, 2);
-		rooms[3] = new Room("TVRoom", items2, 3);
+		rooms[3] = new Room("TVRoom", items2, 6);
 		//TODO
-		rooms[4] = new Room("Music Car", items2, 4);
-		rooms[5] = new Room("Workout Car", items2, 5);
-		rooms[6] = new Room("Reporting Car", items2, 6);
-		rooms[7] = new Room("Filing Car", items2, 7);
-		rooms[8] = new Room("Biking Car", items2, 8);
-		rooms[9] = new Room("Propaganda Car", items2, 9);
+		rooms[4] = new Room("Music Car", items2, 8);				// Fix This
+		rooms[5] = new Room("Workout Car", items2, 4);
+		rooms[6] = new Room("Reporting Car", items2, 10);
+		rooms[7] = new Room("Filing Car", items2, 12);
+		rooms[8] = new Room("Biking Car", items2, 7);
+		rooms[9] = new Room("Propaganda Car", items2, 3);
 		
 		
-		rooms[10] = new Room("Security", items2, 10);
-		rooms[11] = new Room("Pokemon", items2, 11);
-		rooms[12] = new Room("Pirate Car", items2, 12);
-		rooms[13] = new Room("Tea Car", items2, 13);
-		rooms[14] = new Room("Doot Doot Car", items2, 14);
+		rooms[10] = new Room("Security", items2, 11);				// Fix This
+		rooms[11] = new Room("Pokemon", items2, 9);
+		rooms[12] = new Room("Pirate Car", items2, 5);
+		rooms[13] = new Room("Tea Car", items2, 14);
+		rooms[14] = new Room("Doot Doot Car", items2, 13);
 		rooms[15] = new Room("Surfer Car", items2, 15);
-		rooms[16] = new Room("Barracks Car", items2, 16);
-		rooms[17] = new Room("Shower Car", items2, 17);
-		rooms[18] = new Room("Toilets Car", items2, 18);
-		rooms[19] = new Room("Theatre Car", items2, 19);
-		rooms[20] = new Room("Billiards Car", items2, 20);
-		rooms[21] = new Room("Baseball Car", items2, 21);
-		rooms[22] = new Room("Hockey Car", items2, 22);
-		rooms[23] = new Room("Maple Syrup Car", items2, 23);
-		rooms[24] = new Room("Kebab Car", items2, 24);
-		rooms[25] = new Room("Coding Car", items2, 25);
+		rooms[16] = new Room("Barracks Car", items2, 16);			// Fix This
+		rooms[17] = new Room("Shower Car", items2, 17);				// Fix This
+		rooms[18] = new Room("Toilets Car", items2, 122);			// Fix This
+		rooms[19] = new Room("Theatre Car", items2, 23);			// Fix This
+		rooms[20] = new Room("Billiards Car", items2, 18);
+		rooms[21] = new Room("Baseball Car", items2, 25);
+		rooms[22] = new Room("Hockey Car", items2, 20);
+		rooms[23] = new Room("Maple Syrup Car", items2, 21);
+		rooms[24] = new Room("Kebab Car", items2, 24);				// Fix This
+		rooms[25] = new Room("Coding Car", items2, 19);
 		rooms[26] = new Room("Sushi Car", items2, 26);
+		rooms[27] = new Room("Curling Car", items2, 27);
 		
 		
 		// Set rooms locations
@@ -345,7 +346,10 @@ public class Zork implements Serializable{
 		if(x.textSent.indexOf(" ") != -1){
 		String[] commandWordsTemp = x.textSent.split(" ");
 		commandWords = commandWordsTemp;
-		
+		}else{
+			String[] commandWordsTemp = {x.textSent};
+			commandWords = commandWordsTemp;
+		}
 		//	Command typed = new Command(commandWords[0], commandWords[1]);
 		// TODO Check if command is valid
 			boolean commandWord = true, goOnToSecond = false;
@@ -388,15 +392,67 @@ public class Zork implements Serializable{
 				}else if(commandWords[0].equalsIgnoreCase("shoot")){
 					
 				}else if(commandWords[0].equalsIgnoreCase("talk")){
-					if(commandWords[1].equalsIgnoreCase("to") || commandWords[1].equalsIgnoreCase("with") || commandWords[1].equalsIgnoreCase(npcs[location].name)){
-						if((commandWords[2]!=null && commandWords[1].equalsIgnoreCase(npcs[location].name))){
+		
 							x.textSent="";
-							npcs[randomizedRooms[location].i].TalkTo(x,traitor==location);
-						}else if((commandWords[2].equalsIgnoreCase(npcs[randomizedRooms[location].i].name))){
-							x.textSent="";
-							npcs[location].TalkTo(x,traitor==location);
-						}
+					if(randomizedRooms[location].i==0){
+						((Receptionist) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==1){
+						((Receptionist) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==2){
+						((ArmoryGuard) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==3){
+						((BigBrother) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==4){
+						((BoratBuff) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==5){
+						((CaptainCheesecrumbs) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==6){
+						((CorporalCad) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==7){
+						((DanceHarmstring) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==8){
+					((DankSiesta) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==9){
+						((DashKetchup) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==10){
+						((JonCitrus) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==11){
+						((MikeSchmidt) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==12){
+						((MilesFiles) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==13){
+						((MrSkeltal) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==14){
+						((SirPoshingtonIII) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==15){
+						((SurferDude) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==16){
+						((SergeantJohnson) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==17){
+						((SergeantMajorSmith) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==18){
+						((BilliardsBo) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==19){
+						((CodingMasterShan) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==20){
+						((HockeyHank) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==21){
+						((MapleMackDaddy) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==22){
+						((SerbiaSteve) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==23){
+						((SergeantWilliams) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==24){
+						((WarrantOfficerJones) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==25){
+						((BaseballBill) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else if(randomizedRooms[location].i==26){
+						((CowboyTanaka) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
+					}else{
+						((CurlingCarl) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
 					}
+							
+						
 				}else if(commandWords[0].equalsIgnoreCase("exit") || commandWords[0].equalsIgnoreCase("go")){
 					if(commandWords[1].equalsIgnoreCase("North") || commandWords[1].equalsIgnoreCase("South")){
 						if(location == 0 && commandWords[1].equalsIgnoreCase("South")){
@@ -422,15 +478,16 @@ public class Zork implements Serializable{
 					}
 				}
 			}
+		
 		}
-			
-		x.textSent = "";
+		return location;	
+		
 		// TODO Outcome if valid
 		//displayTextMilitaryStyle(x, "Ok Soldier\n");
+	
 	}
-		x.textSent = "";
-		return location;
-	}
+		
+	
 	//The method for the test program, you could just copy paste this into your program and put the string for the url in the parameters.
 	
 	
