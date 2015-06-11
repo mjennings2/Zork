@@ -56,7 +56,7 @@ public class MilesFiles extends NPC {
 								"2 Can you access some personal files? I'm on a mission and-\n");
 					}
 					if (!questions[2]) {
-						displayTextMilitaryStyle(x, "3 How are the kids?\n");
+						displayTextMilitaryStyle(x, "3 Is that a spot on your desk?\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
 					int input = waitForProperInput(x, "1 2 3 4");
