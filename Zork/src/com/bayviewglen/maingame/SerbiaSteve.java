@@ -8,7 +8,7 @@ public class SerbiaSteve extends NPC {
 	public void TalkTo(Display x, Boolean isTerrorist) {
 		boolean[] questions = { false, false, false };
 		boolean loop = true;
-		displayTextMilitaryStyle(x, "*Steve is playing his accordian*?\n");
+		displayTextMilitaryStyle(x, "*Steve is playing his accordian*\n");
 		if (isTerrorist) {
 			while (loop) {
 				if (!questions[0]) {

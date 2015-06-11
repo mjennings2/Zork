@@ -13,7 +13,7 @@ public class BilliardsBo extends NPC {
 	        if (isTerrorist) {
 	            while (loop) {
 	                if (!questions[0]) {
-	                    displayTextMilitaryStyle(x, "1 What. Why are you playing by yourself?\n");
+	                    displayTextMilitaryStyle(x, "1 What? Why are you playing by yourself?\n");
 	                }
 	                if (!questions[1]) {
 	                    displayTextMilitaryStyle(x, "2 What is the goal here?\n");
@@ -40,7 +40,7 @@ public class BilliardsBo extends NPC {
 	        } else {
 	            while (loop) {
 	                if (!questions[0]) {
-	                    displayTextMilitaryStyle(x, "1 What. Why are you playing by yourself?\n");
+	                    displayTextMilitaryStyle(x, "1 What? Why are you playing by yourself?\n");
 	                }
 	                if (!questions[1]) {
 	                        displayTextMilitaryStyle(x, "2 What is the goal here?\n");

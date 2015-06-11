@@ -57,7 +57,7 @@ public class BaseballBill extends NPC {
 	                        displayTextMilitaryStyle(x, "\"Yeah, there was an unknown sneakin’ around.\"\n");
 	                        questions[1] = true;
 	                    } else if (input == 3) {
-	                        displayTextMilitaryStyle(x, "\"They suck!\"\n");
+	                        displayTextMilitaryStyle(x, "\"They're doing well this season!\"\n");
 	                        questions[2] = true;
 	                    } else {
 	                        loop = false;

@@ -25,10 +25,10 @@ public class CurlingCarl extends NPC {
 				int input = waitForProperInput(x, "1 2 3 4");
 				if (input == 1) {
 					displayTextMilitaryStyle(x,
-							"\"You brush the ice in order to speeed up the stone.\"\n");
+							"\"Curling!\"\n");
 					questions[0] = true;
 				} else if (input == 2) {
-					displayTextMilitaryStyle(x, "\"Yeah, there was an unknown sneakin’ around.\"\n");
+					displayTextMilitaryStyle(x, "\"Suspicious? On this train? Pft. Yeah right.\"\n");
 					questions[1] = true;
 				} else if (input == 3) {
 					displayTextMilitaryStyle(x,
@@ -55,14 +55,14 @@ public class CurlingCarl extends NPC {
 					int input = waitForProperInput(x, "1 2 3 4");
 					if (input == 1) {
 						displayTextMilitaryStyle(x,
-								"\"Curling!\"\n");
+								"\"You brush the ice in order to speeed up the stone.\"\n");
 						questions[0] = true;
 					} else if (input == 2) {
 						displayTextMilitaryStyle(x,
-								"\"Suspicious? On this train? Pft. Yeah right.\"\n");
+								"\"Yeah, there was an unknown sneaking around.\"\n");
 						questions[1] = true;
 					} else if (input == 3) {
-						displayTextMilitaryStyle(x, "\"I don't follow baseball.\"\n");
+						displayTextMilitaryStyle(x, "\"They're actually pretty good!\"\n");
 						questions[2] = true;
 					} else {
 						loop = false;

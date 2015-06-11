@@ -9,11 +9,11 @@ public class CodingMasterShan extends NPC {
 	            false, false, false
 	        };
 	        boolean loop = true;
-	        displayTextMilitaryStyle(x, "*Shan is coding like a complete gangstas*\n");
+	        displayTextMilitaryStyle(x, "*Shan is coding like a complete gangsta*\n");
 	        if (isTerrorist) {
 	            while (loop) {
 	                if (!questions[0]) {
-	                    displayTextMilitaryStyle(x, "1 een anyone who can't code?\n");
+	                    displayTextMilitaryStyle(x, "1 Seen anyone who can't code?\n");
 	                }
 	                if (!questions[1]) {
 	                    displayTextMilitaryStyle(x, "2 What program are you coding right now?\n");
@@ -40,7 +40,7 @@ public class CodingMasterShan extends NPC {
 	        } else {
 	            while (loop) {
 	                if (!questions[0]) {
-	                    displayTextMilitaryStyle(x, "1 een anyone who can't code?\n");
+	                    displayTextMilitaryStyle(x, "1 Seen anyone who can't code?\n");
 	                }
 	                if (!questions[1]) {
 	                        displayTextMilitaryStyle(x, "2 What program are you coding right now?\n");

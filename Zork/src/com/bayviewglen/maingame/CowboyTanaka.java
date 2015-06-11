@@ -10,7 +10,7 @@ public class CowboyTanaka extends NPC {
 	            false, false, false
 	        };
 	        boolean loop = true;
-	        displayTextMilitaryStyle(x, "Receptionist: Hello?\n");
+	        displayTextMilitaryStyle(x, "*Tanaka is fileting salmon*?\n");
 	        if (isTerrorist) {
 	            while (loop) {
 	                if (!questions[0]) {
@@ -58,7 +58,7 @@ public class CowboyTanaka extends NPC {
 	                        displayTextMilitaryStyle(x, "\"No!\"\n");
 	                        questions[1] = true;
 	                    } else if (input == 3) {
-	                        displayTextMilitaryStyle(x, "\"Always1\"\n");
+	                        displayTextMilitaryStyle(x, "\"Always!\"\n");
 	                        questions[2] = true;
 	                    } else {
 	                        loop = false;

@@ -10,7 +10,7 @@ public class JonCitrus extends NPC {
 	public void TalkTo(Display x, Boolean isTerrorist) {
 		boolean[] questions = { false, false, false };
 		boolean loop = true;
-		displayTextMilitaryStyle(x, "Receptionist: Hello?\n");
+		displayTextMilitaryStyle(x, "*Jon is sitting at a news desk, script in hand*\n");
 		if (isTerrorist) {
 			while (loop) {
 				if (!questions[0]) {

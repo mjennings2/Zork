@@ -8,7 +8,7 @@ public class MapleMackDaddy extends NPC {
 	public void TalkTo(Display x, Boolean isTerrorist) {
 		boolean[] questions = { false, false, false };
 		boolean loop = true;
-		displayTextMilitaryStyle(x, "Receptionist: Hello?\n");
+		displayTextMilitaryStyle(x, "*Mack Daddy is making maple syrup*\n");
 		if (isTerrorist) {
 			while (loop) {
 				if (!questions[0]) {

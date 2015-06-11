@@ -9,7 +9,7 @@ public class WarrantOfficerJones extends NPC {
 	            false, false, false
 	        };
 	        boolean loop = true;
-	        displayTextMilitaryStyle(x, "Receptionist: Hello?\n");
+	        displayTextMilitaryStyle(x, "Warrant Officer Jones: Hello sir, welcome to the theatre!\n");
 	        if (isTerrorist) {
 	            while (loop) {
 	                if (!questions[0]) {
@@ -19,7 +19,7 @@ public class WarrantOfficerJones extends NPC {
 	                    displayTextMilitaryStyle(x, "2 What is your next shift?\n");
 	                }
 	                if (!questions[2]) {
-	                    displayTextMilitaryStyle(x, "3 How are the kids?\n");
+	                    displayTextMilitaryStyle(x, "3 Seen anything suspicious around here?\n");
 	                }
 	                displayTextMilitaryStyle(x, "4 Goodbye\n");
 	                int input = waitForProperInput(x, "1 2 3 4");
@@ -46,7 +46,7 @@ public class WarrantOfficerJones extends NPC {
 	                        displayTextMilitaryStyle(x, "2 What is your next shift?\n");
 	                    }
 	                    if (!questions[2]) {
-	                        displayTextMilitaryStyle(x, "3 How are the kids?\n");
+	                        displayTextMilitaryStyle(x, "3 Seen anything suspicious around here?\n");
 	                    }
 	                    displayTextMilitaryStyle(x, "4 Goodbye\n");
 	                    int input = waitForProperInput(x, "1 2 3 4");
