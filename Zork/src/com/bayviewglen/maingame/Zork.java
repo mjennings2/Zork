@@ -107,7 +107,7 @@ public class Zork implements Serializable {
         x.frame.setVisible(true);
 
 
-        displayTextMilitaryStyle(x, "Hello and welcome to Trouble in Nuke on a Train with a Terrorist Town!\nType commands in the text bar below. \nLeaving a room is exit, you can go north or south.\nWhen asking a question, use just the number  to the question.\nType 'Start' to start, or 'Load' if you would like to continue your previous game.\n");
+        displayTextMilitaryStyle(x, "Hello and welcome to Trouble in Nuke on a Train with a Terrorist Town!\nType commands in the text bar below. \nLeaving a room is exit, you can go north or south.\nWhen asking a question, use just the number related to the question.\nType 'Start' to start, or 'Load' if you would like to continue your previous game.\n");
 
         sleep(1000);
 
