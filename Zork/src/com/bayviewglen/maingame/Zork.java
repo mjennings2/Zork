@@ -27,6 +27,7 @@ public class Zork implements Serializable{
 	private static String[] commands = {"talk","go", "quit", "help", "eat", "use", "pickup", "exit", "shoot"};
 	public static boolean loginAllowed = false;
 	public static void main(String[] args) throws Exception {
+		boolean shoot = false;
 		int traitor = (int) (Math.random() * 27) + 1;
 		int location = 0;
 		double time[] = {31};
@@ -42,7 +43,7 @@ public class Zork implements Serializable{
 		int[] currentUser = new int[1];
 		//int[] currentUser= {0};
 		//importUsers(users);
-		boolean playGame = true;
+		boolean[] playGame = {true};
 		NPC[] npcs = new NPC[28];
 		
 		npcs[1] = new Receptionist("Receptionist");
@@ -82,16 +83,26 @@ public class Zork implements Serializable{
 			}
 		
 		login.frame.setVisible(false);
-		
+		boolean[] loop = {true};
 		
 		
 		
 		Display x = new Display("input/pictures/Title.jpg");
+		
 		x.frame.setVisible(true);
-		displayTextMilitaryStyle(x,"Hello and welcome to Trouble in Nuke on a Train with a Terrorist Town!\nType commands in the text bar below. Finding out the commands is part of the puzzle!\nLeaving a room is exit, you can go north or south.\nType 'Start' to start, or 'Load' if you would like to continue your previous game.\n");
+		
+		
+		displayTextMilitaryStyle(x,"Hello and welcome to Trouble in Nuke on a Train with a Terrorist Town!\nType commands in the text bar below. \nLeaving a room is exit, you can go north or south.\nWhen asking a question, use just the number releated to the question.\nType 'Start' to start, or 'Load' if you would like to continue your previous game.\n");
+		
 		sleep(1000);
+		
+		
 		location = waitForStartOrLoad(x, time,currentUser,users, newUser);
+		while(loop[0]){
+			x.textSent="";
+			playGame[0] = true;
 		if(time[0] == 31){
+			location = 0;
 		x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk.jpg"));
 
 		displayTextMilitaryStyle(x,"Location: Military train bound for San Fransisco. \nOperation Nuke: The train is carrying a nuclear weapon on a flat bed.\nTime to arrival: 30 min.\nYou are in General DesLauriers Office at the south most part of the train.\nHe is giving you special instructions.\nDesLauriers:\n\"Alright Maggot! We've got a Problem!\nThe train is crying!\nWe are carrying a nuclear payload and have caught wind of a traitor in our ranks!\nYour mission: find this traitor and bring him to Java justice!\nHere, take this fire extinguisher just in case, and this pistol for any traitor-hunting duties you may have to fulfill.\nGet to work, soldier!\n");
@@ -196,7 +207,7 @@ public class Zork implements Serializable{
 			rooms = users.get(currentUser[0]).getAllRooms();
 			
 		}
-		while(playGame){
+		while(playGame[0]){
 			time[0]--;
 			saveUsersTest(users,location,time,currentUser);
 			
@@ -231,89 +242,89 @@ public class Zork implements Serializable{
 			// Commanders office
 			}else if(randomizedRooms[location].getRoomName().equals("Commanders Office")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 				
 			
 			// Receptionist's Hall
 			}else if(randomizedRooms[location].getRoomName().equals("Reception hall")){  
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/test1.jpg"));
 				
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Armory")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Armory.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("TVRoom")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Cad.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Workout Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Buff.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Reporting Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Bill Nye the News Guy.png"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Filing Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Files2.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Biking Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Road biker.png"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Propaganda Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Propaganda.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Music Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitar.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Security")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/SecurityRoom.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Pokemon")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Pokemon.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Pirate Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Pirate.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Tea Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Tea.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Doot Doot Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Doot.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Surfer Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/surfing.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Barracks Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Barraks.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Shower Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Shower.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Toilets Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/bathroom.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Theatre Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Billiards Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Baseball Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Hockey Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Maple Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Kebab Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Coding Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}else if(randomizedRooms[location].getRoomName().equals("Sushi Car")){
 				x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH.jpg"));
-				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor);
+				location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time);
 			}
 			
 			
@@ -324,16 +335,16 @@ public class Zork implements Serializable{
 			
 		}
 		saveUsers(users);
-		
-		
+		}
+		x.frame.setVisible(false);
 	}
 
 	
 	@SuppressWarnings("static-access")
-	private static int waitForProperInput(Display x, Room room, int[] currentUser, ArrayList<User> users, int location, Room[] randomizedRooms, NPC[] npcs, int traitor) {
+	private static int waitForProperInput(Display x, Room room, int[] currentUser, ArrayList<User> users, int location, Room[] randomizedRooms, NPC[] npcs, int traitor, boolean[] playGame, boolean[] loop, double[] time) {
 		// TODO Auto-generated method stub
-		boolean loop = false;
-		while(!loop){
+		boolean loop2 = false;
+		while(!loop2){
 			System.out.println("Hello");
 		while(x.textSent.equals("")){
 			 try {                                                                                                                                                                                                          
@@ -360,7 +371,7 @@ public class Zork implements Serializable{
 						goOnToSecond = true;
 						i += commands.length;
 					}else if (i == commands.length-1){
-						loop = false;
+						loop2 = false;
 						commandWord = false;
 						displayTextMilitaryStyle(x, "That command is not recognized.\n");
 					}
@@ -379,7 +390,7 @@ public class Zork implements Serializable{
 							room.getItems().remove(i);
 							x.textSent = "";
 							i += room.getItems().size();
-							loop = false;
+							loop2 = false;
 							commandWord = true;
 							j += room.getItems().get(i).getLables().length;
 							validItem = true;
@@ -390,9 +401,184 @@ public class Zork implements Serializable{
 						displayTextMilitaryStyle(x,"That is not a valid Item!");
 					}
 				}else if(commandWords[0].equalsIgnoreCase("shoot")){
-					
+					if(randomizedRooms[location].getRoomName().equals("Commanders Office")){
+						displayTextMilitaryStyle(x, "You may have shot the sherrief, but you may not shoot the Deputy.\n");
+						
+					// Receptionist's Hall
+					}else if(randomizedRooms[location].getRoomName().equals("Reception hall")){  
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/test1Shoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Armory")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/ArmoryShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("TVRoom")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/CadShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Workout Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/BuffShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Reporting Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Bill Nye the News Guy.png"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Filing Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Files2Shoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Biking Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Road biker.png"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Propaganda Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/PropagandaShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Music Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TrainGuitarShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Security")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/SecurityRoomShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Pokemon")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/PokemonShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Pirate Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/PirateShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Tea Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/TeaShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Doot Doot Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DootShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Surfer Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/surfingShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Barracks Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/BarraksShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Shower Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/ShowerShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Toilets Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/bathroomShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Theatre Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOHShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Billiards Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOHShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Baseball Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOHShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Hockey Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOHShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Maple Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOHShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Kebab Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOHShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Coding Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOHShoot.jpg"));
+						
+					}else if(randomizedRooms[location].getRoomName().equals("Sushi Car")){
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOHShoot.jpg"));
+						
+					}
+					x.textSent = ("");
+					if(!(randomizedRooms[location].getRoomName().equals("Commanders Office"))){
+					if(traitor==location){
+						int random = (int) (Math.random() *100 );
+						if(random < 5){
+							
+							displayTextMilitaryStyle(x, "Psych, It's a hologram!\n\"You will never catch me alive!\" - He yells from the roof. You try to climb out the hatch but slip and fall.\n");
+							x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
+							displayTextMilitaryStyle(x, "BOOOOOOOOOOOOOOOOOOOOOOOOOOOM! \nYou took to long and the terrorist exploded the bomb. \nYou won but were unlucky and lost, plaese play again!");
+							displayTextMilitaryStyle(x,"Play again? (Y/N)\n");
+							boolean again = waitForPlayAgain(x);
+							playGame[0] = false;
+							time[0] = 31;
+							if(!again){
+								loop[0] = false;								
+							}
+							return 0;
+						}else{
+						displayTextMilitaryStyle(x, "You shot him and he was .................................................................\n"
+								                  + ".................................................................................A TRAITOR!\n You jump in celebration, You Did it!\n");
+						}
+						if(random >= 5 && random < 10){
+							displayTextMilitaryStyle(x, "As you land you hear a click.\nYou look down and see that you steped on the detonator.\n");
+							x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
+							displayTextMilitaryStyle(x, "BOOOOOOOOOOOOOOOOOOOOOOOOOOOM! \nYou took to long and the terrorist exploded the bomb. \nYou won but were unlucky and lost, plaese play again!");
+							displayTextMilitaryStyle(x,"Play again? (Y/N)\n");
+							boolean again = waitForPlayAgain(x);
+							time[0] = 31;
+							playGame[0] = false;
+							if(!again){
+								loop[0] = false;								
+							}
+							return 0;
+						}
+						if(random >= 10 && random < 15){
+							displayTextMilitaryStyle(x, "You hit him in his head but the bullet goes straight through his head and into the window, smashing it to pieces.\nSuddenly you and everything in the train car is sucked toward the open window.\n turns out its a plane and you just depressurized the cabin.\nThe depressurization also sets off the nuke.\n");
+							x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
+							displayTextMilitaryStyle(x, "BOOOOOOOOOOOOOOOOOOOOOOOOOOOM! \nYou took to long and the terrorist exploded the bomb. \nYou won but were unlucky and lost, plaese play again!");
+							displayTextMilitaryStyle(x,"Play again? (Y/N)\n");
+							boolean again = waitForPlayAgain(x);
+							time[0] = 31;
+							playGame[0] = false;
+							if(!again){
+								loop[0] = false;								
+							}
+							return 0;
+						}
+						if(random >= 15 && random < 20){
+							x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
+							displayTextMilitaryStyle(x, "You hit him in his head but the bullet goes straight through and ricochetes of the walls untill it hit you in the head.\nYou collapse to the floor and lend on the detonator.\n");
+							x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
+							displayTextMilitaryStyle(x, "BOOOOOOOOOOOOOOOOOOOOOOOOOOOM! \nYou took to long and the terrorist exploded the bomb. \nYou won but were unlucky and lost, plaese play again!");
+
+							displayTextMilitaryStyle(x,"Play again? (Y/N)\n");
+							boolean again = waitForPlayAgain(x);
+							time[0] = 31;
+							playGame[0] = false;
+							if(!again){
+								loop[0] = false;								
+							}
+							return 0;
+						}
+						
+						if(random >=20){
+							x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Party.jpg"));
+							displayTextMilitaryStyle(x, "Congratulations, you beat the game. Please play again!\n");
+							displayTextMilitaryStyle(x,"Play again? (Y/N)\n");
+							boolean again = waitForPlayAgain(x);
+							time[0] = 31;
+							playGame[0] = false;
+							if(!again){
+								loop[0] = false;								
+							}
+							return 0;
+						}
+					}else{
+						
+						displayTextMilitaryStyle(x, "You shot him and he was .................................................................\n"
+								                  + ".................................................................................Innocent.\nYou hear a laugh in the distance.\n");
+						x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
+				
+						displayTextMilitaryStyle(x, "BOOOOOOOOOOOOOOOOOOOOOOOOOOOM! \nYou took to long and the terrorist exploded the bomb. \nYou lost, plaese play again!");
+
+						displayTextMilitaryStyle(x,"Play again? (Y/N)\n");
+						boolean again = waitForPlayAgain(x);
+						time[0] = 31;
+						playGame[0] = false;
+						if(!again){
+							loop[0] = false;								
+						}
+						return location;
+					}
+					}
 				}else if(commandWords[0].equalsIgnoreCase("talk")){
-		
+					displayTextMilitaryStyle(x, "Type Number:\n:");
 							x.textSent="";
 					if(randomizedRooms[location].i==0){
 						((Receptionist) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
@@ -451,7 +637,7 @@ public class Zork implements Serializable{
 					}else{
 						((CurlingCarl) npcs[randomizedRooms[location].i]).TalkTo(x,traitor==location);
 					}
-							
+					displayTextMilitaryStyle(x, "You stopped talking.\n");	
 						
 				}else if(commandWords[0].equalsIgnoreCase("exit") || commandWords[0].equalsIgnoreCase("go")){
 					if(commandWords[1].equalsIgnoreCase("North") || commandWords[1].equalsIgnoreCase("South")){
@@ -462,7 +648,7 @@ public class Zork implements Serializable{
 							displayTextMilitaryStyle(x, "That is invalid.");
 							x.textSent = "";
 						}else{
-							loop = true; 
+							loop2 = true; 
 							commandWord = false;
 							goOnToSecond = false;
 							if(commandWords[1].equalsIgnoreCase("North")){
@@ -491,6 +677,33 @@ public class Zork implements Serializable{
 	//The method for the test program, you could just copy paste this into your program and put the string for the url in the parameters.
 	
 	
+	private static boolean waitForPlayAgain(Display x) {
+		// TODO Auto-generated method stub\
+		x.textSent = "";
+		boolean loop = true;
+		while(loop){
+		while(x.textSent.equals("")){
+			 try {                                                                                                                                                                                                          
+	                Thread.sleep(1000); //3000 milliseconds is three seconds.                                                                                                                                                   
+	            } catch (InterruptedException ex) {                                                                                                                                                                            
+	                Thread.currentThread().interrupt();                                                                                                                                                                        
+	            }   
+		}
+		if("Y".equalsIgnoreCase(x.textSent) || "Yes".equalsIgnoreCase(x.textSent)){
+			loop = false;
+			return true;
+		}else if("N".equalsIgnoreCase(x.textSent) || "no".equalsIgnoreCase(x.textSent)){
+			loop = false;
+			return false;
+		}else{
+			displayTextMilitaryStyle(x, "That is invalid.\n");
+			x.textSent = ("");
+		}
+		}
+		return false;
+	}
+
+
 	public static synchronized void playSound(final String url) {
 		
 		    
