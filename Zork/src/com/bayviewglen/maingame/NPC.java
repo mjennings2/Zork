@@ -1,5 +1,11 @@
 package com.bayviewglen.maingame;
-
+/*
+ * NPC Class has the output 
+ * for all the NPCs plus the
+ * class used to get the proper
+ * input.
+ *  
+ */
 public class NPC {
 
 	public String name;

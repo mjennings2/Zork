@@ -7,11 +7,11 @@ public class JonCitrus extends NPC {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void TalkTo(Display x, Boolean isTerrorist) {
+	public void TalkTo(Display x, Boolean isTerrorist) {             // Method for talking to this character
 		boolean[] questions = { false, false, false };
 		boolean loop = true;
 		displayTextMilitaryStyle(x, "*Jon is sitting at a news desk, script in hand*\n");
-		if (isTerrorist) {
+		if (isTerrorist) {                                       // Find out if the current character is a traitor in this generation of the map
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x,
@@ -26,7 +26,7 @@ public class JonCitrus extends NPC {
 							"3 How's the weather looking in San Francisco?\n");
 				}
 				displayTextMilitaryStyle(x, "4 Goodbye\n");
-				int input = waitForProperInput(x, "1 2 3 4");
+				int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 				if (input == 1) {
 					displayTextMilitaryStyle(
 							x,
@@ -60,7 +60,7 @@ public class JonCitrus extends NPC {
 								"3 How's the weather looking in San Francisco?\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
-					int input = waitForProperInput(x, "1 2 3 4");
+					int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 					if (input == 1) {
 						displayTextMilitaryStyle(x,
 								"\"EBOLA!!!!!1!\"\n");

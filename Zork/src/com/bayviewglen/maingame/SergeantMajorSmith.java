@@ -7,12 +7,12 @@ public class SergeantMajorSmith extends NPC {
 
  }
 
- public void TalkTo(Display x, Boolean isTerrorist) {
+ public void TalkTo(Display x, Boolean isTerrorist) {             // Method for talking to this character
   boolean[] questions = { false, false, false };
   boolean loop = true;
   displayTextMilitaryStyle(x,
     "*Smith is sitting on a chair in the Barracks*\n");
-  if (isTerrorist) {
+  if (isTerrorist) {                                       // Find out if the current character is a traitor in this generation of the map
    while (loop) {
     if (!questions[0]) {
      displayTextMilitaryStyle(x, "1 When is your next shift?\n");
@@ -24,7 +24,7 @@ public class SergeantMajorSmith extends NPC {
      displayTextMilitaryStyle(x, "3 Seen anything suspicious?\n");
     }
     displayTextMilitaryStyle(x, "4 Goodbye\n");
-    int input = waitForProperInput(x, "1 2 3 4");
+    int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
     if (input == 1) {
      displayTextMilitaryStyle(x,
        "\"Whenever we get to San Fran!\"\n");
@@ -54,7 +54,7 @@ public class SergeantMajorSmith extends NPC {
         "3 Seen anything suspicious?\n");
      }
      displayTextMilitaryStyle(x, "4 Goodbye\n");
-     int input = waitForProperInput(x, "1 2 3 4");
+     int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
      if (input == 1) {
       displayTextMilitaryStyle(x,
         "\"At 1300.\"\n");

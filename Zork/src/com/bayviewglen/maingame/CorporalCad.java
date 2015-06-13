@@ -7,11 +7,11 @@ public class CorporalCad extends NPC {
 
 	}
 
-	public void TalkTo(Display x, Boolean isTerrorist) {
+	public void TalkTo(Display x, Boolean isTerrorist) {             // Method for talking to this character
 		boolean[] questions = { false, false, false };
 		boolean loop = true;
 		displayTextMilitaryStyle(x, "*Corporal Cad is watching TV*\n");
-		if (isTerrorist) {
+		if (isTerrorist) {                                       // Find out if the current character is a traitor in this generation of the map
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x,
@@ -26,7 +26,7 @@ public class CorporalCad extends NPC {
 							"3 That TV is too loud, soldier! People are sleeping on this train!\n");
 				}
 				displayTextMilitaryStyle(x, "4 Goodbye\n");
-				int input = waitForProperInput(x, "1 2 3 4");
+				int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 				if (input == 1) {
 					displayTextMilitaryStyle(x, "\"NOTHING TO REPORT, SIR!\"\n");
 					questions[0] = true;
@@ -57,7 +57,7 @@ public class CorporalCad extends NPC {
 								"3 That TV is too loud, soldier! People are sleeping on this train!\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
-					int input = waitForProperInput(x, "1 2 3 4");
+					int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 					if (input == 1) {
 						displayTextMilitaryStyle(
 								x,

@@ -7,12 +7,12 @@ public class MikeSchmidt extends NPC {
 
 	}
 
-	public void TalkTo(Display x, Boolean isTerrorist) {
+	public void TalkTo(Display x, Boolean isTerrorist) {             // Method for talking to this character
 		boolean[] questions = { false, false, false };
 		boolean loop = true;
 		displayTextMilitaryStyle(x,
 				"*Mike is staring intently at the cameras, watching for any movement*\n");
-		if (isTerrorist) {
+		if (isTerrorist) {                                       // Find out if the current character is a traitor in this generation of the map
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(
@@ -27,7 +27,7 @@ public class MikeSchmidt extends NPC {
 							"3 How long have you been in here?\n");
 				}
 				displayTextMilitaryStyle(x, "4 Goodbye\n");
-				int input = waitForProperInput(x, "1 2 3 4");
+				int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 				if (input == 1) {
 					displayTextMilitaryStyle(x,
 							"\"Nothing on the cams, corporal.\"\n");
@@ -61,7 +61,7 @@ public class MikeSchmidt extends NPC {
 							"3 How long have you been in here?\n");
 				}
 				displayTextMilitaryStyle(x, "4 Goodbye\n");
-				int input = waitForProperInput(x, "1 2 3 4");
+				int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 				if (input == 1) {
 					displayTextMilitaryStyle(x,
 							"\"Nothing on the cams, cap.\"\n");

@@ -4,13 +4,13 @@ public class CodingMasterShan extends NPC {
 	public CodingMasterShan(String name) {
 		super(name);
 	}
-	 public void TalkTo(Display x, Boolean isTerrorist) {
+	 public void TalkTo(Display x, Boolean isTerrorist) {             // Method for talking to this character
 	        boolean[] questions = {
 	            false, false, false
 	        };
 	        boolean loop = true;
 	        displayTextMilitaryStyle(x, "*Shan is coding like a complete gangsta*\n");
-	        if (isTerrorist) {
+	        if (isTerrorist) {                                       // Find out if the current character is a traitor in this generation of the map
 	            while (loop) {
 	                if (!questions[0]) {
 	                    displayTextMilitaryStyle(x, "1 Seen anyone who can't code?\n");
@@ -22,7 +22,7 @@ public class CodingMasterShan extends NPC {
 	                    displayTextMilitaryStyle(x, "3 Are you ready for the Coding Competition?\n");
 	                }
 	                displayTextMilitaryStyle(x, "4 Goodbye\n");
-	                int input = waitForProperInput(x, "1 2 3 4");
+	                int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 	                if (input == 1) {
 	                    displayTextMilitaryStyle(x, "\"Never, everyone can code.\"\n");
 	                    questions[0] = true;
@@ -49,7 +49,7 @@ public class CodingMasterShan extends NPC {
 	                        displayTextMilitaryStyle(x, "3 Are you ready for the Coding Competition?\n");
 	                    }
 	                    displayTextMilitaryStyle(x, "4 Goodbye\n");
-	                    int input = waitForProperInput(x, "1 2 3 4");
+	                    int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 	                    if (input == 1) {
 	                        displayTextMilitaryStyle(x, "\"Yeah, Jackson was here! IS JOKE!\"\n");
 	                        questions[0] = true;

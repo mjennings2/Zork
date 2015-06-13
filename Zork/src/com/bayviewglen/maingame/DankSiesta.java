@@ -7,11 +7,11 @@ public class DankSiesta extends NPC {
 
 	}
 
-	public void TalkTo(Display x, Boolean isTerrorist) {
+	public void TalkTo(Display x, Boolean isTerrorist) {             // Method for talking to this character
 		boolean[] questions = { false, false, false };
 		boolean loop = true;
 		displayTextMilitaryStyle(x, "*Dank is jamming out loudly, clearly entranced in the music*\n");
-		if (isTerrorist) {
+		if (isTerrorist) {                                       // Find out if the current character is a traitor in this generation of the map
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x, "1 Hey! Dank! Have you seen anything weird around here lately?\n");
@@ -24,7 +24,7 @@ public class DankSiesta extends NPC {
 					displayTextMilitaryStyle(x, "3 DANK! HOW LONG HAVE YOU BEEN HERE!?\n");
 				}
 				displayTextMilitaryStyle(x, "4 Goodbye\n");
-				int input = waitForProperInput(x, "1 2 3 4");
+				int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 				if (input == 1) {
 					displayTextMilitaryStyle(x,
 							"\"(He doesn't hear you, but his playing is on point…)\"\n");
@@ -54,7 +54,7 @@ public class DankSiesta extends NPC {
 						displayTextMilitaryStyle(x, "3 DANK! HOW LONG HAVE YOU BEEN HERE!?\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
-					int input = waitForProperInput(x, "1 2 3 4");
+					int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 					if (input == 1) {
 						displayTextMilitaryStyle(x,
 								"\"(He doesn't hear you, but his playing is on point…)\"\n");

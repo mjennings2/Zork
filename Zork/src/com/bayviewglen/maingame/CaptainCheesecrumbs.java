@@ -7,11 +7,11 @@ public class CaptainCheesecrumbs extends NPC {
 
 	}
 
-	public void TalkTo(Display x, Boolean isTerrorist) {
+	public void TalkTo(Display x, Boolean isTerrorist) {             // Method for talking to this character
 		boolean[] questions = { false, false, false };
 		boolean loop = true;
 		displayTextMilitaryStyle(x, "*Captain Cheesecrumbs is whistling a sea shanty*\n");
-		if (isTerrorist) {
+		if (isTerrorist) {                                       // Find out if the current character is a traitor in this generation of the map
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x, "1 Good day Cheesecrumbs, have you seen anything suspicious going on around here lately?\n");
@@ -24,7 +24,7 @@ public class CaptainCheesecrumbs extends NPC {
 					displayTextMilitaryStyle(x, "3 A parrot? I didn't think DesLauriers would allow pets on this train...\n");
 				}
 				displayTextMilitaryStyle(x, "4 Goodbye\n");
-				int input = waitForProperInput(x, "1 2 3 4");
+				int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 				if (input == 1) {
 					displayTextMilitaryStyle(x,
 							"\"Nothing to report, sir!\"\n");
@@ -54,7 +54,7 @@ public class CaptainCheesecrumbs extends NPC {
 						displayTextMilitaryStyle(x, "3 A parrot? I didn't think DesLauriers would allow pets on this train...\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
-					int input = waitForProperInput(x, "1 2 3 4");
+					int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 					if (input == 1) {
 						displayTextMilitaryStyle(x,
 								"\"Aye, I did see some scurvy lad sneakin' around the nuclear hold, I did!\"\n");

@@ -27,12 +27,12 @@ import com.bayviewglen.maingame.Display;
 public class Zork implements Serializable {
 
     private static String[] commands = {
-        "talk", "go", "quit", "help", "eat", "use", "pickup", "exit", "shoot"
+        "talk", "go", "quit", "help", "eat", "use", "pickup", "exit", "shoot", "use", "north", "south", "n", "s", "t"
     };
     public static boolean loginAllowed = false;
     public static void main(String[] args) throws Exception {
         boolean shoot = false;
-   
+        int traitor = 0;
         
         int location = 0;
         double time[] = {
@@ -44,21 +44,21 @@ public class Zork implements Serializable {
             false
         };
         // TODO Auto-generated method stub
-        // open the sound file as a Java input stream
+       
         int width = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
         int height = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-
-        ArrayList < User > users = importUsersTest();
-        //ArrayList<User> users =  new ArrayList<User>();
-        int[] currentUser = new int[1];
-        //int[] currentUser= {0};
-        //importUsers(users);
+        // Below are comments, that are un-commented when adding stuff.
+        //ArrayList < User > users = importUsersTest();
+         ArrayList<User> users =  new ArrayList<User>();
+        //int[] currentUser = new int[1];
+         int[] currentUser= {0};
+         importUsers(users);
         boolean[] playGame = {
             true
         };
-        
+        // Make all the NPCs
         NPC[] npcs = new NPC[28];
-
+        npcs[0] = new General("General");
         npcs[1] = new Receptionist("Receptionist");
         npcs[2] = new ArmoryGuard("Armory Gaurd");
         npcs[3] = new BigBrother("Big Brother");
@@ -87,19 +87,19 @@ public class Zork implements Serializable {
         npcs[26] = new CowboyTanaka("CowboyTanaka");
         npcs[27] = new CurlingCarl("CurlingCarl");
 
-
+        // New login window
         LoginWindow login = new LoginWindow(users, currentUser, newUser);
-
         login.frame.setVisible(true);
+        // Wait till the press login
         while (login.login() < 10) {
             sleep(1000);
         }
-
         login.frame.setVisible(false);
         boolean[] loop = {
             true
         };
-
+        
+        // Create display
         Display x;
         if (height > 800) {
             x = new Display("input/pictures/Title.jpg");
@@ -108,19 +108,19 @@ public class Zork implements Serializable {
         }
         x.frame.setVisible(true);
 
-
+        // Intro
         displayTextMilitaryStyle(x, "Hello and welcome to Trouble in Nuke on a Train with a Terrorist Town!\nType commands in the text bar below. \nLeaving a room is exit, you can go north or south.\nWhen asking a question, use just the number related to the question.\nType 'Start' to start, or 'Load' if you would like to continue your previous game.\n");
 
         sleep(1000);
 
-
+       
         location = waitForStartOrLoad(x, time, currentUser, users, newUser);
       
+        // Loop the game until stop
         while (loop[0]) {
             x.textSent = "";
             playGame[0] = true;
-            if (time[0] == 31) {
-                location = 0;
+            if (time[0] == 31) {                location = 0;
                 if (height > 800) {
                     x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk.jpg"));
                 } else {
@@ -134,9 +134,12 @@ public class Zork implements Serializable {
                 // Declare all Rooms
                 rooms = new Room[28];
                 randomizedRooms = new Room[10];
+                
+                // Create every item and room
                 String[] lables = {
                     "fire extinguisher", "extinguisher", "fire-extinguishing system", "fire-extinguishing thing", "fire extinguishing system", "fire extinguishing thing"
                 };
+                
                 String[] lables1 = {
                     "paper", "sheet", "piece of paper", "piece paper", "piece", "report", "assignment", "profile sheet"
                 };
@@ -186,10 +189,11 @@ public class Zork implements Serializable {
                 rooms[27] = new Room("Curling Car", items2, 27);
 
 
-                // Set rooms locations
+                // Set rooms locations (Randomized)
                 int[] usedRooms = new int[12];
                 int random = 0;
                 for (int i = 0; i <= randomizedRooms.length; i++) {
+                	// Find a random room that has not been used yet
                     boolean randomUnused = true;
                     while (randomUnused) {
                         random = (int)(Math.random() * rooms.length);
@@ -208,7 +212,7 @@ public class Zork implements Serializable {
                     }
 
 
-
+                    // Add that random room to the map
                     if (i == 0) {
                         rooms[0].setExit('N', rooms[random]);
                         usedRooms[0] = 0;
@@ -226,30 +230,42 @@ public class Zork implements Serializable {
                     }
 
                 }
-
+                
+                // Save map to User
                 users.get(currentUser[0]).setMap(randomizedRooms);
                 users.get(currentUser[0]).setAllRooms(rooms);
-
+                traitor = (int)(Math.random() * 9) + 1;
             } else {
-
+            	traitor = users.get(currentUser[0]).traitor;
                 randomizedRooms = users.get(currentUser[0]).getMap();
                 rooms = users.get(currentUser[0]).getAllRooms();
 
             }
-            int traitor = (int)(Math.random() * 9) + 1;
+            ;
+            
             //Uncomment for debugging. It will display the int related to the room that the traitor is located in. 
-            displayTextMilitaryStyle(x, "" + traitor + "\n");
+            // displayTextMilitaryStyle(x, "" + traitor + "\n");
             while (playGame[0]) {
                 time[0]--;
                 saveUsersTest(users, location, time, currentUser);
 
+                
+                // Find out if they have run out of time
                 if (time[0] <= 0) {
                     if (height > 800) {
                         x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
                     } else {
-                        x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
+                        x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom720.jpg"));
                     }
                     displayTextMilitaryStyle(x, "BOOOOOOOOOOOOOOOOOOOOOOOOOOOM! You took to long and the terrorist exploded the bomb. You lose, plaese play again!");
+                    boolean again = waitForPlayAgain(x);
+                    time[0] = 31;
+                    playGame[0] = false;
+                    if (!again) {
+                        loop[0] = false;
+                        x.frame.setVisible(false);
+                    }
+                    location = 0;
 
                 } else if (time[0] == 20) {
 
@@ -272,15 +288,15 @@ public class Zork implements Serializable {
                     displayTextMilitaryStyle(x, "1 Min Remaining");
 
                 }
+                
+                
+                // Set the picture and launch the wait program relative to the location
                 if (height > 800) {
                     if (time[0] <= 0) {
-                        // Commanders office
                     } else if (randomizedRooms[location].getRoomName().equals("Commanders Office")) {
                         x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk.jpg"));
                         location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time, height);
 
-
-                        // Receptionist's Hall
                     } else if (randomizedRooms[location].getRoomName().equals("Reception hall")) {
                         x.lblNewLabel.setIcon(new ImageIcon("input/pictures/test1.jpg"));
 
@@ -363,17 +379,17 @@ public class Zork implements Serializable {
                     } else if (randomizedRooms[location].getRoomName().equals("Curling Car")) {
                         x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH.jpg"));
                         location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time, height);
+                    } else if (randomizedRooms[location].getRoomName().equals("Maple Syrup Car")) {
+                        x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH.jpg"));
+                        location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time, height);
                     }
 
                 } else {
                     if (time[0] <= 0) {
-                        // Commanders office
+                       //Make sure it doesen't run when you loose
                     } else if (randomizedRooms[location].getRoomName().equals("Commanders Office")) {
                         x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Commanders_Desk720.jpg"));
                         location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time, height);
-
-
-                        // Receptionist's Hall
                     } else if (randomizedRooms[location].getRoomName().equals("Reception hall")) {
                         x.lblNewLabel.setIcon(new ImageIcon("input/pictures/test1720.jpg"));
 
@@ -456,6 +472,9 @@ public class Zork implements Serializable {
                     } else if (randomizedRooms[location].getRoomName().equals("Curling Car")) {
                         x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH720.jpg"));
                         location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time, height);
+                    } else if (randomizedRooms[location].getRoomName().equals("Maple Syrup Car")) {
+                        x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH720.jpg"));
+                        location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time, height);
                     }
 
 
@@ -466,7 +485,7 @@ public class Zork implements Serializable {
 
 
             }
-            saveUsers(users);
+            saveUsersTest(users, location, time, currentUser);
         }
         x.frame.setVisible(false);
     }
@@ -477,8 +496,9 @@ public class Zork implements Serializable {
     private static int waitForProperInput(Display x, Room room, int[] currentUser, ArrayList < User > users, int location, Room[] randomizedRooms, NPC[] npcs, int traitor, boolean[] playGame, boolean[] loop, double[] time, int height) {
         // TODO Auto-generated method stub
         boolean loop2 = false;
+        // Make sure it's a command
         while (!loop2) {
-            System.out.println("Hello");
+            
             while (x.textSent.equals("")) {
                 try {
                     Thread.sleep(1000); //3000 milliseconds is three seconds.                                                                                                                                                   
@@ -512,14 +532,16 @@ public class Zork implements Serializable {
                     }
                 }
             }
+            // No do what is related of that command
             commandWord = true;
             if (goOnToSecond) {
                 if (commandWords[0].equalsIgnoreCase("pickup")) {
+                	// Pickup if it is in the room
                     boolean validItem = false;
                     for (int i = 0; i < room.getItems().size(); i++) {
                         for (int j = 0; j < room.getItems().get(i).getLables().length; j++) {
                             if (commandWords[1].equalsIgnoreCase(room.getItems().get(i).getLables()[j])) {
-
+                            	//Add to inventory
                                 displayTextMilitaryStyle(x, "You picked up the " + commandWords[1] + ".\n");
                                 users.get(currentUser[0]).addToInventory(room.getItems().get(i));
                                 room.getItems().remove(i);
@@ -536,6 +558,7 @@ public class Zork implements Serializable {
                         displayTextMilitaryStyle(x, "That is not a valid Item!");
                     }
                 } else if (commandWords[0].equalsIgnoreCase("shoot")) {
+                	// Display shot image
                     if (height > 800) {
                         if (randomizedRooms[location].getRoomName().equals("Commanders Office")) {
                             displayTextMilitaryStyle(x, "You may have shot the sherrief, but you may not shoot the Deputy.\n");
@@ -622,6 +645,10 @@ public class Zork implements Serializable {
                         } else if (randomizedRooms[location].getRoomName().equals("Curling Car")) {
                             x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOHShoot.jpg"));
 
+                        } else if (randomizedRooms[location].getRoomName().equals("Maple Syrup Car")) {
+                            x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOHShoot.jpg"));
+                        } else if (randomizedRooms[location].getRoomName().equals("Maple Syrup Car")) {
+                            x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOHShoot720.jpg"));
                         }
                     } else {
                         if (randomizedRooms[location].getRoomName().equals("Commanders Office")) {
@@ -712,7 +739,9 @@ public class Zork implements Serializable {
                         }
                     }
                     x.textSent = ("");
+                    
                     if (!(randomizedRooms[location].getRoomName().equals("Commanders Office"))) {
+                    	//Display one of the 5 possible endings if he was a terrorist, or the loosing ending if he was a innocent
                         if (traitor == location) {
                             int random = (int)(Math.random() * 100);
                             if (random < 5) {
@@ -821,11 +850,13 @@ public class Zork implements Serializable {
                             return location;
                         }
                     }
-                } else if (commandWords[0].equalsIgnoreCase("talk")) {
+                    
+                } else if (commandWords[0].equalsIgnoreCase("talk") || commandWords[0].equalsIgnoreCase("t")) {
                     displayTextMilitaryStyle(x, "Type Number:\n:");
                     x.textSent = "";
+                    // Talk to the person
                     if (randomizedRooms[location].i == 0) {
-                        ((Receptionist) npcs[randomizedRooms[location].i]).TalkTo(x, traitor == location);
+                        ((General) npcs[randomizedRooms[location].i]).TalkTo(x, traitor == location);
                     } else if (randomizedRooms[location].i == 1) {
                         ((Receptionist) npcs[randomizedRooms[location].i]).TalkTo(x, traitor == location);
                     } else if (randomizedRooms[location].i == 2) {
@@ -882,9 +913,10 @@ public class Zork implements Serializable {
                         ((CurlingCarl) npcs[randomizedRooms[location].i]).TalkTo(x, traitor == location);
                     }
                     displayTextMilitaryStyle(x, "You stopped talking.\n");
-
-                } else if (commandWords[0].equalsIgnoreCase("exit") || commandWords[0].equalsIgnoreCase("go")) {
-                    if (commandWords[1].equalsIgnoreCase("North") || commandWords[1].equalsIgnoreCase("South")) {
+                 // Moving
+                } else if (commandWords[0].equalsIgnoreCase("exit") || commandWords[0].equalsIgnoreCase("go") || commandWords[0].equalsIgnoreCase("N") || commandWords[0].equalsIgnoreCase("S") || commandWords[0].equalsIgnoreCase("North") || commandWords[0].equalsIgnoreCase("South")) {
+                    
+                	if (commandWords.length != 1 && (commandWords[1].equalsIgnoreCase("North") || commandWords[1].equalsIgnoreCase("South"))) {
                         if (location == 0 && commandWords[1].equalsIgnoreCase("South")) {
                             displayTextMilitaryStyle(x, "That is invalid.");
                             x.textSent = "";
@@ -905,7 +937,43 @@ public class Zork implements Serializable {
                                 return location - 1;
                             }
                         }
-                    }
+                	}
+                        if (location == 0 && (commandWords[0].equalsIgnoreCase("s") || commandWords[0].equalsIgnoreCase("south"))) {
+                        	x.textSent = "";
+                        	displayTextMilitaryStyle(x, "That is invalid.");
+                        } else if (location == randomizedRooms.length - 1 && (commandWords[0].equalsIgnoreCase("n") || commandWords[0].equalsIgnoreCase("north"))) {
+                            displayTextMilitaryStyle(x, "That is invalid.");
+                            x.textSent = "";
+                        } else {
+                            loop2 = true;
+                            commandWord = false;
+                            goOnToSecond = false;
+                            if ((commandWords[0].equalsIgnoreCase("n") || commandWords[0].equalsIgnoreCase("north"))) {
+                                displayTextMilitaryStyle(x, "You are now in " + randomizedRooms[location + 1].getRoomName() + ".\n");
+                                x.textSent = ("");
+                                return location + 1;
+                            } else {
+                                displayTextMilitaryStyle(x, "You are now in " + randomizedRooms[location - 1].getRoomName() + ".\n");
+                                x.textSent = ("");
+                                return location - 1;
+                            }
+                        }
+                    
+                    
+                } else if (commandWords[0].equalsIgnoreCase("use")) {
+                	if(commandWords.length == 1){
+                		displayTextMilitaryStyle(x, "Thats not valid.\n");
+                	}else{
+                		// Use is not required in this game, there for use returns "Thats not on fire" as a reference to a game. Here is the game: https://www.youtube.com/watch?v=rnCe08PlGlw
+                		displayTextMilitaryStyle(x, "Thats not on fire.\n");
+                	}
+                	
+                } else if (commandWords[0].equalsIgnoreCase("quit")) {
+                	x.frame.setVisible(false);
+                	playGame[0] = false;
+                	loop[0] = false;
+                	return 0;
+                	
                 }
             }
 
@@ -918,9 +986,8 @@ public class Zork implements Serializable {
     }
 
 
-    //The method for the test program, you could just copy paste this into your program and put the string for the url in the parameters.
 
-
+    //This method waits to see if the player wants to play again.
     private static boolean waitForPlayAgain(Display x) {
         // TODO Auto-generated method stub\
         x.textSent = "";
@@ -948,13 +1015,9 @@ public class Zork implements Serializable {
     }
 
 
-    public static synchronized void playSound(final String url) {
+   
 
-
-
-    }
-
-
+    // This is my window's version of System.Out.Println();
     private static void displayTextMilitaryStyle(Display x, String str) {
         // TODO Auto-generated method stub
         for (int i = 0; i < str.length(); i++) {
@@ -974,7 +1037,7 @@ public class Zork implements Serializable {
     }
 
 
-
+    // This method waits for the user to type start or load, returning an int, that will become the location of they load or 0 if they do not.
     private static int waitForStartOrLoad(Display x, double[] time, int[] currentUser, ArrayList < User > users, boolean[] newUser) {
         // TODO Auto-generated method stub
     	boolean loop = false;
@@ -998,8 +1061,11 @@ public class Zork implements Serializable {
                 displayTextMilitaryStyle(x, "Welcome back Soldier!\n");
                 x.textSent = ("");
                 loop = true;
+                // Assign the time the previously had
                 time[0] = users.get(currentUser[0]).getTime();
+                //Return Location they previously had
                 return users.get(currentUser[0]).getLocation();
+                
             } else {
                 displayTextMilitaryStyle(x, "That is Invalid.\n");
                 x.textSent = ("");
@@ -1013,22 +1079,7 @@ public class Zork implements Serializable {
         return 0;
     }
 
-
-
-    @
-    SuppressWarnings("unused")
-    private static boolean checkIfValid(Display x, String string) {
-        // TODO Auto-generated method stub
-        String[] conditions = string.split("|");
-        String[] inputs = x.textSent.split(" ");
-        for (int i = 0; i < conditions.length; i++) {
-            if (!(conditions[i].equals(inputs[i])));
-            x.textSent = "";
-            return false;
-        }
-        return true;
-    }
-
+    
     private static void saveUsersTest(ArrayList < User > users, int location, double[] time, int[] currentUser) {
 
         // Serialization code
@@ -1047,40 +1098,17 @@ public class Zork implements Serializable {
 
     }
 
-    private static void saveUsers(ArrayList < User > users) throws IOException {
-        // TODO Auto-generated method stub
-        FileWriter writer;
-        try {
-            writer = new FileWriter(new File("input/users.dat"));
-            for (User u: users) {
-                writer.write(u.getMyUsername() + " " + u.getMyPassword() + " ");
-                writer.write("" + u.getMyHighscore().getHighscore() + " ");
-                writer.write(u.getMyHighscore().getDate().get(Calendar.DAY_OF_MONTH) + " ");
-                writer.write(u.getMyHighscore().getDate().get(Calendar.MONTH) + " ");
-                writer.write(u.getMyHighscore().getDate().get(Calendar.YEAR) + " ");
-                for (int i = 0; i < u.getMyAchivements().getMyAchivements().length; i++) {
-                    writer.write(u.getMyAchivements().achivementAsString(i) + " ");
-                }
-                writer.write("\n");
-            }
-            writer.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-
-
-    }
 
     @
     SuppressWarnings("unchecked")
     private static ArrayList < User > importUsersTest() throws FileNotFoundException {
+    	// Deserialization code
         ArrayList < User > deserializedUsers = null;
         try {
             FileInputStream fileIn = new FileInputStream("input/userDetails.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            deserializedUsers = (ArrayList < User > ) in .readObject(); in .close();
+            deserializedUsers = (ArrayList<User>) in .readObject(); 
+            in .close();
             fileIn.close();
             return deserializedUsers;
         } catch (IOException ioe) {
@@ -1092,7 +1120,7 @@ public class Zork implements Serializable {
 
     }
 
-
+    // This is only used when a argument is added to the User class to jump start the serialization file
     private static void importUsers(ArrayList < User > users) throws FileNotFoundException {@
         SuppressWarnings("resource")
         Scanner scanner = new Scanner(new File("input/users.dat"));
@@ -1104,16 +1132,12 @@ public class Zork implements Serializable {
             }
             Highscores highscore = new Highscores(Integer.parseInt(temp[2]), temp[0], Integer.parseInt(temp[3]), Integer.parseInt(temp[4]), Integer.parseInt(temp[5]));
 
-            users.add(new User(temp[0], temp[1], new Achivement(achivements), highscore, 0, 0, null, null));
+            users.add(new User(temp[0], temp[1], new Achivement(achivements), highscore, 0, 0, null, null, 0));
         }
     }
 
-    public static void printAllHighscores(ArrayList < User > list) {
 
-
-
-    }
-
+    // Wait an amount of time in ms	
     public static void sleep(int time) {
         try {
             Thread.sleep(time); //3000 milliseconds is three seconds.                                                                                                                                                   

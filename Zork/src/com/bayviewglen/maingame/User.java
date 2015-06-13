@@ -9,14 +9,15 @@ public class User implements Serializable{
 	private String myPassword;
 	private Achivement myAchivements;
 	private Highscores myHighscore;
-	private ArrayList<Item> inventory = new ArrayList<Item>();
+	public ArrayList<Item> inventory = new ArrayList<Item>();
 	private int location;
 	private double time;
 	private Room[] map;
 	private Room[] allRooms;
+	public int traitor;
 
 
-	public User(String username, String password, Achivement achivement, Highscores highscore, int location, int time, Room[] map, Room[] allRooms){
+	public User(String username, String password, Achivement achivement, Highscores highscore, int location, int time, Room[] map, Room[] allRooms, int traitor){
 		myAchivements = achivement;
 		myUsername = username;
 		myPassword = password;

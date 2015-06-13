@@ -5,13 +5,13 @@ public class CowboyTanaka extends NPC {
 		super(name);
 
 	}
-	 public void TalkTo(Display x, Boolean isTerrorist) {
+	 public void TalkTo(Display x, Boolean isTerrorist) {             // Method for talking to this character
 	        boolean[] questions = {
 	            false, false, false
 	        };
 	        boolean loop = true;
 	        displayTextMilitaryStyle(x, "*Tanaka is fileting salmon*?\n");
-	        if (isTerrorist) {
+	        if (isTerrorist) {                                       // Find out if the current character is a traitor in this generation of the map
 	            while (loop) {
 	                if (!questions[0]) {
 	                    displayTextMilitaryStyle(x, "1 Since when do we have a sushi car?\n");
@@ -23,7 +23,7 @@ public class CowboyTanaka extends NPC {
 	                    displayTextMilitaryStyle(x, "3 Need any extra sushi supplies?\n");
 	                }
 	                displayTextMilitaryStyle(x, "4 Goodbye\n");
-	                int input = waitForProperInput(x, "1 2 3 4");
+	                int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 	                if (input == 1) {
 	                    displayTextMilitaryStyle(x, "\"Let’s see what time is it? Ah about 7 hours.\"\n");
 	                    questions[0] = true;
@@ -50,7 +50,7 @@ public class CowboyTanaka extends NPC {
 	                        displayTextMilitaryStyle(x, "3 Need any extra sushi supplies?\n");
 	                    }
 	                    displayTextMilitaryStyle(x, "4 Goodbye\n");
-	                    int input = waitForProperInput(x, "1 2 3 4");
+	                    int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 	                    if (input == 1) {
 	                        displayTextMilitaryStyle(x, "\"It was added about a week ago.\"\n");
 	                        questions[0] = true;

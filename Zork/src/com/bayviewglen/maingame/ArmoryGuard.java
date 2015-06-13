@@ -7,13 +7,13 @@ public class ArmoryGuard extends NPC{
 		// TODO Auto-generated constructor stub
 	}
 
-    public void TalkTo(Display x, Boolean isTerrorist) {
+    public void TalkTo(Display x, Boolean isTerrorist) {             // Method for talking to this character
         boolean[] questions = {
             false, false, false
         };
         boolean loop = true;
         displayTextMilitaryStyle(x, "Armory Guard: Hello, Captain! /n");
-        if (isTerrorist) {
+        if (isTerrorist) {                                       // Find out if the current character is a traitor in this generation of the map
             while (loop) {
                 if (!questions[0]) {
                     displayTextMilitaryStyle(x, "1 Anything to report?\n");
@@ -25,7 +25,7 @@ public class ArmoryGuard extends NPC{
                     displayTextMilitaryStyle(x, "3 Do you have any extra weapons I could use?\n");
                 }
                 displayTextMilitaryStyle(x, "4 Goodbye\n");
-                int input = waitForProperInput(x, "1 2 3 4");
+                int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
                 if (input == 1) {
                     displayTextMilitaryStyle(x, "\"Nothing here, Captain.\"\n");
                     questions[0] = true;
@@ -52,7 +52,7 @@ public class ArmoryGuard extends NPC{
                         displayTextMilitaryStyle(x, "3 Do you have any extra weapons for me?\n");
                     }
                     displayTextMilitaryStyle(x, "4 Goodbye\n");
-                    int input = waitForProperInput(x, "1 2 3 4");
+                    int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
                     if (input == 1) {
                         displayTextMilitaryStyle(x, "\"Sir! All clear, sir!\"\n");
                         questions[0] = true;

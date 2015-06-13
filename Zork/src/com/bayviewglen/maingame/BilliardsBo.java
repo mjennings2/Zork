@@ -4,13 +4,13 @@ public class BilliardsBo extends NPC {
 	public BilliardsBo(String name) {
 		super(name);
 	}
-	 public void TalkTo(Display x, Boolean isTerrorist) {
+	 public void TalkTo(Display x, Boolean isTerrorist) {             // Method for talking to this character
 	        boolean[] questions = {
 	            false, false, false
 	        };
 	        boolean loop = true;
 	        displayTextMilitaryStyle(x, "*Bo is playing billiards*\n");
-	        if (isTerrorist) {
+	        if (isTerrorist) {                                       // Find out if the current character is a traitor in this generation of the map
 	            while (loop) {
 	                if (!questions[0]) {
 	                    displayTextMilitaryStyle(x, "1 What? Why are you playing by yourself?\n");
@@ -22,7 +22,7 @@ public class BilliardsBo extends NPC {
 	                    displayTextMilitaryStyle(x, "3 Well, Good luck with your game!\n");
 	                }
 	                displayTextMilitaryStyle(x, "4 Goodbye\n");
-	                int input = waitForProperInput(x, "1 2 3 4");
+	                int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 	                if (input == 1) {
 	                    displayTextMilitaryStyle(x, "\"DON'T JUDGE ME! I DON'T ASK YOU WHY YOU'RE ASKING QUESTIONS TO EVERYONE ON THIS GOD FORSAKEN TRAIN. END RANT.\"\n");
 	                    questions[0] = true;
@@ -49,7 +49,7 @@ public class BilliardsBo extends NPC {
 	                        displayTextMilitaryStyle(x, "3 Well, Good luck with your game!\n");
 	                    }
 	                    displayTextMilitaryStyle(x, "4 Goodbye\n");
-	                    int input = waitForProperInput(x, "1 2 3 4");
+	                    int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 	                    if (input == 1) {
 	                        displayTextMilitaryStyle(x, "\"DON'T JUDGE ME! I DON'T ASK YOU WHY YOU'RE ASKING QUESTIONS TO EVERYONE ON THIS GOD FORSAKEN TRAIN. END RANT.\"\n");
 	                        questions[0] = true;

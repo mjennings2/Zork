@@ -7,12 +7,12 @@ public class MrSkeltal extends NPC {
 
 	}
 
-	public void TalkTo(Display x, Boolean isTerrorist) {
+	public void TalkTo(Display x, Boolean isTerrorist) {             // Method for talking to this character
 		boolean[] questions = { false, false, false };
 		boolean loop = true;
 		displayTextMilitaryStyle(x,
 				"*Mr Skeltal is playing the skulltrumpet*\n");
-		if (isTerrorist) {
+		if (isTerrorist) {                                       // Find out if the current character is a traitor in this generation of the map
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x,
@@ -27,7 +27,7 @@ public class MrSkeltal extends NPC {
 							"3 Have you had your spooks today?\n");
 				}
 				displayTextMilitaryStyle(x, "4 Goodbye\n");
-				int input = waitForProperInput(x, "1 2 3 4");
+				int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 				if (input == 1) {
 					displayTextMilitaryStyle(x,
 							"\"*Mr. Skeltal says nothing, due to the fact that he is a skeleton*\"\n");
@@ -60,7 +60,7 @@ public class MrSkeltal extends NPC {
 							"3 Have you had your spooks today?\n");
 				}
 				displayTextMilitaryStyle(x, "4 Goodbye\n");
-				int input = waitForProperInput(x, "1 2 3 4");
+				int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 				if (input == 1) {
 					displayTextMilitaryStyle(x,
 							"\"Mr. Skeltal has seen nothing. Thanks Mr. Skeltal.\"\n");

@@ -7,11 +7,11 @@ public class SurferDude extends NPC {
 
 	}
 
-	public void TalkTo(Display x, Boolean isTerrorist) {
+	public void TalkTo(Display x, Boolean isTerrorist) {             // Method for talking to this character
 		boolean[] questions = { false, false, false };
 		boolean loop = true;
 		displayTextMilitaryStyle(x,	"*Surfer Dude is tearing up the surfing simulator*\n");
-		if (isTerrorist) {
+		if (isTerrorist) {                                       // Find out if the current character is a traitor in this generation of the map
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x,
@@ -26,7 +26,7 @@ public class SurferDude extends NPC {
 							"3 Since when is surfing an appropriate military past-time?\n");
 				}
 				displayTextMilitaryStyle(x, "4 Goodbye\n");
-				int input = waitForProperInput(x, "1 2 3 4");
+				int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 				if (input == 1) {
 					displayTextMilitaryStyle(
 							x,
@@ -47,7 +47,7 @@ public class SurferDude extends NPC {
 			}
 		} else {
 			while (loop) {
-			}
+			
 			if (!questions[0]) {
 					displayTextMilitaryStyle(x,
 							"1 Surfer Dude! Have you seen anything suspicious around here?\n");
@@ -60,7 +60,7 @@ public class SurferDude extends NPC {
 								"3 Since when is surfing an appropriate military past-time?\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
-					int input = waitForProperInput(x, "1 2 3 4");
+					int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 					if (input == 1) {
 						displayTextMilitaryStyle(x,
 								"\"Nah maaaaaan, I was just riding the waves!\"\n");
@@ -68,7 +68,7 @@ public class SurferDude extends NPC {
 					} else if (input == 2) {
 						displayTextMilitaryStyle(x,
 								"\"I dunno maaaaaaan, but it's siiiiiiiick!\"\n");
-						questions[1] = true;
+						questions[1] = true;		
 					} else if (input == 3) {
 						displayTextMilitaryStyle(x,
 							"\"Don't be such a bummer, maaaaaaan!\"\n");
@@ -78,6 +78,6 @@ public class SurferDude extends NPC {
 					}
 				}
 			}
-		
+		}	
 	}
 }

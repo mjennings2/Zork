@@ -5,11 +5,11 @@ public class MapleMackDaddy extends NPC {
 		super(name);
 	}
 
-	public void TalkTo(Display x, Boolean isTerrorist) {
+	public void TalkTo(Display x, Boolean isTerrorist) {             // Method for talking to this character
 		boolean[] questions = { false, false, false };
 		boolean loop = true;
 		displayTextMilitaryStyle(x, "*Mack Daddy is making maple syrup*\n");
-		if (isTerrorist) {
+		if (isTerrorist) {                                       // Find out if the current character is a traitor in this generation of the map
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x, "1 Seen anything suspicious around here?\n");
@@ -22,7 +22,7 @@ public class MapleMackDaddy extends NPC {
 					displayTextMilitaryStyle(x, "3 Pop Quiz: Where do we store the maple syrup?\n");
 				}
 				displayTextMilitaryStyle(x, "4 Goodbye\n");
-				int input = waitForProperInput(x, "1 2 3 4");
+				int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 				if (input == 1) {
 					displayTextMilitaryStyle(x,
 							"\"Suspicious? On this train? Pft. Yeah right.\"\n");
@@ -53,7 +53,7 @@ public class MapleMackDaddy extends NPC {
 						displayTextMilitaryStyle(x, "3 Pop Quiz: Where do we store the maple syrup?\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
-					int input = waitForProperInput(x, "1 2 3 4");
+					int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 					if (input == 1) {
 						displayTextMilitaryStyle(x,
 								"\"Nah bud! No one comes round the maple syrup car anymore. :(\"\n");

@@ -7,11 +7,11 @@ public class DashKetchup extends NPC {
 
 	}
 
-	public void TalkTo(Display x, Boolean isTerrorist) {
+	public void TalkTo(Display x, Boolean isTerrorist) {             // Method for talking to this character
 		boolean[] questions = { false, false, false };
 		boolean loop = true;
 		displayTextMilitaryStyle(x, "*Dash says nothing, only looking at the red and white balls on the table*\n");
-		if (isTerrorist) {
+		if (isTerrorist) {                                       // Find out if the current character is a traitor in this generation of the map
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x, "1 Have you seen anything suspicious around here recently?\n");
@@ -24,7 +24,7 @@ public class DashKetchup extends NPC {
 					displayTextMilitaryStyle(x, "3 What do you do for fun?\n");
 				}
 				displayTextMilitaryStyle(x, "4 Goodbye\n");
-				int input = waitForProperInput(x, "1 2 3 4");
+				int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 				if (input == 1) {
 					displayTextMilitaryStyle(x,
 							"\"Nothing to report, Captain!\"\n");
@@ -54,7 +54,7 @@ public class DashKetchup extends NPC {
 						displayTextMilitaryStyle(x, "3 What do you do for fun?\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
-					int input = waitForProperInput(x, "1 2 3 4");
+					int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 					if (input == 1) {
 						displayTextMilitaryStyle(x,
 								"\"Only my SICK EV-TRAINED POKEMON!\"\n");

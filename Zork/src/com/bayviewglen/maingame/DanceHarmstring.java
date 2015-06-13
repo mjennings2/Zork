@@ -7,11 +7,11 @@ public class DanceHarmstring extends NPC {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void TalkTo(Display x, Boolean isTerrorist) {
+	public void TalkTo(Display x, Boolean isTerrorist) {             // Method for talking to this character
 		boolean[] questions = { false, false, false };
 		boolean loop = true;
 		displayTextMilitaryStyle(x, "*Dance is riding around the track*\n");
-		if (isTerrorist) {
+		if (isTerrorist) {                                       // Find out if the current character is a traitor in this generation of the map
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x, "1 Have you seen anything suspicious lately?\n");
@@ -24,7 +24,7 @@ public class DanceHarmstring extends NPC {
 					displayTextMilitaryStyle(x, "3 What's your favorite shirt color?\n");
 				}
 				displayTextMilitaryStyle(x, "4 Goodbye\n");
-				int input = waitForProperInput(x, "1 2 3 4");
+				int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 				if (input == 1) {
 					displayTextMilitaryStyle(x,
 							"\"Yes, I did. Someone was sneaking around the payload, but I didn't catch their name.\"\n");
@@ -54,7 +54,7 @@ public class DanceHarmstring extends NPC {
 						displayTextMilitaryStyle(x, "3 What's your favorite shirt color?\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
-					int input = waitForProperInput(x, "1 2 3 4");
+					int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 					if (input == 1) {
 						displayTextMilitaryStyle(x,
 								"\"No! No, nothing…nothing at all… \"\n");

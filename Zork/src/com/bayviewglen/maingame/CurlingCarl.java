@@ -5,11 +5,11 @@ public class CurlingCarl extends NPC {
 		super(name);
 	}
 
-	public void TalkTo(Display x, Boolean isTerrorist) {
+	public void TalkTo(Display x, Boolean isTerrorist) {             // Method for talking to this character
 		boolean[] questions = { false, false, false };
 		boolean loop = true;
 		displayTextMilitaryStyle(x, "*Carl is standing on the ice with a broom*\n");
-		if (isTerrorist) {
+		if (isTerrorist) {                                       // Find out if the current character is a traitor in this generation of the map
 			while (loop) {
 				if (!questions[0]) {
 					displayTextMilitaryStyle(x, "1 What’s that stick for?\n");
@@ -22,7 +22,7 @@ public class CurlingCarl extends NPC {
 					displayTextMilitaryStyle(x, "3 How ‘bout dem 2015 CANADIAN MIXED DOUBLES TEAM?\n");
 				}
 				displayTextMilitaryStyle(x, "4 Goodbye\n");
-				int input = waitForProperInput(x, "1 2 3 4");
+				int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 				if (input == 1) {
 					displayTextMilitaryStyle(x,
 							"\"Curling!\"\n");
@@ -52,7 +52,7 @@ public class CurlingCarl extends NPC {
 						displayTextMilitaryStyle(x, "3 How ‘bout dem 2015 CANADIAN MIXED DOUBLES TEAM?\n");
 					}
 					displayTextMilitaryStyle(x, "4 Goodbye\n");
-					int input = waitForProperInput(x, "1 2 3 4");
+					int input = waitForProperInput(x, "1 2 3 4");                  // Wait for real input to text area
 					if (input == 1) {
 						displayTextMilitaryStyle(x,
 								"\"You brush the ice in order to speeed up the stone.\"\n");
