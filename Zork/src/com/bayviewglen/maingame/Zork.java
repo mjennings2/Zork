@@ -32,7 +32,8 @@ public class Zork implements Serializable {
     public static boolean loginAllowed = false;
     public static void main(String[] args) throws Exception {
         boolean shoot = false;
-        int traitor = (int)(Math.random() * 27) + 1;
+   
+        
         int location = 0;
         double time[] = {
             31
@@ -55,6 +56,7 @@ public class Zork implements Serializable {
         boolean[] playGame = {
             true
         };
+        
         NPC[] npcs = new NPC[28];
 
         npcs[1] = new Receptionist("Receptionist");
@@ -113,6 +115,7 @@ public class Zork implements Serializable {
 
 
         location = waitForStartOrLoad(x, time, currentUser, users, newUser);
+      
         while (loop[0]) {
             x.textSent = "";
             playGame[0] = true;
@@ -155,7 +158,7 @@ public class Zork implements Serializable {
                 rooms[2] = new Room("Armory", items2, 2);
                 rooms[3] = new Room("TVRoom", items2, 6);
                 //TODO
-                rooms[4] = new Room("Music Car", items2, 8); // Fix This
+                rooms[4] = new Room("Music Car", items2, 8); 
                 rooms[5] = new Room("Workout Car", items2, 4);
                 rooms[6] = new Room("Reporting Car", items2, 10);
                 rooms[7] = new Room("Filing Car", items2, 12);
@@ -163,7 +166,7 @@ public class Zork implements Serializable {
                 rooms[9] = new Room("Propaganda Car", items2, 3);
 
 
-                rooms[10] = new Room("Security", items2, 11); // Fix This
+                rooms[10] = new Room("Security", items2, 11); 	
                 rooms[11] = new Room("Pokemon", items2, 9);
                 rooms[12] = new Room("Pirate Car", items2, 5);
                 rooms[13] = new Room("Tea Car", items2, 14);
@@ -171,7 +174,7 @@ public class Zork implements Serializable {
                 rooms[15] = new Room("Surfer Car", items2, 15);
                 rooms[16] = new Room("Barracks Car", items2, 16); // Fix This
                 rooms[17] = new Room("Shower Car", items2, 17); // Fix This
-                rooms[18] = new Room("Toilets Car", items2, 122); // Fix This
+                rooms[18] = new Room("Toilets Car", items2, 12); // Fix This
                 rooms[19] = new Room("Theatre Car", items2, 23); // Fix This
                 rooms[20] = new Room("Billiards Car", items2, 18);
                 rooms[21] = new Room("Baseball Car", items2, 25);
@@ -233,6 +236,9 @@ public class Zork implements Serializable {
                 rooms = users.get(currentUser[0]).getAllRooms();
 
             }
+            int traitor = (int)(Math.random() * 9) + 1;
+            //Uncomment for debugging. It will display the int related to the room that the traitor is located in. 
+            displayTextMilitaryStyle(x, "" + traitor + "\n");
             while (playGame[0]) {
                 time[0]--;
                 saveUsersTest(users, location, time, currentUser);
@@ -354,6 +360,9 @@ public class Zork implements Serializable {
                     } else if (randomizedRooms[location].getRoomName().equals("Sushi Car")) {
                         x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH.jpg"));
                         location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time, height);
+                    } else if (randomizedRooms[location].getRoomName().equals("Curling Car")) {
+                        x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH.jpg"));
+                        location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time, height);
                     }
 
                 } else {
@@ -442,6 +451,9 @@ public class Zork implements Serializable {
                         x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH720.jpg"));
                         location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time, height);
                     } else if (randomizedRooms[location].getRoomName().equals("Sushi Car")) {
+                        x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH720.jpg"));
+                        location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time, height);
+                    } else if (randomizedRooms[location].getRoomName().equals("Curling Car")) {
                         x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOH720.jpg"));
                         location = waitForProperInput(x, rooms[0], currentUser, users, location, randomizedRooms, npcs, traitor, playGame, loop, time, height);
                     }
@@ -607,6 +619,9 @@ public class Zork implements Serializable {
                         } else if (randomizedRooms[location].getRoomName().equals("Sushi Car")) {
                             x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOHShoot.jpg"));
 
+                        } else if (randomizedRooms[location].getRoomName().equals("Curling Car")) {
+                            x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOHShoot.jpg"));
+
                         }
                     } else {
                         if (randomizedRooms[location].getRoomName().equals("Commanders Office")) {
@@ -691,6 +706,9 @@ public class Zork implements Serializable {
                         } else if (randomizedRooms[location].getRoomName().equals("Sushi Car")) {
                             x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOHShoot720.jpg"));
 
+                        }else if (randomizedRooms[location].getRoomName().equals("Curling Car")) {
+                            x.lblNewLabel.setIcon(new ImageIcon("input/pictures/DOHShoot720.jpg"));
+
                         }
                     }
                     x.textSent = ("");
@@ -700,7 +718,11 @@ public class Zork implements Serializable {
                             if (random < 5) {
 
                                 displayTextMilitaryStyle(x, "Psych, It's a hologram!\n\"You will never catch me alive!\" - He yells from the roof. You try to climb out the hatch but slip and fall.\n");
+                               if(height > 800){
                                 x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
+                               }else{
+                            	   x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom720.jpg"));
+                               }
                                 displayTextMilitaryStyle(x, "BOOOOOOOOOOOOOOOOOOOOOOOOOOOM! \nYou took to long and the terrorist exploded the bomb. \nYou won but were unlucky and lost, plaese play again!");
                                 displayTextMilitaryStyle(x, "Play again? (Y/N)\n");
                                 boolean again = waitForPlayAgain(x);
@@ -715,8 +737,11 @@ public class Zork implements Serializable {
                             }
                             if (random >= 5 && random < 10) {
                                 displayTextMilitaryStyle(x, "As you land you hear a click.\nYou look down and see that you steped on the detonator.\n");
-                                x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
-                                displayTextMilitaryStyle(x, "BOOOOOOOOOOOOOOOOOOOOOOOOOOOM! \nYou took to long and the terrorist exploded the bomb. \nYou won but were unlucky and lost, plaese play again!");
+                                if(height > 800){
+                                    x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
+                                   }else{
+                                	   x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom720.jpg"));
+                                   }                                displayTextMilitaryStyle(x, "BOOOOOOOOOOOOOOOOOOOOOOOOOOOM! \nYou took to long and the terrorist exploded the bomb. \nYou won but were unlucky and lost, plaese play again!");
                                 displayTextMilitaryStyle(x, "Play again? (Y/N)\n");
                                 boolean again = waitForPlayAgain(x);
                                 time[0] = 31;
@@ -728,8 +753,11 @@ public class Zork implements Serializable {
                             }
                             if (random >= 10 && random < 15) {
                                 displayTextMilitaryStyle(x, "You hit him in his head but the bullet goes straight through his head and into the window, smashing it to pieces.\nSuddenly you and everything in the train car is sucked toward the open window.\n turns out its a plane and you just depressurized the cabin.\nThe depressurization also sets off the nuke.\n");
-                                x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
-                                displayTextMilitaryStyle(x, "BOOOOOOOOOOOOOOOOOOOOOOOOOOOM! \nYou took to long and the terrorist exploded the bomb. \nYou won but were unlucky and lost, plaese play again!");
+                                if(height > 800){
+                                    x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
+                                   }else{
+                                	   x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom720.jpg"));
+                                   }                                displayTextMilitaryStyle(x, "BOOOOOOOOOOOOOOOOOOOOOOOOOOOM! \nYou took to long and the terrorist exploded the bomb. \nYou won but were unlucky and lost, plaese play again!");
                                 displayTextMilitaryStyle(x, "Play again? (Y/N)\n");
                                 boolean again = waitForPlayAgain(x);
                                 time[0] = 31;
@@ -740,10 +768,12 @@ public class Zork implements Serializable {
                                 return 0;
                             }
                             if (random >= 15 && random < 20) {
-                                x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
                                 displayTextMilitaryStyle(x, "You hit him in his head but the bullet goes straight through and ricochetes of the walls untill it hit you in the head.\nYou collapse to the floor and lend on the detonator.\n");
-                                x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
-                                displayTextMilitaryStyle(x, "BOOOOOOOOOOOOOOOOOOOOOOOOOOOM! \nYou took to long and the terrorist exploded the bomb. \nYou won but were unlucky and lost, plaese play again!");
+                                if(height > 800){
+                                    x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
+                                   }else{
+                                	   x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom720.jpg"));
+                                   }                                displayTextMilitaryStyle(x, "BOOOOOOOOOOOOOOOOOOOOOOOOOOOM! \nYou took to long and the terrorist exploded the bomb. \nYou won but were unlucky and lost, plaese play again!");
 
                                 displayTextMilitaryStyle(x, "Play again? (Y/N)\n");
                                 boolean again = waitForPlayAgain(x);
@@ -756,7 +786,11 @@ public class Zork implements Serializable {
                             }
 
                             if (random >= 20) {
-                                x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Party.jpg"));
+                            	if(height > 800){
+                            		x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Party.jpg"));
+                            	}else{
+                            		x.lblNewLabel.setIcon(new ImageIcon("input/pictures/Party720.jpg"));
+                            	}
                                 displayTextMilitaryStyle(x, "Congratulations, you beat the game. Please play again!\n");
                                 displayTextMilitaryStyle(x, "Play again? (Y/N)\n");
                                 boolean again = waitForPlayAgain(x);
@@ -770,8 +804,11 @@ public class Zork implements Serializable {
                         } else {
 
                             displayTextMilitaryStyle(x, "You shot him and he was .................................................................\n" + ".................................................................................Innocent.\nYou hear a laugh in the distance.\n");
-                            x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
-
+                            if(height > 800){
+                                x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
+                               }else{
+                            	   x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom720.jpg"));
+                               }
                             displayTextMilitaryStyle(x, "BOOOOOOOOOOOOOOOOOOOOOOOOOOOM! \nYou took to long and the terrorist exploded the bomb. \nYou lost, plaese play again!");
 
                             displayTextMilitaryStyle(x, "Play again? (Y/N)\n");
@@ -921,7 +958,11 @@ public class Zork implements Serializable {
     private static void displayTextMilitaryStyle(Display x, String str) {
         // TODO Auto-generated method stub
         for (int i = 0; i < str.length(); i++) {
-            if (str.substring(i, i + 1).equals("\n")) {
+        	if(x.textSent.equalsIgnoreCase("skip") || x.textSent.equalsIgnoreCase("s")){
+        		x.display(str.substring(i));
+        		i += str.length();
+        		 x.textSent = "";
+        	}else if (str.substring(i, i + 1).equals("\n")) {
                 x.display(str.substring(i, i + 1));
                 sleep(300);
             } else {
@@ -929,13 +970,14 @@ public class Zork implements Serializable {
                 sleep(25);
             }
         }
+        x.textSent = "";
     }
 
 
 
     private static int waitForStartOrLoad(Display x, double[] time, int[] currentUser, ArrayList < User > users, boolean[] newUser) {
         // TODO Auto-generated method stub
-        boolean loop = false;
+    	boolean loop = false;
         while (!loop) {
             while (x.textSent.equals("")) {
                 try {

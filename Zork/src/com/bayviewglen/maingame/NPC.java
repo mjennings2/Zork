@@ -45,19 +45,22 @@ public class NPC {
 	}
 	
 	
-	protected static void displayTextMilitaryStyle(Display x, String str) {
-		// TODO Auto-generated method stub
-		
-		for(int i = 0; i < str.length(); i++){
-			if(str.substring(i, i+1).equals("\n")){
-				x.display(str.substring(i, i+1));
-				sleep(300);
-			}else{
-				x.display(str.substring(i, i+1));
-				sleep(25);
-			}
-		}
-	}
+	 protected static void displayTextMilitaryStyle(Display x, String str) {
+	        // TODO Auto-generated method stub
+	        for (int i = 0; i < str.length(); i++) {
+	        	if(x.textSent.equalsIgnoreCase("skip") || x.textSent.equalsIgnoreCase("s")){
+	        		x.display(str.substring(i));
+	        		i += str.length();
+	        	}else if (str.substring(i, i + 1).equals("\n")) {
+	                x.display(str.substring(i, i + 1));
+	                sleep(300);
+	            } else {
+	                x.display(str.substring(i, i + 1));
+	                sleep(25);
+	            }
+	        }
+	        x.textSent = "";
+	    }
 
 	
 	protected static void sleep(int time){
