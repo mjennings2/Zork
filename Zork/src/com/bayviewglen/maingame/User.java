@@ -7,7 +7,7 @@ public class User implements Serializable{
 
 	private String myUsername;
 	private String myPassword;
-	private Achivement myAchivements;
+	private Achievement myAchievements;
 	private Highscores myHighscore;
 	public ArrayList<Item> inventory = new ArrayList<Item>();
 	private int location;
@@ -17,8 +17,8 @@ public class User implements Serializable{
 	public int traitor;
 
 
-	public User(String username, String password, Achivement achivement, Highscores highscore, int location, int time, Room[] map, Room[] allRooms, int traitor){
-		myAchivements = achivement;
+	public User(String username, String password, Achievement achievement, Highscores highscore, int location, int time, Room[] map, Room[] allRooms, int traitor){
+		myAchievements = achievement;
 		myUsername = username;
 		myPassword = password;
 		myHighscore = highscore;
@@ -54,12 +54,12 @@ public class User implements Serializable{
 		return myPassword;
 	}
 
-	public Achivement getMyAchivements() {
-		return myAchivements;
+	public Achievement getMyAchievements() {
+		return myAchievements;
 	}
 
-	public void setMyAchivements(Achivement myAchivements) {
-		this.myAchivements = myAchivements;
+	public void setMyAchievements(Achievement myAchievements) {
+		this.myAchievements = myAchievements;
 	}
 	
 	public void addToInventory(Item x){

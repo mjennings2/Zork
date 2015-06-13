@@ -2,11 +2,11 @@ package com.bayviewglen.maingame;
 
 import java.io.Serializable;
 
-public class Achivement implements Serializable{
+public class Achievement implements Serializable{
 
 	private boolean[] myAchivements;
 	
-	public Achivement(boolean[] achivements) {
+	public Achievement(boolean[] achivements) {
 		super();
 		myAchivements = achivements;
 		

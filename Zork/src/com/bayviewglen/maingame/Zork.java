@@ -762,7 +762,7 @@ public class Zork implements Serializable {
                                 }
                                 return 0;
                             } else {
-                                displayTextMilitaryStyle(x, "You shot him and he was .................................................................\n" + ".................................................................................A TRAITOR!\n You jump in celebration, You Did it!\n");
+                                displayTextMilitaryStyle(x, "You shot him and he was .................................................................\n" + ".................................................................................A TRAITOR!\nYou jump in celebration, You Did it!\n");
                             }
                             if (random >= 5 && random < 10) {
                                 displayTextMilitaryStyle(x, "As you land you hear a click.\nYou look down and see that you steped on the detonator.\n");
@@ -781,7 +781,7 @@ public class Zork implements Serializable {
                                 return 0;
                             }
                             if (random >= 10 && random < 15) {
-                                displayTextMilitaryStyle(x, "You hit him in his head but the bullet goes straight through his head and into the window, smashing it to pieces.\nSuddenly you and everything in the train car is sucked toward the open window.\n turns out its a plane and you just depressurized the cabin.\nThe depressurization also sets off the nuke.\n");
+                                displayTextMilitaryStyle(x, "You hit him in his head but the bullet goes straight through his head and into the window, smashing it to pieces.\nSuddenly you and everything in the train car is sucked toward the open window.\nturns out its a plane and you just depressurized the cabin.\nThe depressurization also sets off the nuke.\n");
                                 if(height > 800){
                                     x.lblNewLabel.setIcon(new ImageIcon("input/pictures/boom.jpg"));
                                    }else{
@@ -1132,7 +1132,7 @@ public class Zork implements Serializable {
             }
             Highscores highscore = new Highscores(Integer.parseInt(temp[2]), temp[0], Integer.parseInt(temp[3]), Integer.parseInt(temp[4]), Integer.parseInt(temp[5]));
 
-            users.add(new User(temp[0], temp[1], new Achivement(achivements), highscore, 0, 0, null, null, 0));
+            users.add(new User(temp[0], temp[1], new Achievement(achivements), highscore, 0, 0, null, null, 0));
         }
     }
 
