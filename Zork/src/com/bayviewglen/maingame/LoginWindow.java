@@ -116,7 +116,7 @@ public class LoginWindow {
 		
 		JTextPane txtpnWelcomeTo = new JTextPane();
 		txtpnWelcomeTo.setFont(new Font("OCR A Extended", Font.PLAIN, 18));
-		txtpnWelcomeTo.setText("Welcome to Trouble in Nuke on a Train with a Terrorist Town! If you have an account type your username and password above, then press login. To create an account, type the username you want, the password you want, and hit login. (I advise not useing your regular password, its stored in an unencrypted DAT file.)");
+		txtpnWelcomeTo.setText("Welcome to Trouble in Nuke on a Train with a Terrorist Town! If you have an account, type your username and password above, then press login. To create an account, type the username you want, the password you want, and hit login. (I advise not using your regular password, it's stored in an unencrypted DAT file.)");
 		txtpnWelcomeTo.setBounds(15, 378, 760, 189);
 		frame.getContentPane().add(txtpnWelcomeTo);
 		
@@ -136,7 +136,7 @@ public class LoginWindow {
 						if(users.get(i).validatePassword(password.getText())){
 							login[0] = 100;
 						}else{
-							Notice window = new Notice("That password is not recodnized for the username \"" + username.getText());
+							Notice window = new Notice("That password is not recognized for the username \"" + username.getText());
 							window.frame.setVisible(true);
 						}
 						i += users.size();
